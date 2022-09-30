@@ -60,3 +60,6 @@ crashlytics-build.properties
 
 
 UserSettings/Layouts/default-2021.dwlt
+
+node_modules
+dist
