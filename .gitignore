@@ -1,3 +1,13 @@
+
+# from jasper
+node_modules
+server/**/dist
+.env
+# so that token logic isn't revealed to the world, put this back once we're in a private repo
+server/src/common/ld51/token.ts
+
+
+
 # This .gitignore file should be placed at the root of your Unity project directory
 #
 # Get latest from https://github.com/github/gitignore/blob/master/Unity.gitignore
@@ -60,6 +70,3 @@ crashlytics-build.properties
 
 
 UserSettings/Layouts/default-2021.dwlt
-
-node_modules
-dist
