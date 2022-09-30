@@ -16,16 +16,17 @@ app.use(
     contentSecurityPolicy: false,
   }),
 )
+const subdirectory = c.baseSubdirectory + '/api'
 
-app.get(`/${c.baseSubdirectory}`, (req, res) => {
+app.get(`/${subdirectory}`, (req, res) => {
   res.send('Hello World!')
 })
 
 import tokenRoutes, { tokenIdCombos } from './routes/token'
-app.use(`/${c.baseSubdirectory}/token`, tokenRoutes)
+app.use(`/${subdirectory}/token`, tokenRoutes)
 
 import adminRoutes from './routes/admin'
-app.use(`/${c.baseSubdirectory}/admin`, adminRoutes)
+app.use(`/${subdirectory}/admin`, adminRoutes)
 
 // * ------------------ routes below line require a token ------------------
 // token check
@@ -47,12 +48,12 @@ app.use((req, res, next) => {
     res.status(403).end()
   }
 })
-app.get(`/${c.baseSubdirectory}/testtoken`, (req, res) => {
+app.get(`/${subdirectory}/testtoken`, (req, res) => {
   res.send('Hello token haver!')
 })
 
 app.listen(5151, () => {
   c.log(
-    `Api listening on http://localhost:5151/${c.baseSubdirectory}`,
+    `Api listening on http://localhost:5151/${subdirectory}`,
   )
 })
