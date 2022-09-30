@@ -30,7 +30,7 @@ app.use(`/${c.baseSubdirectory}/admin`, adminRoutes)
 // * ------------------ routes below line require a token ------------------
 // token check
 app.use((req, res, next) => {
-  const token = `${req.query.token || ''}`
+  const token = `${req.headers.token || ''}`
   if (!token) {
     c.error(`no token`, req.headers['x-forwarded-for'])
     res.status(403).end()
@@ -52,7 +52,7 @@ app.get(`/${c.baseSubdirectory}/testtoken`, (req, res) => {
 })
 
 app.listen(5151, () => {
-  console.log(
+  c.log(
     `Api listening on http://localhost:5151/${c.baseSubdirectory}`,
   )
 })

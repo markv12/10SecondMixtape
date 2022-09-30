@@ -2,6 +2,7 @@
   "scripts": {
     "server": "ssh root@143.198.63.63",
     "golive": "ssh root@143.198.63.63 'cd ./LD51/server; git pull; source ~/.nvm/nvm.sh && source ~/.profile && npm install; npm run bo; pm2 restart ld51api;'",
+    "logs": "ssh root@143.198.63.63 'source ~/.nvm/nvm.sh && source ~/.profile && pm2 logs ld51api'",
     "build": "tsc -w",
     "bo": "tsc",
     "dev": "nodemon dist/api/index.js",

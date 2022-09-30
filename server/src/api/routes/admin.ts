@@ -4,7 +4,7 @@ import { Request, Router } from 'express'
 const router = Router()
 
 function adminOk(req: Request): boolean {
-  return req.headers.auth === process.env.ADMIN_PASSWORD
+  return req.query.auth === process.env.ADMIN_PASSWORD
 }
 
 router.use((req, res, next) => {
