@@ -24,7 +24,10 @@ app.get(`/${c.baseSubdirectory}`, (req, res) => {
 import tokenRoutes, { tokenIdCombos } from './routes/token'
 app.use(`/${c.baseSubdirectory}/token`, tokenRoutes)
 
-// * ------------------ token-required routes ------------------
+import adminRoutes from './routes/admin'
+app.use(`/${c.baseSubdirectory}/admin`, adminRoutes)
+
+// * ------------------ routes below line require a token ------------------
 // token check
 app.use((req, res, next) => {
   const token = `${req.query.token || ''}`
@@ -47,11 +50,6 @@ app.use((req, res, next) => {
 app.get(`/${c.baseSubdirectory}/testtoken`, (req, res) => {
   res.send('Hello token haver!')
 })
-
-// * ------------------ admin-required routes ------------------
-
-import adminRoutes from './routes/admin'
-app.use(`/${c.baseSubdirectory}/admin`, adminRoutes)
 
 app.listen(5151, () => {
   console.log(
