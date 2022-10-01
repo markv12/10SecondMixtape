@@ -38,7 +38,7 @@ router.get('/some/:count', async (req, res) => {
 router.post('/new', async (req, res) => {
     const song = req.body;
     if (!song?.name) {
-        c.error('Invalid song uploaded', song);
+        c.error('Invalid song uploaded (no name)', song);
         res.status(400).end();
         return;
     }
