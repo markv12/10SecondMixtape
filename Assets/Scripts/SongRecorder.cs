@@ -19,7 +19,7 @@ public class SongRecorder : MonoBehaviour {
             parts = new InstrumentTrack[] {
                 new InstrumentTrack() {
                     instrument = instrumentId,
-                    notes = Note.NoteTwoDArray(14)
+                    notes = Note.NoteTwoDArray(18)
                 }
             }
         };
@@ -79,50 +79,58 @@ public class SongRecorder : MonoBehaviour {
         }
     }
 
+    private static readonly int[] MajorScaleDegrees = new int[] {
+        0, 2, 4, 5, 7, 9, 11, 12, 14, 16, 17, 19, 21, 23, 24
+    };
+    private static readonly int[] MinorScaleDegrees = new int[] {
+        0, 2, 3, 5, 7, 8, 10, 12, 14, 15, 17, 19, 20, 22, 24
+    };
+    private static int[] ScaleDegreesToUse = MinorScaleDegrees;
+
     private static readonly InstrumentKey[] keyboard = new InstrumentKey[]{
         new InstrumentKey() {
             key = Key.A,
-            noteIndex = 0,
+            noteIndex = ScaleDegreesToUse[0],
         },
         new InstrumentKey() {
             key = Key.S,
-            noteIndex = 1,
+            noteIndex = ScaleDegreesToUse[1],
         },
         new InstrumentKey() {
             key = Key.D,
-            noteIndex = 2,
+            noteIndex = ScaleDegreesToUse[2],
         },
         new InstrumentKey() {
             key = Key.F,
-            noteIndex = 3,
+            noteIndex = ScaleDegreesToUse[3],
         },
         new InstrumentKey() {
             key = Key.G,
-            noteIndex = 4,
+            noteIndex = ScaleDegreesToUse[4],
         },
         new InstrumentKey() {
             key = Key.H,
-            noteIndex = 5,
+            noteIndex = ScaleDegreesToUse[5],
         },
         new InstrumentKey() {
             key = Key.J,
-            noteIndex = 6,
+            noteIndex = ScaleDegreesToUse[6],
         },
         new InstrumentKey() {
             key = Key.K,
-            noteIndex = 7,
+            noteIndex = ScaleDegreesToUse[7],
         },
         new InstrumentKey() {
             key = Key.L,
-            noteIndex = 8,
+            noteIndex = ScaleDegreesToUse[8],
         },
         new InstrumentKey() {
             key = Key.Semicolon,
-            noteIndex = 9,
+            noteIndex = ScaleDegreesToUse[9],
         },
         new InstrumentKey() {
             key = Key.Quote,
-            noteIndex = 10,
+            noteIndex = ScaleDegreesToUse[10],
         },
     };
 
