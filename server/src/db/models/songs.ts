@@ -53,7 +53,9 @@ export async function getRandom(limit: number = 1) {
           c.error(err)
           return resolve([])
         }
-        const promises: Promise<SongData>[] = results.map(
+        const promises: Promise<SongData>[] = (
+          results || []
+        ).map(
           async (song: SongData) =>
             await songDataToFrontendData(song),
         )

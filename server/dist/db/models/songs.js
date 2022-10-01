@@ -67,7 +67,7 @@ async function getRandom(limit = 1) {
                 c.error(err);
                 return resolve([]);
             }
-            const promises = results.map(async (song) => await songDataToFrontendData(song));
+            const promises = (results || []).map(async (song) => await songDataToFrontendData(song));
             await Promise.all(promises).then((songs) => resolve(songs));
         });
     });

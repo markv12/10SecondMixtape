@@ -12,10 +12,10 @@ function validatePart(part) {
     if (!part.notes)
         errors.push('Part notes are required');
     if (!part.notes?.length)
-        errors.push('0 part notes');
+        errors.push('Part notes missing');
     // no notes
     if (!part.notes?.reduce((a, b) => a + b.length, 0))
-        errors.push('Part notes are required');
+        errors.push('Part notes must be non-empty');
     if (part.notes?.length > 25)
         errors.push(`Has more than 25 different notes (${part.notes.length})`);
     part.notes?.forEach((track, i) => {
