@@ -1,22 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SongPlayer : MonoBehaviour {
+    public Button playButton;
     public AudioSourcePool audioSourcePool;
 
-    private IEnumerator Start() {
-        yield return new WaitForSeconds(0.666f);
-        PlayTrack();
+    private void Awake() {
+        playButton.onClick.AddListener(PlayTrack);
     }
 
     private const double SECONDS_PER_BEAT = 0.625;
     private void PlayTrack() {
+        InstrumentMasterList iml = InstrumentMasterList.Instance;
         MusicNetworking.Instance.GetRandomSong((Song song) => {
-            double startTime = AudioSettings.dspTime;
+            double startTime = AudioSettings.dspTime + 1;
             for (int i = 0; i < song.parts.Length; i++) {
                 InstrumentTrack mainTrack = song.parts[i];
-                Instrument instrument = InstrumentMasterList.Instance.GetInstrumentForId(mainTrack.instrument);
+                Instrument instrument = iml.GetInstrumentForId(mainTrack.instrument);
                 for (int j = 0; j < mainTrack.notes.Count; j++) {
                     List<Note> noteList = mainTrack.notes[j];
                     for (int k = 0; k < noteList.Count; k++) {
@@ -35,6 +37,8 @@ public class SongPlayer : MonoBehaviour {
         AudioSource audioSource = audioSourcePool.GetAudioSource(instrumentNote.clip);
         audioSource.pitch = instrumentNote.pitch;
         audioSource.PlayScheduled(startTime + noteStartTime);
-        audioSource.SetScheduledStartTime(startTime + noteEndTime);
+        if (noteEndTime > 0) {
+            audioSource.SetScheduledEndTime(startTime + noteEndTime);
+        }
     }
 }
