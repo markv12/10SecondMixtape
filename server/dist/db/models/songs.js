@@ -31,6 +31,7 @@ const mongoose_1 = require("mongoose");
 const __1 = require("../");
 const c = __importStar(require("../../common"));
 const mongoose_simple_random_1 = __importDefault(require("mongoose-simple-random"));
+const uuid_1 = require("uuid");
 const schemaFields = {
     id: { type: String },
     created: { type: Number },
@@ -75,11 +76,7 @@ async function getRandom(limit = 1) {
 }
 exports.getRandom = getRandom;
 async function add(song) {
-    const exists = await get(song.id);
-    if (exists) {
-        c.error(`Song ${song.id} already exists`);
-        return exists;
-    }
+    song.id = (0, uuid_1.v4)();
     const res = await Song.create(song);
     return res;
 }

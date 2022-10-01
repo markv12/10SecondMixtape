@@ -30,6 +30,7 @@ exports.wipe = exports.removeById = exports.add = exports.getRandom = exports.ge
 const mongoose_1 = require("mongoose");
 const c = __importStar(require("../../common"));
 const mongoose_simple_random_1 = __importDefault(require("mongoose-simple-random"));
+const uuid_1 = require("uuid");
 const schemaFields = {
     id: { type: String },
     created: { type: Number },
@@ -68,11 +69,7 @@ async function getRandom(limit = 1) {
 }
 exports.getRandom = getRandom;
 async function add(part) {
-    const exists = await get(part.id);
-    if (exists) {
-        c.error(`Part ${part.id} already exists`);
-        return exists;
-    }
+    part.id = (0, uuid_1.v4)();
     const res = await Part.create(part);
     return res;
 }

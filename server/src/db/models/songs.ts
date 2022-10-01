@@ -2,6 +2,7 @@ import { Schema, model } from 'mongoose'
 import { db } from '../'
 import * as c from '../../common'
 import getRandomDocs from 'mongoose-simple-random'
+import { v4 as uuidv4 } from 'uuid'
 
 const schemaFields: { [key in keyof SongData]: any } = {
   id: { type: String },
@@ -73,11 +74,7 @@ export async function getRandom(limit: number = 1) {
 }
 
 export async function add(song: SongData) {
-  const exists = await get(song.id)
-  if (exists) {
-    c.error(`Song ${song.id} already exists`)
-    return exists
-  }
+  song.id = uuidv4()
   const res = await Song.create(song)
   return res
 }

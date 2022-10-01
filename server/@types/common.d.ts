@@ -29,17 +29,17 @@ interface SongDataForFrontend
 }
 
 interface PartData {
-  id: string
+  id: string // unneeded when sent from frontend, assigned in code here
   instrument: string
   name: string
+  notes: NoteData[][]
   created?: number
   chosen?: number
   given?: number
   ratio?: number
-  notes: NoteData[][]
 }
 
 interface NoteData {
   start: number
-  end: number
+  end?: number
 }

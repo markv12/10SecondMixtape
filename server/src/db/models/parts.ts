@@ -1,7 +1,7 @@
 import { Schema, model } from 'mongoose'
-import { db } from '..'
 import * as c from '../../common'
 import getRandomDocs from 'mongoose-simple-random'
+import { v4 as uuidv4 } from 'uuid'
 
 const schemaFields: { [key in keyof PartData]: any } = {
   id: { type: String },
@@ -54,11 +54,7 @@ export async function getRandom(
 }
 
 export async function add(part: PartData) {
-  const exists = await get(part.id)
-  if (exists) {
-    c.error(`Part ${part.id} already exists`)
-    return exists
-  }
+  part.id = uuidv4()
   const res = await Part.create(part)
   return res
 }
