@@ -5,10 +5,11 @@ import { init, runOnReady, db } from './db'
 init({})
 
 runOnReady(async () => {
-  await db.parts.wipe()
-  await db.songs.wipe()
+  c.log('green', 'DB Ready')
+  // await db.parts.wipe()
+  // await db.songs.wipe()
 
-  if (process.env.NODE_ENV !== 'development') return
+  // if (process.env.NODE_ENV !== 'development') return
 
   // await db.songs.add({
   //   id: 'test1',
