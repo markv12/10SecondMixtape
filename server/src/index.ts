@@ -29,6 +29,15 @@ runOnReady(async () => {
             { start: 6 },
             { start: 6.5 },
             { start: 6.75 },
+
+            { start: 8 },
+            { start: 9 },
+            { start: 10 },
+            { start: 10.5 },
+            { start: 12 },
+            { start: 14 },
+            { start: 14.5 },
+            { start: 14.75 },
           ],
           [
             { start: 1 },
@@ -37,6 +46,12 @@ runOnReady(async () => {
             { start: 5 },
             { start: 5.75 },
             { start: 7 },
+            { start: 9 },
+            { start: 9.75 },
+            { start: 11 },
+            { start: 13 },
+            { start: 13.75 },
+            { start: 15 },
           ],
           [
             { start: 0 },
@@ -56,6 +71,23 @@ runOnReady(async () => {
             { start: 6.5 },
             { start: 7 },
             { start: 7.5 },
+            { start: 8 },
+            { start: 8.5 },
+            { start: 9 },
+            { start: 9.5 },
+            { start: 10 },
+            { start: 10.5 },
+            { start: 11 },
+            { start: 11.5 },
+            { start: 11.75 },
+            { start: 12 },
+            { start: 12.5 },
+            { start: 13 },
+            { start: 13.5 },
+            { start: 14 },
+            { start: 14.5 },
+            { start: 15 },
+            { start: 15.5 },
           ],
         ],
       },
@@ -67,6 +99,8 @@ runOnReady(async () => {
           [
             { start: 0, end: 3 },
             { start: 4, end: 7 },
+            { start: 8, end: 11 },
+            { start: 12, end: 15 },
           ],
           [],
           //2
@@ -75,28 +109,48 @@ runOnReady(async () => {
           [
             { start: 0.25, end: 3 },
             { start: 4.5, end: 7 },
+            { start: 8.25, end: 11 },
+            { start: 12.5, end: 15 },
           ],
           //3
           [],
           //4
-          [{ start: 5, end: 7 }],
+          [
+            { start: 5, end: 7 },
+            { start: 13, end: 15 },
+          ],
           // tritone
           [],
           //5
-          [{ start: 0.5, end: 3 }],
+          [
+            { start: 0.5, end: 3 },
+            { start: 8.5, end: 11 },
+          ],
           //m6
-          [{ start: 5.5, end: 7 }],
+          [
+            { start: 5.5, end: 7 },
+            { start: 13.5, end: 15 },
+          ],
           //M6
           [],
           //m7
-          [{ start: 0.75, end: 3 }],
+          [
+            { start: 0.75, end: 3 },
+            { start: 8.75, end: 11 },
+          ],
           //7
           [],
           //8
-          [{ start: 6, end: 7 }],
+          [
+            { start: 6, end: 7 },
+            { start: 14, end: 15 },
+          ],
           [],
           //9
-          [{ start: 1, end: 3 }],
+          [
+            { start: 1, end: 3 },
+            { start: 9, end: 11 },
+          ],
           [],
         ],
       },
