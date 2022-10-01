@@ -19,20 +19,20 @@ router.post('/new', async (req, res) => {
   const part = req.body as PartData
   if (!part?.name) {
     c.error('Invalid part uploaded', part)
-    res.status(400)
+    res.status(400).end()
     return
   }
   const errors = c.validatePart(part)
   if (errors.length) {
     c.error('Invalid part uploaded', part, errors)
-    res.status(400)
+    res.status(400).end()
     return
   }
 
   c.log('gray', 'Uploading new part', part)
   part.created = Date.now()
   await db.parts.add(part)
-  res.status(200)
+  res.status(200).end()
 })
 
 export default router
