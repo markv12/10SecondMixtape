@@ -1,11 +1,10 @@
-using Newtonsoft.Json;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
     public Button recordButton;
+    public Button uploadButton;
     public Button playButton;
     public Button stopButton;
     public SongRecorder songRecorder;
@@ -14,8 +13,11 @@ public class GameManager : MonoBehaviour {
 
     private void Awake() {
         recordButton.onClick.AddListener(StartRecording);
+        uploadButton.onClick.AddListener(UploadSong);
         playButton.onClick.AddListener(PlayTrack);
         stopButton.onClick.AddListener(StopTracks);
+
+        uploadButton.gameObject.SetActive(false);
     }
 
     private void PlayTrack() {
@@ -27,14 +29,32 @@ public class GameManager : MonoBehaviour {
     private void StopTracks() {
         songPlayer.StopSong();
         metronomePlayer.StopSong();
-        Song song = songRecorder.StopRecording();
-        if(song != null) {
-            Debug.Log(JsonConvert.SerializeObject(song));
-            songPlayer.PlaySong(song, true);
+        CurrentSong = songRecorder.StopRecording();
+        if(CurrentSong != null) {
+            songPlayer.PlaySong(CurrentSong, true);
+        }
+    }
+
+    private Song currentSong;
+    private Song CurrentSong {
+        get {
+            return currentSong;
+        }
+        set {
+            currentSong = value;
+            uploadButton.gameObject.SetActive(currentSong != null);
+        }
+    }
+    private void UploadSong() {
+        songPlayer.StopSong();
+        if (CurrentSong != null) {
+            MusicNetworking.Instance.UploadSong(CurrentSong);
+            CurrentSong = null;
         }
     }
 
     private void StartRecording() {
+        uploadButton.gameObject.SetActive(false);
         metronomePlayer.PlaySong(metronomeSong, true);
         songRecorder.StartRecording("RockBass");
     }

@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Text;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -55,6 +56,36 @@ public static class NetUtility {
                         onComplete?.Invoke(false, webRequest.downloadHandler.text);
                     } else {
                         if (autoRetry) yield return Post(uri, bodyParams, onComplete, false);
+                    }
+                    break;
+                case UnityWebRequest.Result.Success:
+                    onComplete?.Invoke(true, webRequest.downloadHandler.text);
+                    break;
+            }
+        }
+    }
+
+    public static IEnumerator PostJson(string uri, string json, Action<bool, string> onComplete, bool autoRetry = true) {
+        WWWForm form = new WWWForm();
+        using (UnityWebRequest webRequest = UnityWebRequest.Post(urlBase + uri, form)) {
+            byte[] bodyRaw = Encoding.UTF8.GetBytes(json);
+            webRequest.uploadHandler = new UploadHandlerRaw(bodyRaw);
+            webRequest.downloadHandler = new DownloadHandlerBuffer();
+            webRequest.SetRequestHeader("Content-Type", "application/json");
+            yield return webRequest.SendWebRequest();
+
+            switch (webRequest.result) {
+                case UnityWebRequest.Result.ConnectionError:
+                case UnityWebRequest.Result.DataProcessingError:
+                    Debug.LogError(uri + ": Error: " + webRequest.error);
+                    if (autoRetry) yield return PostJson(uri, json, onComplete, false);
+                    break;
+                case UnityWebRequest.Result.ProtocolError:
+                    Debug.LogError(uri + ": HTTP Error: " + webRequest.error);
+                    if (webRequest.responseCode == 400) {
+                        onComplete?.Invoke(false, webRequest.downloadHandler.text);
+                    } else {
+                        if (autoRetry) yield return PostJson(uri, json, onComplete, false);
                     }
                     break;
                 case UnityWebRequest.Result.Success:

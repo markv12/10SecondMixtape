@@ -15,9 +15,11 @@ public class SongRecorder : MonoBehaviour {
         startTime = Time.time;
         currentInstrument = InstrumentMasterList.Instance.GetInstrumentForId(instrumentId);
         currentSong = new Song() {
+            name = "Test Song",
             length = 10,
             parts = new InstrumentTrack[] {
                 new InstrumentTrack() {
+                    name = "Test Person",
                     instrument = instrumentId,
                     notes = Note.NoteTwoDArray(18)
                 }
@@ -49,7 +51,7 @@ public class SongRecorder : MonoBehaviour {
                 } else if (InputUtility.GetKeyUp(key.key)) {
                     if (key.currentNote != null) {
                         double end = Quantize((Time.time - startTime) % currentSong.length);
-                        double extension = (key.currentNote.start == end) ? 0.125 : 0;
+                        double extension = (key.currentNote.start == end) ? 0.25 : 0;
                         end += extension;
                         if(key.currentSource != null) {
                             FadeNote(key.currentSource, extension);
@@ -143,6 +145,6 @@ public class SongRecorder : MonoBehaviour {
 
     public double Quantize(double value) {
         double beat = value / SongPlayer.SECONDS_PER_BEAT;
-        return System.Math.Round(beat*8.0)/8.0;
+        return System.Math.Round(beat*4.0)/4.0;
     }
 }
