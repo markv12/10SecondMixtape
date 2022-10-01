@@ -30,6 +30,10 @@ public static class InputUtility {
         return Keyboard.current[key].wasPressedThisFrame;
     }
 
+    public static bool GetKeyUp(Key key) {
+        return Keyboard.current[key].wasReleasedThisFrame;
+    }
+
     public static bool GetKey(Key key) {
         return Keyboard.current[key].isPressed;
     }

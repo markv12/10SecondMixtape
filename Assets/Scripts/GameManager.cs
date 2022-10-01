@@ -1,3 +1,4 @@
+using Newtonsoft.Json;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,7 @@ public class GameManager : MonoBehaviour {
     public Button recordButton;
     public Button playButton;
     public Button stopButton;
+    public SongRecorder songRecorder;
     public SongPlayer songPlayer;
     public SongPlayer metronomePlayer;
 
@@ -25,14 +27,20 @@ public class GameManager : MonoBehaviour {
     private void StopTracks() {
         songPlayer.StopSong();
         metronomePlayer.StopSong();
+        Song song = songRecorder.StopRecording();
+        if(song != null) {
+            Debug.Log(JsonConvert.SerializeObject(song));
+            songPlayer.PlaySong(song, true);
+        }
     }
 
     private void StartRecording() {
         metronomePlayer.PlaySong(metronomeSong, true);
+        songRecorder.StartRecording();
     }
 
     private static Song metronomeSong = new Song() {
-        length = 0.625f,
+        length = 2.5f,
         parts = new InstrumentTrack[] {
             new InstrumentTrack {
                 instrument = "Drumset1",
@@ -40,6 +48,15 @@ public class GameManager : MonoBehaviour {
                     new List<Note>(){
                         new Note() {
                             start = 0
+                        },
+                         new Note() {
+                            start = 1
+                        },
+                        new Note() {
+                            start = 2
+                        },
+                         new Note() {
+                            start = 3
                         }
                     }
                 }

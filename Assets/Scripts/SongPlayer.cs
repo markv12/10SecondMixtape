@@ -15,8 +15,8 @@ public class SongPlayer : MonoBehaviour {
         StopSong();
         loop = _loop;
         currentSong = song;
-        dspStartOffset = AudioSettings.dspTime + 0.5;
-        startOffset = Time.time + 0.5f;
+        dspStartOffset = AudioSettings.dspTime;
+        startOffset = Time.time;
         QueueSongAtOffset(song, dspStartOffset, startOffset);
     }
 
@@ -37,13 +37,14 @@ public class SongPlayer : MonoBehaviour {
         }
         for (int i = 0; i < noteQueue.Count; i++) {
             QueuedNote note = noteQueue[i];
-            if((note.dspStartTime - AudioSettings.dspTime) < 0.5f) {
+            if((note.startTime - Time.time) < 0.5f) {
                 PlayNote(note);
                 noteQueue.RemoveAt(i);
                 i--;
             }
         }
     }
+
 
     private readonly List<AudioSource> activeSources = new List<AudioSource>();
     private const float FADE_TIME = 0.25f;
@@ -76,7 +77,7 @@ public class SongPlayer : MonoBehaviour {
         audioSourcePool.DisposeAudioSource(audioSource);
     }
 
-    private const double SECONDS_PER_BEAT = 0.625;
+    public const double SECONDS_PER_BEAT = 0.625;
 
     private void QueueSongAtOffset(Song song, double dspStartOffset, float startOffset) {
         InstrumentMasterList iml = InstrumentMasterList.Instance;
@@ -100,6 +101,7 @@ public class SongPlayer : MonoBehaviour {
         double endTime = (_endTime > 0) ? (startOffset + _endTime + FADE_TIME) : 0;
         noteQueue.Add(new QueuedNote() {
             dspStartTime = dspStartOffset + startTime,
+            startTime = startOffset + startTime,
             endTime = (float)endTime,
             instrumentNote = _instrumentNote
         });
@@ -107,6 +109,7 @@ public class SongPlayer : MonoBehaviour {
 
     private struct QueuedNote {
         public double dspStartTime;
+        public double startTime;
         public float endTime;
         public InstrumentNote instrumentNote;
     }

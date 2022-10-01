@@ -153,7 +153,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioSourcePool: {fileID: 1827042431}
-  loop: 0
 --- !u!4 &259668296
 Transform:
   m_ObjectHideFlags: 0
@@ -336,6 +335,7 @@ MonoBehaviour:
   recordButton: {fileID: 2140284773}
   playButton: {fileID: 2118025489}
   stopButton: {fileID: 1624701511}
+  songRecorder: {fileID: 915333278}
   songPlayer: {fileID: 259668295}
   metronomePlayer: {fileID: 1826334406}
 --- !u!4 &507418113
@@ -351,6 +351,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 259668296}
+  - {fileID: 915333279}
   - {fileID: 1826334407}
   - {fileID: 1827042432}
   m_Father: {fileID: 0}
@@ -575,6 +576,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 751225008}
   m_CullTransparentMesh: 1
+--- !u!1 &915333277
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 915333279}
+  - component: {fileID: 915333278}
+  m_Layer: 0
+  m_Name: SongRecorder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &915333278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 915333277}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab2d10a725d6fe146ab8dcf900533ddb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &915333279
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 915333277}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 507418113}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1291704305
 GameObject:
   m_ObjectHideFlags: 0
@@ -1012,7 +1057,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioSourcePool: {fileID: 1827042431}
-  loop: 0
 --- !u!4 &1826334407
 Transform:
   m_ObjectHideFlags: 0
@@ -1026,7 +1070,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 507418113}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1827042430
 GameObject:
@@ -1071,7 +1115,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 507418113}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2118025487
 GameObject:
