@@ -1,3 +1,5 @@
+import * as c from '../general/log'
+
 export function validatePart(part: PartData) {
   const errors: string[] = []
   if (!part) return ['No part data']
@@ -9,11 +11,11 @@ export function validatePart(part: PartData) {
   // no notes
   if (!part.notes?.reduce((a, b) => a + b.length, 0))
     errors.push('Part notes are required')
-  part.notes?.forEach((voice, i) => {
-    voice.forEach((note, j) => {
-      if (!note.start)
+  part.notes?.forEach((track, i) => {
+    track.forEach((note, j) => {
+      if (note.start !== undefined)
         errors.push(`Voice ${i} note ${j} has no start`)
-      if (note.end && note.end <= note.start)
+      if (note.end && note.end < note.start)
         errors.push(`Voice ${i} note ${j} has invalid end`)
       if (note.start < 0)
         errors.push(
