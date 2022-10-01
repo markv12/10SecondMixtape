@@ -15,3 +15,4 @@ MonoBehaviour:
   instruments:
   - {fileID: 11400000, guid: b1f6e2f9bbb87174d8fcdf11f481acb2, type: 2}
   - {fileID: 11400000, guid: 91dfe909440cbce489fc9206bcfba7f8, type: 2}
+  - {fileID: 11400000, guid: e433b0dde4e4aac44b7a08e2e9181eec, type: 2}

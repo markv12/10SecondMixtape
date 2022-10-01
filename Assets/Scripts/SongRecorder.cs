@@ -13,7 +13,7 @@ public class SongRecorder : MonoBehaviour {
             length = 10,
             parts = new InstrumentTrack[] {
                 new InstrumentTrack() {
-                    instrument = "Piano",
+                    instrument = "RockBass",
                     notes = Note.NoteTwoDArray(14)
                 }
             }
@@ -39,8 +39,12 @@ public class SongRecorder : MonoBehaviour {
                     currentSong.parts[0].notes[key.noteIndex].Add(newNote);
                     key.currentNote = newNote;
                 } else if (InputUtility.GetKeyUp(key.key)) {
-                    if(key.currentNote != null) {
-                        key.currentNote.end = Quantize((Time.time - startTime) % currentSong.length);
+                    if (key.currentNote != null) {
+                        double end = Quantize((Time.time - startTime) % currentSong.length);
+                        if(key.currentNote.start == end) {
+                            end += 0.125;
+                        }
+                        key.currentNote.end = end;
                         key.currentNote = null;
                     }
                 }
