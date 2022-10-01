@@ -22,38 +22,42 @@ app.get(`/${subdirectory}`, (req, res) => {
   res.send('Hello World!')
 })
 
-import tokenRoutes, { tokenIdCombos } from './routes/token'
-app.use(`/${subdirectory}/token`, tokenRoutes)
+import songsRoutes from './routes/songs'
+app.use(`/${subdirectory}/songs`, songsRoutes)
 
-import adminRoutes from './routes/admin'
-app.use(`/${subdirectory}/admin`, adminRoutes)
+// import tokenRoutes, { tokenIdCombos } from './routes/token'
+// app.use(`/${subdirectory}/token`, tokenRoutes)
 
-// * ------------------ routes below line require a token ------------------
-// token check
-app.use((req, res, next) => {
-  const token = `${req.headers.token || ''}`
-  if (!token) {
-    c.error(`no token`, req.headers['x-forwarded-for'])
-    res.status(403).end()
-    return
-  }
+// import adminRoutes from './routes/admin'
+// app.use(`/${subdirectory}/admin`, adminRoutes)
 
-  const tokenData = c.tokenIsValid(token, tokenIdCombos)
+// // * ------------------ routes below line require a token ------------------
+// // token check
+// app.use((req, res, next) => {
+//   const token = `${req.headers.token || ''}`
+//   if (!token) {
+//     c.error(`no token`, req.headers['x-forwarded-for'])
+//     res.status(403).end()
+//     return
+//   }
 
-  if (!('error' in tokenData)) {
-    tokenData.used.push(Date.now())
-    next()
-  } else {
-    c.log('gray', `invalid token: ${tokenData.error}`)
-    res.status(403).end()
-  }
-})
-app.get(`/${subdirectory}/testtoken`, (req, res) => {
-  res.send('Hello token haver!')
-})
+//   const tokenData = c.tokenIsValid(token, tokenIdCombos)
+
+//   if (!('error' in tokenData)) {
+//     tokenData.used.push(Date.now())
+//     next()
+//   } else {
+//     c.log('gray', `invalid token: ${tokenData.error}`)
+//     res.status(403).end()
+//   }
+// })
+// app.get(`/${subdirectory}/testtoken`, (req, res) => {
+//   res.send('Hello token haver!')
+// })
 
 app.listen(5151, () => {
   c.log(
-    `Api listening on http://localhost:5151/${subdirectory}`,
+    'green',
+    `api listening on http://localhost:5151/${subdirectory}`,
   )
 })
