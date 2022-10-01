@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 
 [Serializable]
-public struct Song {
+public class Song {
     public string name;
     public InstrumentTrack[] parts;
-
+    public float length = 10;
     public static Song CreateFromJson(string json) {
         return JsonConvert.DeserializeObject<Song>(json);
     }

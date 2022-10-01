@@ -1,21 +1,40 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class SongPlayer : MonoBehaviour {
-    public Button playButton;
-    public Button stopButton;
+
     public AudioSourcePool audioSourcePool;
 
-    private void Awake() {
-        playButton.onClick.AddListener(PlayTrack);
-        stopButton.onClick.AddListener(StopTrack);
+    private bool loop = false;
+
+    private Song currentSong;
+    private double dspStartOffset;
+    private float startOffset;
+    public void PlaySong(Song song, bool _loop) {
+        StopSong();
+        loop = _loop;
+        currentSong = song;
+        dspStartOffset = AudioSettings.dspTime + 0.5;
+        startOffset = Time.time + 0.5f;
+        QueueSongAtOffset(song, dspStartOffset, startOffset);
+    }
+
+    public void StopSong() {
+        loop = false;
+        noteQueue.Clear();
+        for (int i = 0; i < activeSources.Count; i++) {
+            activeSources[i].Stop();
+        }
     }
 
     private readonly List<QueuedNote> noteQueue = new List<QueuedNote>();
     private void Update() {
+        if(loop && (Time.time - startOffset) > (currentSong.length - 0.5f)) {
+            dspStartOffset += currentSong.length;
+            startOffset += currentSong.length;
+            QueueSongAtOffset(currentSong, dspStartOffset, startOffset);
+        }
         for (int i = 0; i < noteQueue.Count; i++) {
             QueuedNote note = noteQueue[i];
             if((note.dspStartTime - AudioSettings.dspTime) < 0.5f) {
@@ -42,39 +61,24 @@ public class SongPlayer : MonoBehaviour {
                 this.CreateAnimationRoutine(FADE_TIME, (float progress) => {
                     audioSource.volume = Mathf.Lerp(startVolume, 0, progress);
                 }, () => {
-                    Dispose(audioSource);
+                    DisposeAudioSource(audioSource);
                 });
             } else {
                 float waitTime = (float)(note.dspStartTime - AudioSettings.dspTime) + audioSource.clip.length + FADE_TIME;
                 yield return new WaitForSecondsRealtime(waitTime);
-                Dispose(audioSource);
+                DisposeAudioSource(audioSource);
             }
         }
     }
 
-    private void Dispose(AudioSource audioSource) {
+    private void DisposeAudioSource(AudioSource audioSource) {
         activeSources.Remove(audioSource);
         audioSourcePool.DisposeAudioSource(audioSource);
     }
 
     private const double SECONDS_PER_BEAT = 0.625;
-    private void PlayTrack() {
-        MusicNetworking.Instance.GetRandomSong((Song song) => {
-            double dspStartOffset = AudioSettings.dspTime + 0.5;
-            float startOffset = Time.time + 0.5f;
-            PlaySoundAtOffset(song, dspStartOffset, startOffset);
-            PlaySoundAtOffset(song, dspStartOffset+5, startOffset+5);
-        });
-    }
 
-    private void StopTrack() {
-        noteQueue.Clear();
-        for (int i = 0; i < activeSources.Count; i++) {
-            activeSources[i].Stop();
-        }
-    }
-
-    private void PlaySoundAtOffset(Song song, double dspStartOffset, float startOffset) {
+    private void QueueSongAtOffset(Song song, double dspStartOffset, float startOffset) {
         InstrumentMasterList iml = InstrumentMasterList.Instance;
         for (int i = 0; i < song.parts.Length; i++) {
             InstrumentTrack mainTrack = song.parts[i];
@@ -92,12 +96,6 @@ public class SongPlayer : MonoBehaviour {
         }
     }
 
-    private struct QueuedNote {
-        public double dspStartTime;
-        public float endTime;
-        public InstrumentNote instrumentNote;
-    }
-
     private void QueueNote(double dspStartOffset, float startOffset, double startTime, double _endTime, InstrumentNote _instrumentNote) {
         double endTime = (_endTime > 0) ? (startOffset + _endTime + FADE_TIME) : 0;
         noteQueue.Add(new QueuedNote() {
@@ -105,5 +103,11 @@ public class SongPlayer : MonoBehaviour {
             endTime = (float)endTime,
             instrumentNote = _instrumentNote
         });
+    }
+
+    private struct QueuedNote {
+        public double dspStartTime;
+        public float endTime;
+        public InstrumentNote instrumentNote;
     }
 }
