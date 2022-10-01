@@ -6,6 +6,7 @@ init({})
 
 runOnReady(async () => {
   c.log('green', 'DB Ready')
+
   // await db.parts.wipe()
   // await db.songs.wipe()
 

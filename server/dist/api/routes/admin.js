@@ -25,6 +25,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const c = __importStar(require("../../common"));
 const express_1 = require("express");
+const db_1 = require("../../db");
 const router = (0, express_1.Router)();
 function adminOk(req) {
     return req.query.auth === process.env.ADMIN_PASSWORD;
@@ -40,6 +41,14 @@ router.use((req, res, next) => {
 });
 router.get('/', (req, res) => {
     res.send('Hello Admin!');
+});
+router.get('/wipe/parts', async (req, res) => {
+    await db_1.db.parts.wipe();
+    res.send('Wiped parts db');
+});
+router.get('/wipe/songs', async (req, res) => {
+    await db_1.db.songs.wipe();
+    res.send('Wiped songs db');
 });
 exports.default = router;
 //# sourceMappingURL=admin.js.map
