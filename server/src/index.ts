@@ -1,7 +1,6 @@
 import * as c from './common'
 
 import './api'
-import './io'
 import { init, runOnReady, db } from './db'
 init({})
 
