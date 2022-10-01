@@ -25,6 +25,9 @@ app.get(`/${subdirectory}`, (req, res) => {
 import songsRoutes from './routes/songs'
 app.use(`/${subdirectory}/songs`, songsRoutes)
 
+import partsRoutes from './routes/parts'
+app.use(`/${subdirectory}/parts`, partsRoutes)
+
 // import tokenRoutes, { tokenIdCombos } from './routes/token'
 // app.use(`/${subdirectory}/token`, tokenRoutes)
 

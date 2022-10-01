@@ -47,6 +47,8 @@ app.get(`/${subdirectory}`, (req, res) => {
 });
 const songs_1 = __importDefault(require("./routes/songs"));
 app.use(`/${subdirectory}/songs`, songs_1.default);
+const parts_1 = __importDefault(require("./routes/parts"));
+app.use(`/${subdirectory}/parts`, parts_1.default);
 // import tokenRoutes, { tokenIdCombos } from './routes/token'
 // app.use(`/${subdirectory}/token`, tokenRoutes)
 // import adminRoutes from './routes/admin'
