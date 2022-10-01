@@ -28,11 +28,11 @@ interface PartData {
   id?: string // unneeded when sent from frontend, assigned in code here
   instrument: string
   name: string
-  notes: NoteData[][]
   created?: number
   chosen?: number
   given?: number
   ratio?: number
+  notes: NoteData[][]
 }
 
 interface NoteData {
