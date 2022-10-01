@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour {
     public SongRecorder songRecorder;
     public SongPlayer songPlayer;
     public SongPlayer metronomePlayer;
+    public SongVisualizer songVisualizer;
 
     private void Awake() {
         recordButton.onClick.AddListener(StartRecording);
@@ -23,6 +24,7 @@ public class GameManager : MonoBehaviour {
     private void PlayTrack() {
         MusicNetworking.Instance.GetRandomSong((Song song) => {
             songPlayer.PlaySong(song, true);
+            songVisualizer.ShowPart(song.parts[0], song.length);
         });
     }
 

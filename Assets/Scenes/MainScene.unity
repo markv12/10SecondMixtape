@@ -417,6 +417,7 @@ MonoBehaviour:
   songRecorder: {fileID: 915333278}
   songPlayer: {fileID: 259668295}
   metronomePlayer: {fileID: 1826334406}
+  songVisualizer: {fileID: 7877570651518310848}
 --- !u!4 &507418113
 Transform:
   m_ObjectHideFlags: 0
@@ -2546,7 +2547,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   visualizerRect: {fileID: 708046468}
   noteLinePrefab: {fileID: 6903114478078033000, guid: 6da4e45a6eec82543bb00f15aa25ab33, type: 3}
-  noteSquarePrefab: {fileID: 0}
+  noteSquarePrefab: {fileID: 3453896321937218012, guid: f66d36f50d89d3a4ca69a21e60ff2567, type: 3}
 --- !u!1001 &8918423011915185402
 PrefabInstance:
   m_ObjectHideFlags: 0
