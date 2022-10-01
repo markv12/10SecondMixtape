@@ -1,5 +1,6 @@
 import * as c from '../../common'
 import { Request, Router } from 'express'
+import { db } from '../../db'
 
 const router = Router()
 
@@ -21,6 +22,16 @@ router.use((req, res, next) => {
 
 router.get('/', (req, res) => {
   res.send('Hello Admin!')
+})
+
+router.get('/wipe/parts', async (req, res) => {
+  await db.parts.wipe()
+  res.send('Wiped parts db')
+})
+
+router.get('/wipe/songs', async (req, res) => {
+  await db.songs.wipe()
+  res.send('Wiped songs db')
 })
 
 export default router
