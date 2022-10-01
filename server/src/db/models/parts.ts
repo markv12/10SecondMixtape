@@ -54,13 +54,15 @@ export async function getRandom(
 }
 
 export async function add(part: PartData) {
-  part.id = uuidv4()
+  part.id = part.id || uuidv4()
   const res = await Part.create(part)
+  c.log(`Added part ${part.id}`)
   return res
 }
 
 export async function removeById(id: string) {
   await Part.deleteOne({ id })
+  c.log(`Removed part ${id}`)
 }
 
 export async function wipe() {

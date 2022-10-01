@@ -103,7 +103,7 @@ runOnReady(async () => {
     created: Date.now(),
     name: 'test1',
     key: 0,
-    partIds: ['1'],
+    partIds: ['1', '2'],
   })
   c.log(
     JSON.stringify(await db.songs.getRandom(1), null, 2),

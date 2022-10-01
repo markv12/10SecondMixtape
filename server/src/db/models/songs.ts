@@ -25,9 +25,13 @@ async function songDataToFrontendData(
   const parts: PartData[] =
     ((
       await Promise.all(
-        song.partIds.map((id) => db.parts.get(id)),
+        song.partIds.map(async (id) => {
+          const part = await db.parts.get(id)
+          c.log(part, id)
+          return part
+        }),
       )
-    ).map((p) => p) as PartData[]) || []
+    ).filter((p) => p) as PartData[]) || []
 
   return {
     id: song.id,
@@ -74,7 +78,7 @@ export async function getRandom(limit: number = 1) {
 }
 
 export async function add(song: SongData) {
-  song.id = uuidv4()
+  song.id = song.id || uuidv4()
   const res = await Song.create(song)
   return res
 }

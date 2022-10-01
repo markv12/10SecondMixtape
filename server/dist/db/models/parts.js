@@ -69,13 +69,15 @@ async function getRandom(limit = 1) {
 }
 exports.getRandom = getRandom;
 async function add(part) {
-    part.id = (0, uuid_1.v4)();
+    part.id = part.id || (0, uuid_1.v4)();
     const res = await Part.create(part);
+    c.log(`Added part ${part.id}`);
     return res;
 }
 exports.add = add;
 async function removeById(id) {
     await Part.deleteOne({ id });
+    c.log(`Removed part ${id}`);
 }
 exports.removeById = removeById;
 async function wipe() {

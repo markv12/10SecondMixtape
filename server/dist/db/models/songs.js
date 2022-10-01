@@ -46,7 +46,11 @@ const songSchema = new mongoose_1.Schema(schemaFields);
 songSchema.plugin(mongoose_simple_random_1.default);
 const Song = (0, mongoose_1.model)(`Song`, songSchema);
 async function songDataToFrontendData(song) {
-    const parts = (await Promise.all(song.partIds.map((id) => __1.db.parts.get(id)))).map((p) => p) || [];
+    const parts = (await Promise.all(song.partIds.map(async (id) => {
+        const part = await __1.db.parts.get(id);
+        c.log(part, id);
+        return part;
+    }))).filter((p) => p) || [];
     return {
         id: song.id,
         name: song.name,
@@ -76,7 +80,7 @@ async function getRandom(limit = 1) {
 }
 exports.getRandom = getRandom;
 async function add(song) {
-    song.id = (0, uuid_1.v4)();
+    song.id = song.id || (0, uuid_1.v4)();
     const res = await Song.create(song);
     return res;
 }
