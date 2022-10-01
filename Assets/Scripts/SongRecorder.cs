@@ -35,6 +35,8 @@ public class SongRecorder : MonoBehaviour {
         return result;
     }
 
+    public const double SMALLEST_NOTE_LENGTH = 0.25;
+    public const double NOTE_QUANTIZE_MULTIPLE = 1.0 / SMALLEST_NOTE_LENGTH;
     private void Update() {
         if (isRecording) {
             for (int i = 0; i < keyboard.Length; i++) {
@@ -145,6 +147,6 @@ public class SongRecorder : MonoBehaviour {
 
     public double Quantize(double value) {
         double beat = value / SongPlayer.SECONDS_PER_BEAT;
-        return System.Math.Round(beat*4.0)/4.0;
+        return System.Math.Round(beat * NOTE_QUANTIZE_MULTIPLE) / NOTE_QUANTIZE_MULTIPLE;
     }
 }

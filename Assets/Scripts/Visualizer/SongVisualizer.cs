@@ -9,8 +9,7 @@ public class SongVisualizer : MonoBehaviour {
 
     private List<NoteLine> noteLines;
     public void ShowPart(InstrumentTrack track, float songLength) {
-        int lineCount = GetLineCount(track);
-
+        int lineCount = GetLastLineIndex(track) + 1;
         noteLines = new List<NoteLine>(new NoteLine[lineCount]);
 
         float rectWidth = visualizerRect.sizeDelta.x;
@@ -21,17 +20,17 @@ public class SongVisualizer : MonoBehaviour {
             newLine.rectT.sizeDelta = new Vector2(rectWidth, lineHeight);
             newLine.rectT.anchoredPosition = new Vector2(0, lineHeight * i);
             noteLines[i] = newLine;
-        }
-        for (int i = 0; i < lineCount; i++) {
+
             List<Note> noteList = track.notes[i];
-            NoteLine noteLine = noteLines[i];
             for (int j = 0; j < noteList.Count; j++) {
                 Note note = noteList[j];
-                NoteSquare newSquare = Instantiate(noteSquarePrefab, noteLine.rectT);
+                NoteSquare newSquare = Instantiate(noteSquarePrefab, newLine.rectT);
+
+                double end = note.end == 0 ? note.start + SongRecorder.SMALLEST_NOTE_LENGTH : note.end;
                 float startX = BeatToX(note.start, songLength, rectWidth);
-                float width = BeatToX((note.end - note.start), songLength, rectWidth);
+                float width = BeatToX((end - note.start), songLength, rectWidth);
                 newSquare.rectT.anchoredPosition = new Vector2(startX, 0);
-                newSquare.rectT.sizeDelta = new Vector2(width, noteLine.rectT.sizeDelta.y);
+                newSquare.rectT.sizeDelta = new Vector2(width, newLine.rectT.sizeDelta.y);
             }
         }
     }
@@ -40,7 +39,7 @@ public class SongVisualizer : MonoBehaviour {
         return (float)((beat * SongPlayer.SECONDS_PER_BEAT * rectWidth) / songLength);
     }
 
-    public int GetLineCount(InstrumentTrack track) {
+    public int GetLastLineIndex(InstrumentTrack track) {
         int result = 0;
         for (int i = 0; i < track.notes.Count; i++) {
             if(track.notes[i].Count > 0) {
