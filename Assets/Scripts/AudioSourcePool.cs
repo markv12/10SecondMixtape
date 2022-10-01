@@ -4,19 +4,24 @@ using UnityEngine;
 public class AudioSourcePool : MonoBehaviour {
     public Transform parentT;
 
-    private readonly List<AudioSource> audioSources = new List<AudioSource>();
+    private readonly List<AudioSource> freeAudioSources = new List<AudioSource>();
 
     public AudioSource GetAudioSource(AudioClip clip) {
-        for (int i = 0; i < audioSources.Count; i++) {
-            AudioSource audioSource = audioSources[i];
-            if (!audioSource.isPlaying) {
-                return audioSource;
-            }
+        AudioSource result;
+        if(freeAudioSources.Count > 0) {
+            result = freeAudioSources[freeAudioSources.Count - 1];
+            freeAudioSources.RemoveAt(freeAudioSources.Count - 1);
+        } else {
+            result = CreateAudioSource();
         }
-        AudioSource newAudioSource = CreateAudioSource();
-        audioSources.Add(newAudioSource);
-        newAudioSource.clip = clip;
-        return newAudioSource;
+        result.clip = clip;
+        result.volume = 1;
+        return result;
+    }
+
+    public void DisposeAudioSource(AudioSource audioSource) {
+        audioSource.Stop();
+        freeAudioSources.Add(audioSource);
     }
 
     private AudioSource CreateAudioSource() {
