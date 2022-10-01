@@ -1,19 +1,24 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class SongRecorder : MonoBehaviour {
 
+    public AudioSourcePool audioSourcePool;
+
     private bool isRecording = false;
 
     private Song currentSong;
+    private Instrument currentInstrument;
     private float startTime;
-    public void StartRecording() {
+    public void StartRecording(string instrumentId) {
         startTime = Time.time;
+        currentInstrument = InstrumentMasterList.Instance.GetInstrumentForId(instrumentId);
         currentSong = new Song() {
             length = 10,
             parts = new InstrumentTrack[] {
                 new InstrumentTrack() {
-                    instrument = "RockBass",
+                    instrument = instrumentId,
                     notes = Note.NoteTwoDArray(14)
                 }
             }
@@ -33,22 +38,44 @@ public class SongRecorder : MonoBehaviour {
             for (int i = 0; i < keyboard.Length; i++) {
                 InstrumentKey key = keyboard[i];
                 if (InputUtility.GetKeyDown(key.key)) {
+                    AudioSource audioSource = audioSourcePool.GetAudioSource(currentInstrument.GetInstrumentNote(key.noteIndex));
+                    audioSource.Play();
                     Note newNote = new Note() {
                         start = Quantize((Time.time - startTime) % currentSong.length)
                     };
                     currentSong.parts[0].notes[key.noteIndex].Add(newNote);
                     key.currentNote = newNote;
+                    key.currentSource = audioSource;
                 } else if (InputUtility.GetKeyUp(key.key)) {
                     if (key.currentNote != null) {
                         double end = Quantize((Time.time - startTime) % currentSong.length);
-                        if(key.currentNote.start == end) {
-                            end += 0.125;
+                        double extension = (key.currentNote.start == end) ? 0.125 : 0;
+                        end += extension;
+                        if(key.currentSource != null) {
+                            FadeNote(key.currentSource, extension);
+                            key.currentSource = null;
                         }
                         key.currentNote.end = end;
                         key.currentNote = null;
                     }
                 }
             }
+        }
+    }
+
+    private void FadeNote(AudioSource audioSource, double initialWait) {
+        StartCoroutine(FadeRoutine());
+
+        IEnumerator FadeRoutine() {
+            if(initialWait > 0) {
+                yield return new WaitForSecondsRealtime((float)initialWait);
+            }
+            float startVolume = audioSource.volume;
+            this.CreateAnimationRoutine(SongPlayer.FADE_TIME, (float progress) => {
+                audioSource.volume = Mathf.Lerp(startVolume, 0, progress);
+            }, () => {
+                audioSourcePool.DisposeAudioSource(audioSource);
+            });
         }
     }
 
@@ -103,6 +130,7 @@ public class SongRecorder : MonoBehaviour {
         public Key key;
         public int noteIndex;
         public Note currentNote;
+        public AudioSource currentSource;
     }
 
     public double Quantize(double value) {

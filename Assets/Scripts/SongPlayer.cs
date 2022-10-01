@@ -47,11 +47,10 @@ public class SongPlayer : MonoBehaviour {
 
 
     private readonly List<AudioSource> activeSources = new List<AudioSource>();
-    private const float FADE_TIME = 0.25f;
+    public const float FADE_TIME = 0.2f;
     private void PlayNote(QueuedNote note) {
-        AudioSource audioSource = audioSourcePool.GetAudioSource(note.instrumentNote.clip);
+        AudioSource audioSource = audioSourcePool.GetAudioSource(note.instrumentNote);
         activeSources.Add(audioSource);
-        audioSource.pitch = note.instrumentNote.pitch;
         audioSource.PlayScheduled(note.dspStartTime);
         StartCoroutine(EndRoutine());
 

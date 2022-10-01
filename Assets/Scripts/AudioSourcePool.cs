@@ -6,7 +6,7 @@ public class AudioSourcePool : MonoBehaviour {
 
     private readonly List<AudioSource> freeAudioSources = new List<AudioSource>();
 
-    public AudioSource GetAudioSource(AudioClip clip) {
+    public AudioSource GetAudioSource(InstrumentNote note) {
         AudioSource result;
         if(freeAudioSources.Count > 0) {
             result = freeAudioSources[freeAudioSources.Count - 1];
@@ -14,7 +14,8 @@ public class AudioSourcePool : MonoBehaviour {
         } else {
             result = CreateAudioSource();
         }
-        result.clip = clip;
+        result.clip = note.clip;
+        result.pitch = note.pitch;
         result.volume = 1;
         return result;
     }

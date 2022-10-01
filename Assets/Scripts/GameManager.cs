@@ -36,7 +36,7 @@ public class GameManager : MonoBehaviour {
 
     private void StartRecording() {
         metronomePlayer.PlaySong(metronomeSong, true);
-        songRecorder.StartRecording();
+        songRecorder.StartRecording("RockBass");
     }
 
     private static Song metronomeSong = new Song() {
