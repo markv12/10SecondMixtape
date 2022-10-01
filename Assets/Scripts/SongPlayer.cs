@@ -6,10 +6,12 @@ using UnityEngine.UI;
 
 public class SongPlayer : MonoBehaviour {
     public Button playButton;
+    public Button stopButton;
     public AudioSourcePool audioSourcePool;
 
     private void Awake() {
         playButton.onClick.AddListener(PlayTrack);
+        stopButton.onClick.AddListener(StopTrack);
     }
 
     private readonly List<QueuedNote> noteQueue = new List<QueuedNote>();
@@ -24,9 +26,11 @@ public class SongPlayer : MonoBehaviour {
         }
     }
 
+    private readonly List<AudioSource> activeSources = new List<AudioSource>();
     private const float FADE_TIME = 0.25f;
     private void PlayNote(QueuedNote note) {
         AudioSource audioSource = audioSourcePool.GetAudioSource(note.instrumentNote.clip);
+        activeSources.Add(audioSource);
         audioSource.pitch = note.instrumentNote.pitch;
         audioSource.PlayScheduled(note.dspStartTime);
         StartCoroutine(EndRoutine());
@@ -38,37 +42,54 @@ public class SongPlayer : MonoBehaviour {
                 this.CreateAnimationRoutine(FADE_TIME, (float progress) => {
                     audioSource.volume = Mathf.Lerp(startVolume, 0, progress);
                 }, () => {
-                    audioSourcePool.DisposeAudioSource(audioSource);
+                    Dispose(audioSource);
                 });
             } else {
                 float waitTime = (float)(note.dspStartTime - AudioSettings.dspTime) + audioSource.clip.length + FADE_TIME;
                 yield return new WaitForSecondsRealtime(waitTime);
-                audioSourcePool.DisposeAudioSource(audioSource);
+                Dispose(audioSource);
             }
         }
     }
 
+    private void Dispose(AudioSource audioSource) {
+        activeSources.Remove(audioSource);
+        audioSourcePool.DisposeAudioSource(audioSource);
+    }
+
     private const double SECONDS_PER_BEAT = 0.625;
     private void PlayTrack() {
-        InstrumentMasterList iml = InstrumentMasterList.Instance;
         MusicNetworking.Instance.GetRandomSong((Song song) => {
             double dspStartOffset = AudioSettings.dspTime + 0.5;
             float startOffset = Time.time + 0.5f;
-            for (int i = 0; i < song.parts.Length; i++) {
-                InstrumentTrack mainTrack = song.parts[i];
-                Instrument instrument = iml.GetInstrumentForId(mainTrack.instrument);
-                for (int j = 0; j < mainTrack.notes.Count; j++) {
-                    List<Note> noteList = mainTrack.notes[j];
-                    for (int k = 0; k < noteList.Count; k++) {
-                        Note note = noteList[k];
-                        double startTime = note.start * SECONDS_PER_BEAT;
-                        double endTime = note.end * SECONDS_PER_BEAT;
-                        InstrumentNote instrumentNote = instrument.GetInstrumentNote(j);
-                        QueueNote(dspStartOffset, startOffset, startTime, endTime, instrumentNote);
-                    }
+            PlaySoundAtOffset(song, dspStartOffset, startOffset);
+            PlaySoundAtOffset(song, dspStartOffset+5, startOffset+5);
+        });
+    }
+
+    private void StopTrack() {
+        noteQueue.Clear();
+        for (int i = 0; i < activeSources.Count; i++) {
+            activeSources[i].Stop();
+        }
+    }
+
+    private void PlaySoundAtOffset(Song song, double dspStartOffset, float startOffset) {
+        InstrumentMasterList iml = InstrumentMasterList.Instance;
+        for (int i = 0; i < song.parts.Length; i++) {
+            InstrumentTrack mainTrack = song.parts[i];
+            Instrument instrument = iml.GetInstrumentForId(mainTrack.instrument);
+            for (int j = 0; j < mainTrack.notes.Count; j++) {
+                List<Note> noteList = mainTrack.notes[j];
+                for (int k = 0; k < noteList.Count; k++) {
+                    Note note = noteList[k];
+                    double startTime = note.start * SECONDS_PER_BEAT;
+                    double endTime = note.end * SECONDS_PER_BEAT;
+                    InstrumentNote instrumentNote = instrument.GetInstrumentNote(j);
+                    QueueNote(dspStartOffset, startOffset, startTime, endTime, instrumentNote);
                 }
             }
-        });
+        }
     }
 
     private struct QueuedNote {
