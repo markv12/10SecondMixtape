@@ -5,6 +5,7 @@ server/**/dist
 .env
 # so that token logic isn't revealed to the world, put this back once we're in a private repo
 server/src/common/ld51/token.ts
+dbBackups
 
 
 
