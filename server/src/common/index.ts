@@ -1,5 +1,6 @@
 export * from './ld51/constants'
 export * from './ld51/token'
+export * from './ld51/partValidator'
 
 export * from './general/math'
 export * from './general/text'

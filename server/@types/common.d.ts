@@ -21,15 +21,11 @@ interface SongData {
   likes?: number
   dislikes?: number
   ratio?: number
-  partIds: string[]
-}
-interface SongDataForFrontend
-  extends Omit<SongData, 'partIds'> {
   parts: PartData[]
 }
 
 interface PartData {
-  id: string // unneeded when sent from frontend, assigned in code here
+  id?: string // unneeded when sent from frontend, assigned in code here
   instrument: string
   name: string
   notes: NoteData[][]

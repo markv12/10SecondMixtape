@@ -32,27 +32,26 @@ router.get('/', (req, res) => {
 });
 router.get('/some/:count', async (req, res) => {
     const count = parseInt(req.params.count);
-    const songs = await db_1.db.songs.getRandom(count);
-    res.send(songs);
+    const parts = await db_1.db.parts.getRandom(count);
+    res.send(parts);
 });
 router.post('/new', async (req, res) => {
-    const song = req.body;
-    if (!song?.name) {
-        c.error('Invalid song uploaded', song);
+    const part = req.body;
+    if (!part?.name) {
+        c.error('Invalid part uploaded', part);
         res.status(400);
         return;
     }
-    for (const part of song?.parts) {
-        const errors = c.validatePart(part);
-        if (errors.length) {
-            c.error('Invalid part uploaded', part, errors);
-            res.status(400);
-            return;
-        }
+    const errors = c.validatePart(part);
+    if (errors.length) {
+        c.error('Invalid part uploaded', part, errors);
+        res.status(400);
+        return;
     }
-    c.log('gray', 'Uploading new song', song);
-    await db_1.db.songs.add(song);
+    c.log('gray', 'Uploading new part', part);
+    part.created = Date.now();
+    await db_1.db.parts.add(part);
     res.status(200);
 });
 exports.default = router;
-//# sourceMappingURL=songs.js.map
+//# sourceMappingURL=parts.js.map

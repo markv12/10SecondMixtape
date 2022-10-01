@@ -28,7 +28,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.wipe = exports.removeById = exports.add = exports.getRandom = exports.get = void 0;
 const mongoose_1 = require("mongoose");
-const __1 = require("../");
 const c = __importStar(require("../../common"));
 const mongoose_simple_random_1 = __importDefault(require("mongoose-simple-random"));
 const uuid_1 = require("uuid");
@@ -40,22 +39,17 @@ const schemaFields = {
     likes: { type: Number },
     dislikes: { type: Number },
     ratio: { type: Number },
-    partIds: [{ type: String }],
+    parts: mongoose_1.Schema.Types.Mixed,
 };
 const songSchema = new mongoose_1.Schema(schemaFields);
 songSchema.plugin(mongoose_simple_random_1.default);
 const Song = (0, mongoose_1.model)(`Song`, songSchema);
 async function songDataToFrontendData(song) {
-    const parts = (await Promise.all(song.partIds.map(async (id) => {
-        const part = await __1.db.parts.get(id);
-        c.log(part, id);
-        return part;
-    }))).filter((p) => p) || [];
     return {
         id: song.id,
         name: song.name,
         key: song.key,
-        parts,
+        parts: song.parts,
     };
 }
 async function get(id) {
