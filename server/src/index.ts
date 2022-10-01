@@ -59,7 +59,7 @@ runOnReady(async () => {
     id: '2',
     name: 'part2',
     created: Date.now(),
-    instrument: 'piano',
+    instrument: 'Piano',
     notes: [
       //1
       [
