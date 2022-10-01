@@ -5,16 +5,26 @@ using UnityEngine;
 using Newtonsoft.Json;
 
 [Serializable]
+public struct Song {
+    public string name;
+    public InstrumentTrack[] parts;
+
+    public static Song CreateFromJson(string json) {
+        return JsonConvert.DeserializeObject<Song>(json);
+    }
+    public static Song[] CreateListFromJson(string json) {
+        return JsonConvert.DeserializeObject<Song[]>(json);
+    }
+}
+
+[Serializable]
 public struct InstrumentTrack {
-    public string instrumentId;
+    public string name;
+    public string instrument;
     public List<List<Note>> notes;
 
-    public static InstrumentTrack CreateFromJson(string json) {
-        return JsonConvert.DeserializeObject<InstrumentTrack>(json);
-    }
-
     public const string TEST_TRACK = @"{
-    instrumentId: 'Drumset1',
+    instrument: 'Drumset1',
     notes: [
     [
         { 'start' : 0 },

@@ -10,24 +10,31 @@ public class SongPlayer : MonoBehaviour {
         PlayTrack();
     }
 
+    private const double SECONDS_PER_BEAT = 0.625;
     private void PlayTrack() {
-        InstrumentTrack mainTrack = InstrumentTrack.CreateFromJson(InstrumentTrack.TEST_TRACK);
-        Instrument instrument = InstrumentMasterList.Instance.GetInstrumentForId(mainTrack.instrumentId);
-        double startTime = AudioSettings.dspTime;
-        for (int i = 0; i < mainTrack.notes.Count; i++) {
-            List<Note> noteList = mainTrack.notes[i];
-            for (int j = 0; j < noteList.Count; j++) {
-                Note note = noteList[j];
-                double timeFromStart = note.start * 0.625;
-                InstrumentNote instrumentNote = instrument.GetInstrumentNote(i);
-                PlayNote(startTime + timeFromStart, instrumentNote);
+        MusicNetworking.Instance.GetRandomSong((Song song) => {
+            double startTime = AudioSettings.dspTime;
+            for (int i = 0; i < song.parts.Length; i++) {
+                InstrumentTrack mainTrack = song.parts[i];
+                Instrument instrument = InstrumentMasterList.Instance.GetInstrumentForId(mainTrack.instrument);
+                for (int j = 0; j < mainTrack.notes.Count; j++) {
+                    List<Note> noteList = mainTrack.notes[j];
+                    for (int k = 0; k < noteList.Count; k++) {
+                        Note note = noteList[k];
+                        double noteStartTime = note.start * SECONDS_PER_BEAT;
+                        double noteEndTime = note.end * SECONDS_PER_BEAT;
+                        InstrumentNote instrumentNote = instrument.GetInstrumentNote(j);
+                        PlayNote(startTime, noteStartTime, noteEndTime, instrumentNote);
+                    }
+                }
             }
-        }
+        });
     }
 
-    private void PlayNote(double playTime, InstrumentNote instrumentNote) {
+    private void PlayNote(double startTime, double noteStartTime, double noteEndTime, InstrumentNote instrumentNote) {
         AudioSource audioSource = audioSourcePool.GetAudioSource(instrumentNote.clip);
         audioSource.pitch = instrumentNote.pitch;
-        audioSource.PlayScheduled(playTime);
+        audioSource.PlayScheduled(startTime + noteStartTime);
+        audioSource.SetScheduledStartTime(startTime + noteEndTime);
     }
 }

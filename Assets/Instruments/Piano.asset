@@ -9,9 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 783781f4e0f47074780a80aa89b5ed15, type: 3}
-  m_Name: InstrumentMasterList
+  m_Script: {fileID: 11500000, guid: f9397d6f4323b8a4483b38bff87ede03, type: 3}
+  m_Name: Piano
   m_EditorClassIdentifier: 
-  instruments:
-  - {fileID: 11400000, guid: b1f6e2f9bbb87174d8fcdf11f481acb2, type: 2}
-  - {fileID: 11400000, guid: 91dfe909440cbce489fc9206bcfba7f8, type: 2}
+  id: Piano
+  note: {fileID: 8300000, guid: d4900c0c96c492b4eb4badb06e04e48d, type: 3}

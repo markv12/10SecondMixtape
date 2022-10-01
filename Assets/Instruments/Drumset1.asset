@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 87a5b4a6f02418e4fa58b0d5be5be701, type: 3}
+  m_Script: {fileID: 11500000, guid: bb0eecc6a8ac9cb4e8634b274b239014, type: 3}
   m_Name: Drumset1
   m_EditorClassIdentifier: 
   id: Drumset1
