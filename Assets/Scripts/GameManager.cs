@@ -19,6 +19,8 @@ public class GameManager : MonoBehaviour {
         stopButton.onClick.AddListener(StopTracks);
 
         uploadButton.gameObject.SetActive(false);
+
+        _ = DspTimeEstimator.Instance;
     }
 
     private void PlayTrack() {

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SongVisualizer : MonoBehaviour {
     public RectTransform visualizerRect;
+    public RectTransform playheadRect;
     public NoteLine noteLinePrefab;
     public NoteSquare noteSquarePrefab;
 
@@ -32,6 +33,21 @@ public class SongVisualizer : MonoBehaviour {
                 newSquare.rectT.anchoredPosition = new Vector2(startX, 0);
                 newSquare.rectT.sizeDelta = new Vector2(width, newLine.rectT.sizeDelta.y);
             }
+        }
+        MovePlayhead(0, rectWidth, songLength);
+    }
+
+    private void MovePlayhead(float startX, float endX, float duration) {
+        StartCoroutine(MoveRoutine());
+
+        IEnumerator MoveRoutine() {
+            yield return new WaitForSecondsRealtime(0.01f);
+            playheadRect.SetAsLastSibling();
+            Vector2 startPos = playheadRect.anchoredPosition.SetX(startX);
+            Vector2 endPos = playheadRect.anchoredPosition.SetX(endX);
+            this.CreateAnimationRoutine(duration, (float progress) => {
+                playheadRect.anchoredPosition = Vector2.Lerp(startPos, endPos, progress);
+            });
         }
     }
 

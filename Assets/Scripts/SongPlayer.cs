@@ -15,7 +15,7 @@ public class SongPlayer : MonoBehaviour {
         StopSong();
         loop = _loop;
         currentSong = song;
-        dspStartOffset = AudioSettings.dspTime;
+        dspStartOffset = DspTimeEstimator.Instance.DspTime;
         startOffset = Time.time;
         QueueSongAtOffset(song, dspStartOffset, startOffset);
     }
