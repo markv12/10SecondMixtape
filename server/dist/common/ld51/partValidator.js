@@ -24,8 +24,8 @@ function validatePart(part) {
         track.forEach((note, j) => {
             if (note.start === undefined)
                 errors.push(`Voice ${i} note ${j} has no start`);
-            if (note.end && note.end < note.start)
-                errors.push(`Voice ${i} note ${j} has invalid end`);
+            // if (note.end && note.end < note.start)
+            //   errors.push(`Voice ${i} note ${j} has invalid end`)
             if (note.start < 0)
                 errors.push(`Voice ${i} note ${j} has invalid start`);
             if ((note.start * 4) % 1 !== 0)
