@@ -12,7 +12,7 @@ const schemaFields: { [key in keyof SongData]: any } = {
   likes: { type: Number },
   dislikes: { type: Number },
   ratio: { type: Number },
-  partIds: [{ type: String }],
+  parts: Schema.Types.Mixed,
 }
 
 const songSchema = new Schema(schemaFields)
@@ -21,29 +21,18 @@ const Song = model<SongData>(`Song`, songSchema)
 
 async function songDataToFrontendData(
   song: SongData,
-): Promise<SongDataForFrontend> {
-  const parts: PartData[] =
-    ((
-      await Promise.all(
-        song.partIds.map(async (id) => {
-          const part = await db.parts.get(id)
-          c.log(part, id)
-          return part
-        }),
-      )
-    ).filter((p) => p) as PartData[]) || []
-
+): Promise<SongData> {
   return {
     id: song.id,
     name: song.name,
     key: song.key,
-    parts,
+    parts: song.parts,
   }
 }
 
 export async function get(
   id: string,
-): Promise<SongDataForFrontend | null> {
+): Promise<SongData | null> {
   const dbObject: SongData | undefined = (
     await Song.find({ id }).limit(1)
   )[0]
@@ -53,7 +42,7 @@ export async function get(
 }
 
 export async function getRandom(limit: number = 1) {
-  return new Promise<SongDataForFrontend[]>((resolve) => {
+  return new Promise<SongData[]>((resolve) => {
     const filters: any = {}
     ;(Song as any).findRandom(
       filters,
@@ -64,11 +53,10 @@ export async function getRandom(limit: number = 1) {
           c.error(err)
           return resolve([])
         }
-        const promises: Promise<SongDataForFrontend>[] =
-          results.map(
-            async (song: SongData) =>
-              await songDataToFrontendData(song),
-          )
+        const promises: Promise<SongData>[] = results.map(
+          async (song: SongData) =>
+            await songDataToFrontendData(song),
+        )
         await Promise.all(promises).then((songs) =>
           resolve(songs),
         )
