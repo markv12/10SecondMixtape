@@ -33,8 +33,8 @@ export function validatePart(part: PartData) {
       if (note.start === undefined)
         errors.push(`Voice ${i} note ${j} has no start`)
 
-      if (note.end && note.end < note.start)
-        errors.push(`Voice ${i} note ${j} has invalid end`)
+      // if (note.end && note.end < note.start)
+      //   errors.push(`Voice ${i} note ${j} has invalid end`)
 
       if (note.start < 0)
         errors.push(
