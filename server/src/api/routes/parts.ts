@@ -9,43 +9,46 @@ router.get('/', (req, res) => {
   res.send('Hello Songs!')
 })
 
-router.get('/some/:count/:scaleType?', async (req, res) => {
-  const count = parseInt(req.params.count)
-  const scaleType = req.params.scaleType as
-    | ScaleType
-    | undefined
+router.get(
+  '/some/:count?/:scaleType?',
+  async (req, res) => {
+    const count = parseInt(req.params.count || '1') || 1
+    const scaleType = req.params.scaleType as
+      | ScaleType
+      | undefined
 
-  let randomParts: PartData[] = [],
-    bestParts: PartData[] = []
-  randomParts = await db.parts.getRandom(
-    Math.ceil(count / 2),
-    scaleType,
-  )
-  if (randomParts.length < count)
-    bestParts = await db.parts.getBest(
-      count - randomParts.length,
+    let randomParts: PartData[] = [],
+      bestParts: PartData[] = []
+    randomParts = await db.parts.getRandom(
+      Math.ceil(count / 2),
       scaleType,
     )
-  let allParts = [...randomParts, ...bestParts]
-  // remove just one of duplicate ids
-  allParts = allParts.filter(
-    (song, i) =>
-      allParts.findIndex((s) => s.id === song.id) === i,
-    scaleType,
-  )
-  res.send(c.shuffleArray(allParts))
+    if (randomParts.length < count)
+      bestParts = await db.parts.getBest(
+        count - randomParts.length,
+        scaleType,
+      )
+    let allParts = [...randomParts, ...bestParts]
+    // remove just one of duplicate ids
+    allParts = allParts.filter(
+      (song, i) =>
+        allParts.findIndex((s) => s.id === song.id) === i,
+      scaleType,
+    )
+    res.send(c.shuffleArray(allParts))
 
-  if (count > 1)
-    allParts.forEach((p) => {
-      db.parts.incrementGiven(p.id!)
-    })
+    if (count > 1)
+      allParts.forEach((p) => {
+        db.parts.incrementGiven(p.id!)
+      })
 
-  c.log(
-    `Sent ${allParts.length} general part/s${
-      scaleType ? ` of scale type ${scaleType}` : ``
-    }`,
-  )
-})
+    c.log(
+      `Sent ${allParts.length} general part/s${
+        scaleType ? ` of scale type ${scaleType}` : ``
+      }`,
+    )
+  },
+)
 
 router.get('/chosen/:id', async (req, res) => {
   const id = req.params.id

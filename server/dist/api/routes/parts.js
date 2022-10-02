@@ -30,8 +30,8 @@ const router = (0, express_1.Router)();
 router.get('/', (req, res) => {
     res.send('Hello Songs!');
 });
-router.get('/some/:count/?:scaleType', async (req, res) => {
-    const count = parseInt(req.params.count);
+router.get('/some/:count?/:scaleType?', async (req, res) => {
+    const count = parseInt(req.params.count || '1') || 1;
     const scaleType = req.params.scaleType;
     let randomParts = [], bestParts = [];
     randomParts = await db_1.db.parts.getRandom(Math.ceil(count / 2), scaleType);
