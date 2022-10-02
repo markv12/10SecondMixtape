@@ -63,9 +63,13 @@ public class SongVisualizer : MonoBehaviour {
             playheadRect.SetAsLastSibling();
             Vector2 startPos = playheadRect.anchoredPosition.SetX(startX);
             Vector2 endPos = playheadRect.anchoredPosition.SetX(endX);
-            this.CreateAnimationRoutine(duration, (float progress) => {
+            float startTime = Time.time;
+            while (true) {
+                float timeSinceStart = Time.time - startTime;
+                float progress = (timeSinceStart / 10f) % 1;
                 playheadRect.anchoredPosition = Vector2.Lerp(startPos, endPos, progress);
-            });
+                yield return null;
+            }
         }
     }
 
