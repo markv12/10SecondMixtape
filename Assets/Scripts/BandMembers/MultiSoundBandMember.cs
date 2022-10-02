@@ -10,4 +10,5 @@ public class MultiSoundBandMember : BandMember {
             pitch = 1
         };
     }
+    public override int NoteCount => notes.Length;
 }

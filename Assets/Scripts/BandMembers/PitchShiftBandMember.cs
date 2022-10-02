@@ -10,4 +10,5 @@ public class PitchShiftBandMember : BandMember {
             pitch = Mathf.Pow(1.059463f, noteIndex + 1)
         };
     }
+    public override int NoteCount => 11;
 }

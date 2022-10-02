@@ -7,6 +7,7 @@ public abstract class BandMember : ScriptableObject {
     public Sprite mainSprite;
     public Sprite cassetteSprite;
     public abstract InstrumentNote GetInstrumentNote(int noteIndex);
+    public abstract int NoteCount { get; }
     public enum InstrumentType {
         Lead,
         Bass,
