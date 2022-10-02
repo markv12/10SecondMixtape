@@ -6,6 +6,7 @@ public abstract class BandMember : ScriptableObject {
     public Color color;
     public Sprite mainSprite;
     public Sprite cassetteSprite;
+    public bool cassetteTextWhite;
     public abstract InstrumentNote GetInstrumentNote(int noteIndex);
     public enum InstrumentType {
         Lead,

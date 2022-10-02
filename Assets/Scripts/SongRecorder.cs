@@ -87,7 +87,7 @@ public class SongRecorder : MonoBehaviour {
         0, 2, 4, 5, 7, 9, 11, 12, 14, 16, 17, 19, 21, 23, 24
     };
     private static readonly int[] MinorScaleDegrees = new int[] {
-        0, 2, 3, 5, 7, 8, 10, 12, 14, 15, 17, 19, 20, 22, 24
+        0, 2, 3, 5, 7, 8, 11, 12, 14, 15, 17, 19, 20, 23, 24
     };
     private static int[] ScaleDegreesToUse = MajorScaleDegrees;
 

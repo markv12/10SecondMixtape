@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: Scatting
   instrumentDisplayName: Scatting
-  color: {r: 0.115877524, g: 0.4506777, b: 0.7924528, a: 1}
+  color: {r: 0.6862745, g: 0.7725491, b: 0.8431373, a: 1}
   mainSprite: {fileID: 21300000, guid: 871e79baeb02c44f6b43fc7db48bb083, type: 3}
-  cassetteSprite: {fileID: 0}
+  cassetteSprite: {fileID: 21300000, guid: cbe9ba00131994eb4a9cd5b0bb9c8f1e, type: 3}
+  cassetteTextWhite: 1
   instrumentType: 2
   note: {fileID: 0}

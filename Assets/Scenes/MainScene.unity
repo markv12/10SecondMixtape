@@ -418,6 +418,10 @@ MonoBehaviour:
   songPlayer: {fileID: 259668295}
   metronomePlayer: {fileID: 1826334406}
   songVisualizer: {fileID: 7877570651518310848}
+  currentSong:
+    name: 
+    parts: []
+    length: 10
 --- !u!4 &507418113
 Transform:
   m_ObjectHideFlags: 0
@@ -2494,6 +2498,34 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2123128513890020761, guid: f3492731507dfc441a93976244591390, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2123128513890020761, guid: f3492731507dfc441a93976244591390, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2123128513890020761, guid: f3492731507dfc441a93976244591390, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2123128513890020761, guid: f3492731507dfc441a93976244591390, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2123128513890020761, guid: f3492731507dfc441a93976244591390, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 1920
+      objectReference: {fileID: 0}
+    - target: {fileID: 2123128513890020761, guid: f3492731507dfc441a93976244591390, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 1080
+      objectReference: {fileID: 0}
+    - target: {fileID: 2123128513890020761, guid: f3492731507dfc441a93976244591390, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8873338266673689799, guid: f3492731507dfc441a93976244591390, type: 3}
       propertyPath: bandmatePreviewUI
       value: 

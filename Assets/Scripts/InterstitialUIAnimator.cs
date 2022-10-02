@@ -22,24 +22,6 @@ public class InterstitialUIAnimator : MonoBehaviour {
     IEnumerator MoveRoutine() {
         yield return new WaitForSeconds(0.5f);
 
-        Vector3 currentTopPanelPosition = topPanel.transform.position;
-        Vector3 startTopPanelPosition = new Vector3(
-            currentTopPanelPosition.x,
-            currentTopPanelPosition.y + 300,
-            currentTopPanelPosition.z
-        );
-        topPanel.transform.position = startTopPanelPosition;
-        topPanel.gameObject.SetActive(true);
-        this.CreateAnimationRoutine(.8f, (float progress) => {
-            topPanel.position = Vector3.Lerp(
-                startTopPanelPosition,
-                currentTopPanelPosition,
-                Easing.easeOutBounce(0, 1, progress)
-            );
-        });
-
-        yield return new WaitForSeconds(1.5f);
-
         Vector3 currentLeftPanelPosition = leftPanel.transform.position;
         Vector3 startLeftPanelPosition = new Vector3(
             currentLeftPanelPosition.x - 1200,
@@ -56,7 +38,7 @@ public class InterstitialUIAnimator : MonoBehaviour {
             );
         });
 
-        yield return new WaitForSeconds(0.7f);
+        yield return new WaitForSeconds(0.8f);
 
         Vector3 currentPlusSignScale = plusSign.transform.localScale;
         Vector3 startPlusSignScale = new Vector3(
@@ -74,7 +56,7 @@ public class InterstitialUIAnimator : MonoBehaviour {
             );
         });
 
-        yield return new WaitForSeconds(0.7f);
+        yield return new WaitForSeconds(0.8f);
 
         Vector3 currentRightPanelPosition = rightPanel.transform.position;
         Vector3 startRightPanelPosition = new Vector3(
@@ -88,6 +70,25 @@ public class InterstitialUIAnimator : MonoBehaviour {
             rightPanel.position = Vector3.Lerp(
                 startRightPanelPosition,
                 currentRightPanelPosition,
+                Easing.easeOutBounce(0, 1, progress)
+            );
+        });
+
+
+        yield return new WaitForSeconds(1.5f);
+
+        Vector3 currentTopPanelPosition = topPanel.transform.position;
+        Vector3 startTopPanelPosition = new Vector3(
+            currentTopPanelPosition.x,
+            currentTopPanelPosition.y + 300,
+            currentTopPanelPosition.z
+        );
+        topPanel.transform.position = startTopPanelPosition;
+        topPanel.gameObject.SetActive(true);
+        this.CreateAnimationRoutine(.8f, (float progress) => {
+            topPanel.position = Vector3.Lerp(
+                startTopPanelPosition,
+                currentTopPanelPosition,
                 Easing.easeOutBounce(0, 1, progress)
             );
         });

@@ -14,8 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: SynthDrums
   instrumentDisplayName: Synth Drums
-  color: {r: 0.4156863, g: 0.2392157, b: 0.8941177, a: 1}
+  color: {r: 0.27450982, g: 0.16470589, b: 0.37647063, a: 1}
   mainSprite: {fileID: 21300000, guid: 46da1504418bc4af99ad4d80b55dadaa, type: 3}
   cassetteSprite: {fileID: 21300000, guid: a02d2b8d036514d4c83214383faa7b75, type: 3}
+  cassetteTextWhite: 1
   instrumentType: 2
-  notes: []
+  notes:
+  - {fileID: 8300000, guid: dfccaf4d959d64487ba285cc4023ad3f, type: 3}
+  - {fileID: 8300000, guid: 3d14451e102574a1685f9d6c4d90cbed, type: 3}
+  - {fileID: 8300000, guid: 53961d5fc52174cb88ed20fcc1ea9b1f, type: 3}
+  - {fileID: 8300000, guid: 53961d5fc52174cb88ed20fcc1ea9b1f, type: 3}
+  - {fileID: 8300000, guid: 4596cca6c0b084cfa9c93ed2d7854ca6, type: 3}
+  - {fileID: 8300000, guid: e0b3e98aa360b491d81cf72dce03d862, type: 3}
+  - {fileID: 8300000, guid: 82facb3560f9247b6be81f4dae4c60a1, type: 3}
+  - {fileID: 8300000, guid: d54a3d2c6353441adb7dc9c5fa5950b2, type: 3}

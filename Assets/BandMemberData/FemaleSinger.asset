@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: FemaleSinger
   instrumentDisplayName: Female Singer
-  color: {r: 0.8018868, g: 0.14751692, b: 0.3265735, a: 1}
+  color: {r: 0.56078434, g: 0.04705883, b: 0.21176472, a: 1}
   mainSprite: {fileID: 21300000, guid: e36c006fe0c2644088d74996372af936, type: 3}
-  cassetteSprite: {fileID: 0}
+  cassetteSprite: {fileID: 21300000, guid: 329621df440dd411b877bbfb2d61695e, type: 3}
+  cassetteTextWhite: 1
   instrumentType: 0
   note: {fileID: 0}

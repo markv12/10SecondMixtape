@@ -53,7 +53,7 @@ public class AudioManager : MonoBehaviour {
     }
 
     public void StartCrowdMurmur(float intensity) {
-        PlaySFX(crowdMurmur, 0.1f * intensity, 1, true);
+        PlaySFX(crowdMurmur, 0.15f * intensity, 1, true);
     }
     public void StopCrowdMurmur() {
         FadeOutSFX(crowdMurmur);

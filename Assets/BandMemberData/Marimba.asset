@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: Marimba
   instrumentDisplayName: Marimba
-  color: {r: 0.6509434, g: 0.16273585, b: 0.4204009, a: 1}
+  color: {r: 0.9294118, g: 0.3254902, b: 0.56078434, a: 1}
   mainSprite: {fileID: 21300000, guid: 000b6c71ee61141138cf07e573e08a2a, type: 3}
-  cassetteSprite: {fileID: 0}
+  cassetteSprite: {fileID: 21300000, guid: 2797c290a2cb34a4381610366389abc8, type: 3}
+  cassetteTextWhite: 1
   instrumentType: 0
   note: {fileID: 8300000, guid: f254db6e492774f7ca8b52fc4cb2a893, type: 3}
