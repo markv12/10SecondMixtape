@@ -40,7 +40,7 @@ public class RecordUI : MonoBehaviour {
             yourPartPlayers[i].StopSong();
         }
         songRecorder.Clear();
-        songVisualizer.Clear();
+        songVisualizer.ClearNoteSquares();
     }
 
     private void Back() {
@@ -50,6 +50,7 @@ public class RecordUI : MonoBehaviour {
         metronomePlayer.StopSong();
         otherPartPlayer.StopSong();
         Clear();
+        songVisualizer.ClearLines();
 
         IEnumerator BackRoutine() {
             yield return null;

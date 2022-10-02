@@ -66,11 +66,20 @@ public class SongVisualizer : MonoBehaviour {
         MovePlayhead(0, rectWidth, songLength, startWait);
     }
 
-    public void Clear() {
+    public void ClearNoteSquares() {
         for (int i = 0; i < noteSquares.Count; i++) {
             Destroy(noteSquares[i].gameObject);
         }
         noteSquares.Clear();
+    }
+
+    public void ClearLines() {
+        if(noteLines != null) {
+            for (int i = 0; i < noteLines.Count; i++) {
+                Destroy(noteLines[i].gameObject);
+            }
+            noteLines.Clear();
+        }
     }
 
     private void MovePlayhead(float startX, float endX, float duration, double startWait) {
