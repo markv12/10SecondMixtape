@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bandMembers:
   - {fileID: 11400000, guid: 580c651766e9046bc867ae69a53361a5, type: 2}
-  - {fileID: 11400000, guid: 9ac9547775ae44dd7963ff689a4cd8bb, type: 2}
+  - {fileID: 11400000, guid: 6ca989a26ccc14782844f34672be1e1c, type: 2}
   - {fileID: 11400000, guid: 67bfc2ece2d124b8da97e80f5230e7e8, type: 2}
   - {fileID: 11400000, guid: 8b7a05dc7b82c44e9b32593ae9ff3791, type: 2}
   - {fileID: 11400000, guid: 02e7b64fa776f490b9c85746285895f0, type: 2}
