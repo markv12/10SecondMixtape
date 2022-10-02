@@ -99,6 +99,15 @@ export async function incrementGiven(id: string) {
   return res
 }
 
+export async function incrementChosen(id: string) {
+  const res = await Part.updateOne(
+    { id },
+    { $inc: { chosen: 1 } },
+  )
+  c.log(`Incremented chosen for part ${id}`)
+  return res
+}
+
 export async function removeById(id: string) {
   await Part.deleteOne({ id })
   c.log(`Removed part ${id}`)

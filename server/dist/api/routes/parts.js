@@ -46,6 +46,16 @@ router.get('/some/:count', async (req, res) => {
         });
     c.log(`Sent ${allParts.length} general parts`);
 });
+router.get('/chosen/:id', async (req, res) => {
+    const id = req.params.id;
+    if (!id) {
+        c.error('Missing part id to increment chosen', id);
+        res.status(400).end();
+        return;
+    }
+    await db_1.db.parts.incrementChosen(id);
+    res.status(200).end();
+});
 router.post('/new', async (req, res) => {
     const part = req.body;
     if (!part?.name) {
