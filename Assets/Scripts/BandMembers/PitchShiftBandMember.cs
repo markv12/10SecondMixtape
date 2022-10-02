@@ -1,7 +1,7 @@
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Pitch Shift Instrument")]
-public class PitchShiftInstrument : Instrument {
+[CreateAssetMenu(menuName = "Pitch Shift Band Member")]
+public class PitchShiftBandMember : BandMember {
     public AudioClip note;
 
     public override InstrumentNote GetInstrumentNote(int noteIndex) {

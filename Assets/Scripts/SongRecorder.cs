@@ -9,11 +9,11 @@ public class SongRecorder : MonoBehaviour {
     private bool isRecording = false;
 
     private Song currentSong;
-    private Instrument currentInstrument;
+    private BandMember currentBandMember;
     private float startTime;
     public void StartRecording(string instrumentId) {
         startTime = Time.time;
-        currentInstrument = InstrumentMasterList.Instance.GetInstrumentForId(instrumentId);
+        currentBandMember = BandMemberMasterList.Instance.GetBandMemberForId(instrumentId);
         currentSong = new Song() {
             name = "Test Song",
             length = 10,
@@ -42,7 +42,7 @@ public class SongRecorder : MonoBehaviour {
             for (int i = 0; i < keyboard.Length; i++) {
                 InstrumentKey key = keyboard[i];
                 if (InputUtility.GetKeyDown(key.key)) {
-                    AudioSource audioSource = audioSourcePool.GetAudioSource(currentInstrument.GetInstrumentNote(key.noteIndex));
+                    AudioSource audioSource = audioSourcePool.GetAudioSource(currentBandMember.GetInstrumentNote(key.noteIndex));
                     audioSource.Play();
                     Note newNote = new Note() {
                         start = Quantize((Time.time - startTime) % currentSong.length)

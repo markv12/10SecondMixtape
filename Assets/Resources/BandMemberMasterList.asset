@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 783781f4e0f47074780a80aa89b5ed15, type: 3}
-  m_Name: InstrumentMasterList
+  m_Name: BandMemberMasterList
   m_EditorClassIdentifier: 
-  instruments:
+  bandMembers:
   - {fileID: 11400000, guid: b1f6e2f9bbb87174d8fcdf11f481acb2, type: 2}
   - {fileID: 11400000, guid: 91dfe909440cbce489fc9206bcfba7f8, type: 2}
   - {fileID: 11400000, guid: e433b0dde4e4aac44b7a08e2e9181eec, type: 2}

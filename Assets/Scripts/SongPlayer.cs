@@ -79,17 +79,17 @@ public class SongPlayer : MonoBehaviour {
     public const double SECONDS_PER_BEAT = 0.625;
 
     private void QueueSongAtOffset(Song song, double dspStartOffset, float startOffset) {
-        InstrumentMasterList iml = InstrumentMasterList.Instance;
+        BandMemberMasterList iml = BandMemberMasterList.Instance;
         for (int i = 0; i < song.parts.Length; i++) {
             InstrumentTrack mainTrack = song.parts[i];
-            Instrument instrument = iml.GetInstrumentForId(mainTrack.instrument);
+            BandMember bandMember = iml.GetBandMemberForId(mainTrack.instrument);
             for (int j = 0; j < mainTrack.notes.Count; j++) {
                 List<Note> noteList = mainTrack.notes[j];
                 for (int k = 0; k < noteList.Count; k++) {
                     Note note = noteList[k];
                     double startTime = note.start * SECONDS_PER_BEAT;
                     double endTime = note.end * SECONDS_PER_BEAT;
-                    InstrumentNote instrumentNote = instrument.GetInstrumentNote(j);
+                    InstrumentNote instrumentNote = bandMember.GetInstrumentNote(j);
                     QueueNote(dspStartOffset, startOffset, startTime, endTime, instrumentNote);
                 }
             }

@@ -1,7 +1,7 @@
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Note Instrument")]
-public class NoteInstrument : Instrument {
+[CreateAssetMenu(menuName = "Multi Sound Band Member")]
+public class MultiSoundBandMember : BandMember {
     public AudioClip[] notes;
 
     public override InstrumentNote GetInstrumentNote(int noteIndex) {
