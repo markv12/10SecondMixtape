@@ -13,4 +13,8 @@ MonoBehaviour:
   m_Name: RockBass
   m_EditorClassIdentifier: 
   id: RockBass
+  instrumentDisplayName: Rock Bass
+  color: {r: 0.69803923, g: 0.85098046, b: 0.20392159, a: 1}
+  mainSprite: {fileID: 0}
+  cassetteSprite: {fileID: 21300000, guid: 4d68b652b3cb34e9881159053a68a991, type: 3}
   note: {fileID: 8300000, guid: ea4c989ddca990f4cbb1e2c81e9789c0, type: 3}

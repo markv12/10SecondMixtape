@@ -10,9 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bb0eecc6a8ac9cb4e8634b274b239014, type: 3}
-  m_Name: Drumset1
+  m_Name: RockDrums
   m_EditorClassIdentifier: 
-  id: Drumset1
+  id: RockDrums
+  instrumentDisplayName: 
+  color: {r: 0, g: 0, b: 0, a: 0}
+  mainSprite: {fileID: 0}
+  cassetteSprite: {fileID: 0}
   notes:
   - {fileID: 8300000, guid: 80b5f24bdbcda2047ac6d51de2540142, type: 3}
   - {fileID: 8300000, guid: 47a953470c554454a8ef8caa98b491cb, type: 3}

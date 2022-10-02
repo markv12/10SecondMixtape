@@ -6,8 +6,8 @@ using UnityEngine.EventSystems;
 
 public class WiggleOnMouseHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    public float intensity = .005f;
-    public float speed = 0.3f;
+    public float intensity = 1.0f;
+    public float speed = 1.0f;
 
     private Button button;
     private Vector3 originalPosition;
@@ -33,28 +33,34 @@ public class WiggleOnMouseHover : MonoBehaviour, IPointerEnterHandler, IPointerE
             //     transform.position.y, 
             //     transform.position.z
             // );
-            // transform.eulerAngles = new Vector3(
-            //     transform.eulerAngles.x, 
-            //     transform.eulerAngles.y, 
-            //     transform.eulerAngles.z + Mathf.Cos(Time.time * 10.0f * speed) * intensity
-            // );
+            
             transform.localScale = new Vector3(
-                transform.localScale.x + Mathf.Cos(Time.time * 10.0f * speed) * .05f * intensity, 
-                transform.localScale.y + Mathf.Cos(Time.time * 10.0f * speed) * .05f * intensity, 
-                transform.localScale.z
-            );
+                    originalScale.x + .15f * intensity,
+                    originalScale.y + .15f * intensity,
+                    originalScale.z
+                );
+            bool state1 = Mathf.Cos(Time.time * 10.0f * speed) > 0;
+            if (state1) {
+                transform.eulerAngles = new Vector3(
+                    originalRotation.x, 
+                    originalRotation.y, 
+                    originalRotation.z + 3 * intensity
+                );
+            }
+            else {
+                transform.eulerAngles = new Vector3(
+                    originalRotation.x, 
+                    originalRotation.y, 
+                    originalRotation.z - 3 * intensity
+                );
+            }
+            
         }
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
         isHovering = true;
-        transform.localScale = new Vector3(
-            transform.localScale.x + intensity * 2.0f, 
-            transform.localScale.y + intensity * 2.0f, 
-            transform.localScale.z
-        );
-
     }
 
     public void OnPointerExit(PointerEventData eventData)
