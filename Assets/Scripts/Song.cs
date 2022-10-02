@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 [Serializable]
 public class Song {
     public string name;
+    public string id;
     public InstrumentTrack[] parts;
     public float length = 10;
     public static Song CreateFromJson(string json) {
@@ -18,6 +19,7 @@ public class Song {
 [Serializable]
 public struct InstrumentTrack {
     public string name;
+    public string id;
     public string instrument;
     public List<List<Note>> notes;
 

@@ -39,10 +39,14 @@ public class SongRecorder : MonoBehaviour {
     public const double NOTE_QUANTIZE_MULTIPLE = 1.0 / SMALLEST_NOTE_LENGTH;
     private void Update() {
         if (isRecording) {
-            for (int i = 0; i < keyboard.Length; i++) {
-                InstrumentKey key = keyboard[i];
+            InstrumentKey[] keyboardToUse = currentBandMember is MultiSoundBandMember ? 
+                chromaticKeyboard :
+                pitchedKeyboard;
+            for (int i = 0; i < keyboardToUse.Length; i++) {
+                InstrumentKey key = keyboardToUse[i];
                 if (InputUtility.GetKeyDown(key.key)) {
-                    AudioSource audioSource = audioSourcePool.GetAudioSource(currentBandMember.GetInstrumentNote(key.noteIndex));
+                    InstrumentNote note = currentBandMember.GetInstrumentNote(key.noteIndex);
+                    AudioSource audioSource = audioSourcePool.GetAudioSource(note);
                     audioSource.Play();
                     Note newNote = new Note() {
                         start = Quantize((Time.time - startTime) % currentSong.length)
@@ -83,6 +87,8 @@ public class SongRecorder : MonoBehaviour {
         }
     }
 
+
+
     private static readonly int[] MajorScaleDegrees = new int[] {
         0, 2, 4, 5, 7, 9, 11, 12, 14, 16, 17, 19, 21, 23, 24
     };
@@ -91,7 +97,7 @@ public class SongRecorder : MonoBehaviour {
     };
     private static int[] ScaleDegreesToUse = MajorScaleDegrees;
 
-    private static readonly InstrumentKey[] keyboard = new InstrumentKey[]{
+    private static readonly InstrumentKey[] pitchedKeyboard = new InstrumentKey[]{
         new InstrumentKey() {
             key = Key.A,
             noteIndex = ScaleDegreesToUse[0],
@@ -135,6 +141,53 @@ public class SongRecorder : MonoBehaviour {
         new InstrumentKey() {
             key = Key.Quote,
             noteIndex = ScaleDegreesToUse[10],
+        },
+    };
+
+    private static readonly InstrumentKey[] chromaticKeyboard = new InstrumentKey[]{
+        new InstrumentKey() {
+            key = Key.A,
+            noteIndex = 0,
+        },
+        new InstrumentKey() {
+            key = Key.S,
+            noteIndex = 1,
+        },
+        new InstrumentKey() {
+            key = Key.D,
+            noteIndex = 2,
+        },
+        new InstrumentKey() {
+            key = Key.F,
+            noteIndex = 3,
+        },
+        new InstrumentKey() {
+            key = Key.G,
+            noteIndex = 4,
+        },
+        new InstrumentKey() {
+            key = Key.H,
+            noteIndex = 5,
+        },
+        new InstrumentKey() {
+            key = Key.J,
+            noteIndex = 6,
+        },
+        new InstrumentKey() {
+            key = Key.K,
+            noteIndex = 7,
+        },
+        new InstrumentKey() {
+            key = Key.L,
+            noteIndex = 8,
+        },
+        new InstrumentKey() {
+            key = Key.Semicolon,
+            noteIndex = 9,
+        },
+        new InstrumentKey() {
+            key = Key.Quote,
+            noteIndex = 10,
         },
     };
 
