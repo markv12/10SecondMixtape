@@ -27,7 +27,7 @@ public class AudioManager : MonoBehaviour {
     public AudioClip timpani;
 
     public void PlaySuccessSound(float intensity) {
-        PlaySFX(success, 0.4f * intensity);
+        PlaySFX(success, 0.2f * intensity);
     }
 
     public void PlayPlasticClickSound(float intensity) {
@@ -43,7 +43,7 @@ public class AudioManager : MonoBehaviour {
     }
 
     public void StartCrowdMurmur(float intensity) {
-        PlaySFX(crowdMurmur, 0.3f * intensity, 1, true);
+        PlaySFX(crowdMurmur, 0.1f * intensity, 1, true);
     }
     public void StopCrowdMurmur() {
         StopSFX(crowdMurmur);

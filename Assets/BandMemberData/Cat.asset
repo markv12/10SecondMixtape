@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: Cat
   instrumentDisplayName: Cat
-  color: {r: 0.21960786, g: 0.21960786, b: 0.21960786, a: 1}
-  mainSprite: {fileID: 0}
+  color: {r: 0.08051807, g: 0.4716981, b: 0.05562477, a: 1}
+  mainSprite: {fileID: 21300000, guid: 24fbd5cdb8e3b470ca415746ef64e5b6, type: 3}
   cassetteSprite: {fileID: 0}
+  instrumentType: 0
   note: {fileID: 0}
