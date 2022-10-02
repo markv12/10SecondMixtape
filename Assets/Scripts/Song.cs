@@ -20,6 +20,10 @@ public struct InstrumentTrack {
     public string name;
     public string instrument;
     public List<List<Note>> notes;
+
+    public static InstrumentTrack[] CreateListFromJson(string json) {
+        return JsonConvert.DeserializeObject<InstrumentTrack[]>(json);
+    }
 }
 
 [Serializable]

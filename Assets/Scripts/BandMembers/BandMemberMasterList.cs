@@ -27,4 +27,16 @@ public class BandMemberMasterList : ScriptableObject {
     public BandMember GetBandMemberForId(string id) {
         return bandMemberMap[id];
     }
+
+    public BandMember GetBandMemberOfDifferentType(BandMember.InstrumentType instrumentType) {
+        BandMember result = bandMembers[0];
+        for (int i = 0; i < 6; i++) {
+            BandMember candidate = bandMembers[Random.Range(0, bandMembers.Length)];
+            if(candidate.instrumentType != instrumentType) {
+                result = candidate;
+                break;
+            }
+        }
+        return result;
+    }
 }
