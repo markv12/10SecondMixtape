@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,14 +8,23 @@ public class SongVisualizer : MonoBehaviour {
     public NoteLine noteLinePrefab;
     public NoteSquare noteSquarePrefab;
 
+    private float rectWidth;
+    private float rectHeight;
+    private Vector2 playheadStartPos; 
+    private Vector2 playheadEndPos;
+    private void Awake() {
+        rectWidth = visualizerRect.sizeDelta.x;
+        rectHeight = visualizerRect.sizeDelta.y;
+        playheadStartPos = playheadRect.anchoredPosition.SetX(0);
+        playheadEndPos = playheadRect.anchoredPosition.SetX(rectWidth);
+    }
+
     private List<NoteLine> noteLines;
     private readonly List<NoteSquare> noteSquares = new List<NoteSquare>();
     public void ShowPart(InstrumentTrack track, double startWait, float songLength) {
         int lineCount = GetLastLineIndex(track) + 1;
         noteLines = new List<NoteLine>(new NoteLine[lineCount]);
 
-        float rectWidth = visualizerRect.sizeDelta.x;
-        float rectHeight = visualizerRect.sizeDelta.y;
         float lineHeight = rectHeight / lineCount;
         for (int i = 0; i < lineCount; i++) {
             NoteLine newLine = Instantiate(noteLinePrefab, visualizerRect);
@@ -31,7 +39,7 @@ public class SongVisualizer : MonoBehaviour {
                 AddNoteSquare(note, songLength, rectWidth, newLine);
             }
         }
-        MovePlayhead(0, rectWidth, songLength, startWait);
+        MovePlayhead(songLength, startWait);
     }
 
     private void AddNoteSquare(Note note, float songLength, float rectWidth, NoteLine newLine) {
@@ -63,7 +71,7 @@ public class SongVisualizer : MonoBehaviour {
             newLine.keyText.text = SongRecorder.KeyStringForLine(i);
             noteLines[i] = newLine;
         }
-        MovePlayhead(0, rectWidth, songLength, startWait);
+        MovePlayhead(songLength, startWait);
     }
 
     public void ClearNoteSquares() {
@@ -73,28 +81,30 @@ public class SongVisualizer : MonoBehaviour {
         noteSquares.Clear();
     }
 
-    public void ClearLines() {
+    public void ClearLinesAndStop() {
         if(noteLines != null) {
             for (int i = 0; i < noteLines.Count; i++) {
                 Destroy(noteLines[i].gameObject);
             }
             noteLines.Clear();
         }
+        this.EnsureCoroutineStopped(ref playheadRoutine);
+        playheadRect.anchoredPosition = playheadStartPos;
     }
 
-    private void MovePlayhead(float startX, float endX, float duration, double startWait) {
-        StartCoroutine(MoveRoutine());
+    private Coroutine playheadRoutine;
+    private void MovePlayhead(float duration, double startWait) {
+        playheadRoutine = StartCoroutine(MoveRoutine());
 
         IEnumerator MoveRoutine() {
             yield return new WaitForSeconds((float)startWait);
             playheadRect.SetAsLastSibling();
-            Vector2 startPos = playheadRect.anchoredPosition.SetX(startX);
-            Vector2 endPos = playheadRect.anchoredPosition.SetX(endX);
+
             float startTime = Time.time;
             while (true) {
                 float timeSinceStart = Time.time - startTime;
-                float progress = (timeSinceStart / 10f) % 1;
-                playheadRect.anchoredPosition = Vector2.Lerp(startPos, endPos, progress);
+                float progress = (timeSinceStart / duration) % 1;
+                playheadRect.anchoredPosition = Vector2.Lerp(playheadStartPos, playheadEndPos, progress);
                 yield return null;
             }
         }
