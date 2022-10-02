@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7201624264978703653}
   - component: {fileID: 1099964124843599755}
   m_Layer: 5
-  m_Name: Checked
+  m_Name: SelectedImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -71,7 +71,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: 0322b4c69578d4e7b9ddb86ad6538d80, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -116,12 +116,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3041621931740525078}
+  - component: {fileID: 6269979638370136535}
   - component: {fileID: 2533607278722835336}
   - component: {fileID: 6421328957991903539}
   - component: {fileID: 3895073591686910415}
   - component: {fileID: 5531715482913205489}
   m_Layer: 5
-  m_Name: Cassete
+  m_Name: CasseteButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -148,8 +149,26 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -158, y: 37}
-  m_SizeDelta: {x: 320.4179, y: 206.4545}
+  m_SizeDelta: {x: 320, y: 207}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &6269979638370136535
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2347725916205427685}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dce62e2202244404c80654c13a62b80f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cassetteImage: {fileID: 6421328957991903539}
+  part:
+    name: 
+    id: 
+    instrument: 
+  selectedImage: {fileID: 549413774758364894}
 --- !u!222 &2533607278722835336
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -180,7 +199,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: c6858724a793d4a93843555b26ab3fd7, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -387,7 +406,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 4.2, y: -1.9}
-  m_SizeDelta: {x: 163.7379, y: 40.3278}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6063153554684752715
 CanvasRenderer:
@@ -444,7 +463,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 27.35
+  m_fontSize: 18
   m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -460,7 +479,7 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_enableWordWrapping: 0
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}

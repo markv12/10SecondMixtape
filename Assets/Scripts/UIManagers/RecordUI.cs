@@ -87,6 +87,7 @@ public class RecordUI : MonoBehaviour {
         bandNameText.text = sessionData.bandName + "'s New Song";
         otherMemberNameText.text = "Playing along with " + sessionData.otherName + "'s track.";
         bandPickUI.ShowSessionData(sessionData);
+        bandPickUI.LoadParts();
 
         gameObject.SetActive(true);
 
