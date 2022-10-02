@@ -1928,6 +1928,7 @@ MonoBehaviour:
   onScreenPos: {x: 0, y: 0}
   doneButton: {fileID: 8918423010922058394}
   clearButton: {fileID: 8918423011178237722}
+  backButton: {fileID: 8918423012010612602}
   songVisualizer: {fileID: 4199489142580832465}
   yourMemberImage: {fileID: 8918423011684582457}
   otherMemberImage: {fileID: 8918423011402094351}
