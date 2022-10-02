@@ -25,6 +25,10 @@ function toFrontendData(p: PartData): PartData {
     name: p.name,
     instrument: p.instrument,
     notes: p.notes,
+    chosen: p.chosen,
+    given: p.given,
+    ratio: p.ratio,
+    recencyRatio: p.recencyRatio,
   }
 }
 

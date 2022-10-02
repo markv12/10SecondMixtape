@@ -51,6 +51,10 @@ function toFrontendData(p) {
         name: p.name,
         instrument: p.instrument,
         notes: p.notes,
+        chosen: p.chosen,
+        given: p.given,
+        ratio: p.ratio,
+        recencyRatio: p.recencyRatio,
     };
 }
 async function get(id) {

@@ -51,6 +51,10 @@ function songDataToFrontendData(song) {
         name: song.name,
         key: song.key,
         parts: song.parts,
+        likes: song.likes,
+        dislikes: song.dislikes,
+        ratio: song.ratio,
+        recencyRatio: song.recencyRatio,
     };
 }
 async function get(id) {
