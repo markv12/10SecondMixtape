@@ -7,24 +7,18 @@ using UnityEngine.UI;
 
 public class BandmatePreviewUI : MonoBehaviour {
 
-    public Image yourMemberImage;
-    public TMP_Text yourPlayerNameText; 
-    public TMP_Text yourInstrumentLabel; 
+    public TMP_Text bandNameLabel;
 
-    public Image otherMemberImage;
-    public TMP_Text otherPlayerNameText;
-    public TMP_Text otherPlayerInstrumentLabel;
+    public BandMemberCard yourCard;
+    public BandMemberCard otherMemberCard;
 
     public void SetupNewBandmatePairing(InstrumentTrack part) {
         BandMember otherMember = BandMemberMasterList.Instance.GetBandMemberForId(part.instrument);
         BandMember yourMember = BandMemberMasterList.Instance.GetBandMemberOfDifferentType(otherMember.instrumentType);
 
-        yourMemberImage.sprite = yourMember.mainSprite;
-        yourPlayerNameText.text = "Derp";
-        yourInstrumentLabel.text = yourMember.instrumentDisplayName;
+        yourCard.ShowMember(yourMember, NameGenerator.GeneratePersonName());
+        otherMemberCard.ShowMember(otherMember, part.name);
 
-        otherMemberImage.sprite = otherMember.mainSprite;
-        otherPlayerNameText.text = part.name;
-        otherPlayerInstrumentLabel.text = otherMember.instrumentDisplayName;
+        bandNameLabel.text = NameGenerator.GenerateBandName();
     }
 }
