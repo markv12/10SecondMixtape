@@ -23,10 +23,11 @@ public class GameManager : MonoBehaviour {
         _ = DspTimeEstimator.Instance;
     }
 
+    private const double STANDARD_WAIT = 0.5;
     private void PlayTrack() {
         MusicNetworking.Instance.GetRandomSong((Song song) => {
-            songPlayer.PlaySong(song, true);
-            songVisualizer.ShowPart(song.parts[0], song.length);
+            songPlayer.PlaySong(song, STANDARD_WAIT, true);
+            songVisualizer.ShowPart(song.parts[0], STANDARD_WAIT, song.length);
         });
     }
 
@@ -35,7 +36,7 @@ public class GameManager : MonoBehaviour {
         metronomePlayer.StopSong();
         CurrentSong = songRecorder.StopRecording();
         if(CurrentSong != null) {
-            songPlayer.PlaySong(CurrentSong, true);
+            songPlayer.PlaySong(CurrentSong, STANDARD_WAIT,  true);
         }
     }
 
@@ -59,7 +60,7 @@ public class GameManager : MonoBehaviour {
 
     private void StartRecording() {
         uploadButton.gameObject.SetActive(false);
-        metronomePlayer.PlaySong(metronomeSong, true);
+        metronomePlayer.PlaySong(metronomeSong, STANDARD_WAIT, true);
         songRecorder.StartRecording("RockBass");
     }
 

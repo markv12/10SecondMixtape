@@ -11,12 +11,12 @@ public class SongPlayer : MonoBehaviour {
     private Song currentSong;
     private double dspStartOffset;
     private float startOffset;
-    public void PlaySong(Song song, bool _loop) {
+    public void PlaySong(Song song, double startWait,  bool _loop) {
         StopSong();
         loop = _loop;
         currentSong = song;
-        dspStartOffset = DspTimeEstimator.Instance.DspTime;
-        startOffset = Time.time;
+        dspStartOffset = DspTimeEstimator.Instance.DspTime + startWait;
+        startOffset = Time.time + (float)startWait;
         QueueSongAtOffset(song, dspStartOffset, startOffset);
     }
 

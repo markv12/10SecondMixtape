@@ -9,7 +9,7 @@ public class SongVisualizer : MonoBehaviour {
     public NoteSquare noteSquarePrefab;
 
     private List<NoteLine> noteLines;
-    public void ShowPart(InstrumentTrack track, float songLength) {
+    public void ShowPart(InstrumentTrack track, double startWait, float songLength) {
         int lineCount = GetLastLineIndex(track) + 1;
         noteLines = new List<NoteLine>(new NoteLine[lineCount]);
 
@@ -34,14 +34,14 @@ public class SongVisualizer : MonoBehaviour {
                 newSquare.rectT.sizeDelta = new Vector2(width, newLine.rectT.sizeDelta.y);
             }
         }
-        MovePlayhead(0, rectWidth, songLength);
+        MovePlayhead(0, rectWidth, songLength, startWait);
     }
 
-    private void MovePlayhead(float startX, float endX, float duration) {
+    private void MovePlayhead(float startX, float endX, float duration, double startWait) {
         StartCoroutine(MoveRoutine());
 
         IEnumerator MoveRoutine() {
-            yield return new WaitForSecondsRealtime(0.005f);
+            yield return new WaitForSecondsRealtime((float)startWait - 0.2f);
             playheadRect.SetAsLastSibling();
             Vector2 startPos = playheadRect.anchoredPosition.SetX(startX);
             Vector2 endPos = playheadRect.anchoredPosition.SetX(endX);
