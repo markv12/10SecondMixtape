@@ -76,10 +76,26 @@ export async function add(part: PartData) {
   part.created = Date.now()
   part.chosen = 0
   part.given = 0
-  part.ratio = 0
+  part.ratio = 0.5
   part.recencyRatio = c.getRecencyRatio(part)
   const res = await Part.create(part)
   c.log(`Added part ${part.id}`)
+  return res
+}
+
+export async function update(part: PartData) {
+  part.recencyRatio = c.getRecencyRatio(part)
+  const res = await Part.updateOne({ id: part.id }, part)
+  c.log(`Updated part ${part.id}`)
+  return res
+}
+
+export async function incrementGiven(id: string) {
+  const res = await Part.updateOne(
+    { id },
+    { $inc: { given: 1 } },
+  )
+  c.log(`Incremented given for part ${id}`)
   return res
 }
 

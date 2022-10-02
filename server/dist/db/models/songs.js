@@ -87,7 +87,7 @@ async function add(song) {
     song.created = Date.now();
     song.likes = 0;
     song.dislikes = 0;
-    song.ratio = 0;
+    song.ratio = 0.5;
     song.recencyRatio = c.getRecencyRatio(song);
     const res = await Song.create(song);
     return res;

@@ -26,7 +26,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.wipe = exports.removeById = exports.add = exports.getRandom = exports.getBest = exports.get = void 0;
+exports.wipe = exports.removeById = exports.incrementGiven = exports.update = exports.add = exports.getRandom = exports.getBest = exports.get = void 0;
 const mongoose_1 = require("mongoose");
 const c = __importStar(require("../../common"));
 const mongoose_simple_random_1 = __importDefault(require("mongoose-simple-random"));
@@ -85,13 +85,26 @@ async function add(part) {
     part.created = Date.now();
     part.chosen = 0;
     part.given = 0;
-    part.ratio = 0;
+    part.ratio = 0.5;
     part.recencyRatio = c.getRecencyRatio(part);
     const res = await Part.create(part);
     c.log(`Added part ${part.id}`);
     return res;
 }
 exports.add = add;
+async function update(part) {
+    part.recencyRatio = c.getRecencyRatio(part);
+    const res = await Part.updateOne({ id: part.id }, part);
+    c.log(`Updated part ${part.id}`);
+    return res;
+}
+exports.update = update;
+async function incrementGiven(id) {
+    const res = await Part.updateOne({ id }, { $inc: { given: 1 } });
+    c.log(`Incremented given for part ${id}`);
+    return res;
+}
+exports.incrementGiven = incrementGiven;
 async function removeById(id) {
     await Part.deleteOne({ id });
     c.log(`Removed part ${id}`);

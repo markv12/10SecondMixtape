@@ -27,6 +27,8 @@ router.get('/some/:count', async (req, res) => {
       allSongs.findIndex((s) => s.id === song.id) === i,
   )
   res.send(c.shuffleArray(allSongs))
+
+  c.log(`Sent ${allSongs.length} general songs`)
 })
 
 router.post('/new', async (req, res) => {
@@ -69,6 +71,13 @@ router.get('/like/:id', async (req, res) => {
   song.recencyRatio = c.getRecencyRatio(song)
   await db.songs.update(song)
   res.status(200).end()
+
+  c.log(
+    'gray',
+    `Upvoted song ${id}, now has ${song.likes} likes and ${
+      song.dislikes
+    } dislikes (ratio ${c.r2(song.recencyRatio, 4)})`,
+  )
 })
 
 router.get('/dislike/:id', async (req, res) => {
@@ -90,6 +99,16 @@ router.get('/dislike/:id', async (req, res) => {
   song.recencyRatio = c.getRecencyRatio(song)
   await db.songs.update(song)
   res.status(200).end()
+
+  c.log(
+    'gray',
+    `Downvoted song ${id}, now has ${
+      song.likes
+    } likes and ${song.dislikes} dislikes (ratio ${c.r2(
+      song.recencyRatio,
+      4,
+    )})`,
+  )
 })
 
 export default router

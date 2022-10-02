@@ -11,8 +11,29 @@ router.get('/', (req, res) => {
 
 router.get('/some/:count', async (req, res) => {
   const count = parseInt(req.params.count)
-  const parts = await db.parts.getRandom(count)
-  res.send(parts)
+
+  let randomParts: PartData[] = [],
+    bestParts: PartData[] = []
+  randomParts = await db.parts.getRandom(
+    Math.ceil(count / 2),
+  )
+  if (randomParts.length < count)
+    bestParts = await db.parts.getBest(
+      count - randomParts.length,
+    )
+  let allParts = [...randomParts, ...bestParts]
+  // remove just one of duplicate ids
+  allParts = allParts.filter(
+    (song, i) =>
+      allParts.findIndex((s) => s.id === song.id) === i,
+  )
+  res.send(c.shuffleArray(allParts))
+
+  allParts.forEach((p) => {
+    db.parts.incrementGiven(p.id!)
+  })
+
+  c.log(`Sent ${allParts.length} general parts`)
 })
 
 router.post('/new', async (req, res) => {
