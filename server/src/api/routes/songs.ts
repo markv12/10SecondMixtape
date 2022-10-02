@@ -28,15 +28,24 @@ router.get(
 router.get('/some/:count', async (req, res) => {
   const count = parseInt(req.params.count)
   let randomSongs: SongData[] = [],
-    bestSongs: SongData[] = []
+    bestSongs: SongData[] = [],
+    recentSongs: SongData[] = []
   randomSongs = await db.songs.getRandom(
-    Math.ceil(count / 2),
+    Math.ceil(count / 3),
   )
   if (randomSongs.length < count)
     bestSongs = await db.songs.getBest(
-      count - randomSongs.length,
+      Math.ceil(count / 3 - randomSongs.length),
     )
-  let allSongs = [...randomSongs, ...bestSongs]
+  if (randomSongs.length + bestSongs.length < count)
+    recentSongs = await db.songs.getRecent(
+      count - randomSongs.length - bestSongs.length,
+    )
+  let allSongs = [
+    ...randomSongs,
+    ...bestSongs,
+    ...recentSongs,
+  ]
   // remove just one of duplicate ids
   allSongs = allSongs.filter(
     (song, i) =>

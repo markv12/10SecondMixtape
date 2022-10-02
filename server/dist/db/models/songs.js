@@ -26,7 +26,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.wipe = exports.removeById = exports.update = exports.add = exports.getBest = exports.getRandom = exports.getByIdFragment = exports.get = void 0;
+exports.wipe = exports.removeById = exports.update = exports.add = exports.getRecent = exports.getBest = exports.getRandom = exports.getByIdFragment = exports.get = void 0;
 const mongoose_1 = require("mongoose");
 const c = __importStar(require("../../common"));
 const mongoose_simple_random_1 = __importDefault(require("mongoose-simple-random"));
@@ -92,6 +92,17 @@ async function getBest(limit = 1) {
     return (results || []).map(songDataToFrontendData);
 }
 exports.getBest = getBest;
+async function getRecent(limit = 1) {
+    // get highest created
+    const filters = {};
+    const options = {
+        sort: { created: -1 },
+        limit,
+    };
+    const results = await Song.find(filters, {}, options);
+    return (results || []).map(songDataToFrontendData);
+}
+exports.getRecent = getRecent;
 async function add(song) {
     song.id = song.id || (0, uuid_1.v4)();
     song.created = Date.now();

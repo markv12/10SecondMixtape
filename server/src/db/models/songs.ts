@@ -85,6 +85,23 @@ export async function getBest(
   return (results || []).map(songDataToFrontendData)
 }
 
+export async function getRecent(
+  limit: number = 1,
+): Promise<SongData[]> {
+  // get highest created
+  const filters: any = {}
+  const options: any = {
+    sort: { created: -1 },
+    limit,
+  }
+  const results: SongData[] | null = await Song.find(
+    filters,
+    {},
+    options,
+  )
+  return (results || []).map(songDataToFrontendData)
+}
+
 export async function add(song: SongData) {
   song.id = song.id || uuidv4()
   song.created = Date.now()

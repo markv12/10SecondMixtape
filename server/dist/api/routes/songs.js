@@ -43,11 +43,17 @@ router.get('/byIdFragment/:idFragment', async (req, res) => {
 });
 router.get('/some/:count', async (req, res) => {
     const count = parseInt(req.params.count);
-    let randomSongs = [], bestSongs = [];
-    randomSongs = await db_1.db.songs.getRandom(Math.ceil(count / 2));
+    let randomSongs = [], bestSongs = [], recentSongs = [];
+    randomSongs = await db_1.db.songs.getRandom(Math.ceil(count / 3));
     if (randomSongs.length < count)
-        bestSongs = await db_1.db.songs.getBest(count - randomSongs.length);
-    let allSongs = [...randomSongs, ...bestSongs];
+        bestSongs = await db_1.db.songs.getBest(Math.ceil(count / 3 - randomSongs.length));
+    if (randomSongs.length + bestSongs.length < count)
+        recentSongs = await db_1.db.songs.getRecent(count - randomSongs.length - bestSongs.length);
+    let allSongs = [
+        ...randomSongs,
+        ...bestSongs,
+        ...recentSongs,
+    ];
     // remove just one of duplicate ids
     allSongs = allSongs.filter((song, i) => allSongs.findIndex((s) => s.id === song.id) === i);
     res.send(c.shuffleArray(allSongs));
