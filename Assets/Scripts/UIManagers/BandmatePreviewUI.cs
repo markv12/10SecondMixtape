@@ -22,21 +22,32 @@ public class BandmatePreviewUI : MonoBehaviour {
         BandMember otherMember = BandMemberMasterList.Instance.GetBandMemberForId(part.instrument);
         BandMember yourMember = BandMemberMasterList.Instance.GetBandMemberOfDifferentType(otherMember.instrumentType);
 
-        yourCard.ShowMember(yourMember, NameGenerator.GeneratePersonName());
+        string yourName = NameGenerator.GeneratePersonName();
+        yourCard.ShowMember(yourMember, yourName);
         otherMemberCard.ShowMember(otherMember, part.name);
 
-        bandNameLabel.text = NameGenerator.GenerateBandName();
+        string bandName = NameGenerator.GenerateBandName();
+        bandNameLabel.text = bandName;
 
-        WaitThenGoToRecord(part);
+        SessionData sessionData = new SessionData() {
+            otherPart = part,
+            yourMember = yourMember,
+            otherMember = otherMember,
+            yourName = yourName,
+            otherName = part.name,
+            bandName = bandName,
+        };
+
+        WaitThenGoToRecord(sessionData);
     }
 
-    private void WaitThenGoToRecord(InstrumentTrack part) {
+    private void WaitThenGoToRecord(SessionData sessionData) {
         gameObject.SetActive(true);
         StartCoroutine(WaitRoutine());
 
         IEnumerator WaitRoutine() {
             yield return new WaitForSeconds(7f);
-            recordUI.Startup(part);
+            recordUI.Startup(sessionData);
             yield return new WaitForSeconds(3);
             gameObject.SetActive(false);
         }

@@ -34,8 +34,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -315, y: 0}
-  m_SizeDelta: {x: 795, y: 600}
+  m_AnchoredPosition: {x: -330, y: 0}
+  m_SizeDelta: {x: 910, y: 590}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &8571390522855348286
 GameObject:
@@ -508,7 +508,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8918423012553694343}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -545,7 +545,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: 01ecaa74b2bfd43f5a038ab7ab68a9d1, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -660,7 +660,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8918423012553694343}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -776,7 +776,7 @@ GameObject:
   - component: {fileID: 8918423011684582462}
   - component: {fileID: 8918423011684582457}
   m_Layer: 5
-  m_Name: Image
+  m_Name: YourMemberImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -832,7 +832,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: 5919c6d2809334e0db50a584bc0c7fcf, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -963,7 +963,7 @@ RectTransform:
   m_Children:
   - {fileID: 8918423011188831498}
   m_Father: {fileID: 8918423012553694343}
-  m_RootOrder: 12
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1146,12 +1146,12 @@ RectTransform:
   - {fileID: 8918423012708311327}
   - {fileID: 8918423012383508391}
   m_Father: {fileID: 8918423012553694343}
-  m_RootOrder: 8
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -320, y: 0}
-  m_SizeDelta: {x: 800, y: 600}
+  m_AnchoredPosition: {x: -330, y: 0}
+  m_SizeDelta: {x: 920, y: 600}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8918423012281372750
 CanvasRenderer:
@@ -1316,7 +1316,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 200, y: 0}
+  m_AnchoredPosition: {x: 230, y: 0}
   m_SizeDelta: {x: 2, y: 600}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8918423012383508389
@@ -1530,11 +1530,11 @@ RectTransform:
   - {fileID: 8918423012388880179}
   - {fileID: 8918423012674544520}
   - {fileID: 8918423011684582456}
-  - {fileID: 8918423012281372744}
   - {fileID: 8918423012733968294}
   - {fileID: 8918423011503603532}
   - {fileID: 8918423011402094350}
   - {fileID: 8918423012010612612}
+  - {fileID: 8918423012281372744}
   - {fileID: 5980316005029564301}
   m_Father: {fileID: 8918423012822690827}
   m_RootOrder: 0
@@ -1752,7 +1752,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -200, y: 0}
+  m_AnchoredPosition: {x: -230, y: 0}
   m_SizeDelta: {x: 2, y: 600}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8918423012708311325
@@ -1824,7 +1824,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8918423012553694343}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1929,6 +1929,10 @@ MonoBehaviour:
   doneButton: {fileID: 8918423010922058394}
   clearButton: {fileID: 8918423011178237722}
   songVisualizer: {fileID: 4199489142580832465}
+  yourMemberImage: {fileID: 8918423011684582457}
+  otherMemberImage: {fileID: 8918423011402094351}
+  bandNameText: {fileID: 8918423012388880176}
+  otherMemberNameText: {fileID: 8918423011503603533}
 --- !u!114 &4199489142580832465
 MonoBehaviour:
   m_ObjectHideFlags: 0
