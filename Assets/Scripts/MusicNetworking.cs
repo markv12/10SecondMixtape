@@ -21,6 +21,12 @@ public class MusicNetworking : Singleton<MusicNetworking> {
         }));
     }
 
+    public Coroutine Get9Parts(string scaleType, Action<InstrumentTrack[]> onComplete) {
+        return StartCoroutine(NetUtility.Get("parts/some/9/" + scaleType, (string json) => {
+            onComplete?.Invoke(InstrumentTrack.CreateListFromJson(json));
+        }));
+    }
+
     public void UploadSong(Song song) {
         string json = JsonConvert.SerializeObject(song);
         StartCoroutine(NetUtility.PostJson("songs/new", json, (bool success, string newSongId) => { 

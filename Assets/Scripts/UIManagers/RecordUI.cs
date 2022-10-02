@@ -29,7 +29,10 @@ public class RecordUI : MonoBehaviour {
 
     private void Awake() {
         doneButton.onClick.AddListener(Done);
-        clearButton.onClick.AddListener(ClearYourPart);
+        clearButton.onClick.AddListener(() => {
+            AudioManager.Instance.PlayPlasticClickSound(1);
+            ClearYourPart();
+        });
         backButton.onClick.AddListener(Back);
         AudioManager.Instance.PlayTapeStartSound(1.0f);
     }
@@ -39,11 +42,15 @@ public class RecordUI : MonoBehaviour {
         AudioManager.Instance.PlayTapeOutSound(1.0f);
         StopAllMusic();
         bandPickUI.gameObject.SetActive(true);
-        MoveUI(offScreenPos);
+        StartCoroutine(DoneRoutine());
+        IEnumerator DoneRoutine() {
+            yield return MoveUI(offScreenPos);
+            ClearYourPart();
+            songVisualizer.ClearLinesAndStop();
+        }
     }
 
     private void ClearYourPart() {
-        AudioManager.Instance.PlayPlasticClickSound(1);
         StopYourPart();
         songRecorder.Clear();
         songVisualizer.ClearNoteSquares();
@@ -89,6 +96,7 @@ public class RecordUI : MonoBehaviour {
         bandNameText.text = sessionData.bandName + "'s New Song";
         otherMemberNameText.text = "Playing along with " + sessionData.otherName + "'s track.";
         bandPickUI.ShowSessionData(sessionData);
+        bandPickUI.LoadParts();
 
         gameObject.SetActive(true);
 
