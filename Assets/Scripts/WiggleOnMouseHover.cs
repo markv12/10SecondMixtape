@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
@@ -19,9 +17,9 @@ public class WiggleOnMouseHover : MonoBehaviour, IPointerEnterHandler, IPointerE
     void Start()
     {
         button = GetComponent<Button>();
-        originalPosition = transform.position;
+        originalPosition = transform.localPosition;
         originalScale = transform.localScale;
-        originalRotation = transform.eulerAngles;
+        originalRotation = transform.localEulerAngles;
     }
 
     void Update() 
@@ -41,14 +39,14 @@ public class WiggleOnMouseHover : MonoBehaviour, IPointerEnterHandler, IPointerE
                 );
             bool state1 = Mathf.Cos(Time.time * 10.0f * speed) > 0;
             if (state1) {
-                transform.eulerAngles = new Vector3(
+                transform.localEulerAngles = new Vector3(
                     originalRotation.x, 
                     originalRotation.y, 
                     originalRotation.z + 3 * intensity
                 );
             }
             else {
-                transform.eulerAngles = new Vector3(
+                transform.localEulerAngles = new Vector3(
                     originalRotation.x, 
                     originalRotation.y, 
                     originalRotation.z - 3 * intensity
@@ -66,8 +64,8 @@ public class WiggleOnMouseHover : MonoBehaviour, IPointerEnterHandler, IPointerE
     public void OnPointerExit(PointerEventData eventData)
     {
         isHovering = false;
-        transform.position = originalPosition;
+        transform.localPosition = originalPosition;
         transform.localScale = originalScale;
-        transform.eulerAngles = originalRotation;
+        transform.localEulerAngles = originalRotation;
     }
 }
