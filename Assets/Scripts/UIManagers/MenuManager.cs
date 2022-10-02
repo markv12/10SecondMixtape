@@ -4,7 +4,14 @@ using UnityEngine.UI;
 using TMPro;
 
 public class MenuManager : MonoBehaviour{
-    public string name;
+    private const string PLAYER_NAME_KEY = "player_name";
+    public static string PlayerName {
+        get {
+            return PlayerPrefs.GetString(PLAYER_NAME_KEY);
+        } set {
+            PlayerPrefs.SetString(PLAYER_NAME_KEY, value);
+        }
+    }
 
     public Button playButton;
     public BandmatePreviewUI bandmatePreviewUI;
@@ -12,7 +19,11 @@ public class MenuManager : MonoBehaviour{
     public TMP_Text nameText;
 
     private void Awake() {
-        RefreshName();
+        if(string.IsNullOrWhiteSpace(PlayerName)) {
+            RefreshName();
+        } else {
+            nameText.text = PlayerName;
+        }
         playButton.onClick.AddListener(Play);
         AudioManager.Instance.StartCrowdMurmur(1.0f);
         refreshNameButton.onClick.AddListener(RefreshName);
@@ -30,7 +41,7 @@ public class MenuManager : MonoBehaviour{
     }
 
     private void RefreshName() {
-        name = NameGenerator.GeneratePersonName();
-        nameText.text = name;
+        PlayerName = NameGenerator.GeneratePersonName();
+        nameText.text = PlayerName;
     }
 }

@@ -24,7 +24,7 @@ public class BandmatePreviewUI : MonoBehaviour {
         BandMember otherMember = BandMemberMasterList.Instance.GetBandMemberForId(part.instrument);
         BandMember yourMember = BandMemberMasterList.Instance.GetBandMemberOfDifferentType(otherMember.instrumentType);
 
-        string yourName = NameGenerator.GeneratePersonName();
+        string yourName = MenuManager.PlayerName;
         yourCard.ShowMember(yourMember, yourName);
         otherMemberCard.ShowMember(otherMember, part.name);
 
