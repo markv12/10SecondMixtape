@@ -9,7 +9,7 @@ router.get('/', (req, res) => {
   res.send('Hello Songs!')
 })
 
-router.get('/some/:count/?:scaleType', async (req, res) => {
+router.get('/some/:count/:scaleType?', async (req, res) => {
   const count = parseInt(req.params.count)
   const scaleType = req.params.scaleType as
     | ScaleType
