@@ -100,14 +100,17 @@ router.get('/dislike/:id', async (req, res) => {
   song.dislikes++
   song.ratio = (song.likes || 0) / (song.dislikes || 1)
   song.recencyRatio = c.getRecencyRatio(song)
-  await db.songs.update(song)
+  const dbRes = await db.songs.update(song)
+  c.log(dbRes)
   res.status(200).end()
 
   c.log(
     'gray',
     `Downvoted song ${id}, now has ${
       song.likes || 0
-    } likes and ${song.dislikes} dislikes (ratio ${c.r2(
+    } likes and ${
+      song.dislikes
+    } dislikes (recencyRatio ${c.r2(
       song.recencyRatio,
       4,
     )})`,
