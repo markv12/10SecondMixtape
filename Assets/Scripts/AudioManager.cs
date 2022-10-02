@@ -26,6 +26,7 @@ public class AudioManager : MonoBehaviour {
     public AudioClip applause;
     public AudioClip timpani;
     public AudioClip touch;
+    public AudioClip swish;
 
     public void PlaySuccessSound(float intensity) {
         PlaySFX(success, 0.2f * intensity);
@@ -45,6 +46,10 @@ public class AudioManager : MonoBehaviour {
 
     public void PlayTouchSound(float intensity) {
         PlaySFX(touch, 0.4f * intensity);
+    }
+
+    public void PlaySwishSound(float intensity) {
+        PlaySFX(swish, 0.4f * intensity);
     }
 
     public void StartCrowdMurmur(float intensity) {
