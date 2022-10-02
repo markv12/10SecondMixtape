@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,6 +10,7 @@ public class SongVisualizer : MonoBehaviour {
     public NoteSquare noteSquarePrefab;
 
     private List<NoteLine> noteLines;
+    private List<NoteSquare> noteSquares = new List<NoteSquare>();
     public void ShowPart(InstrumentTrack track, double startWait, float songLength) {
         int lineCount = GetLastLineIndex(track) + 1;
         noteLines = new List<NoteLine>(new NoteLine[lineCount]);
@@ -40,6 +42,7 @@ public class SongVisualizer : MonoBehaviour {
         float width = BeatToX((end - note.start), songLength, rectWidth);
         newSquare.rectT.anchoredPosition = new Vector2(startX, 0);
         newSquare.rectT.sizeDelta = new Vector2(width, newLine.rectT.sizeDelta.y);
+        noteSquares.Add(newSquare);
     }
 
     private void AddNoteSquare(Note note, int lineIndex,  float songLength) {
@@ -61,6 +64,13 @@ public class SongVisualizer : MonoBehaviour {
             noteLines[i] = newLine;
         }
         MovePlayhead(0, rectWidth, songLength, startWait);
+    }
+
+    public void Clear() {
+        for (int i = 0; i < noteSquares.Count; i++) {
+            Destroy(noteSquares[i].gameObject);
+        }
+        noteSquares.Clear();
     }
 
     private void MovePlayhead(float startX, float endX, float duration, double startWait) {

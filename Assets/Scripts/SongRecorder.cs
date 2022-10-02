@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -82,7 +83,13 @@ public class SongRecorder : MonoBehaviour {
         }
     }
 
-
+    public void Clear() {
+        if (currentTrack != null) {
+            for (int i = 0; i < currentTrack.notes.Count; i++) {
+                currentTrack.notes[i].Clear();
+            }
+        }
+    }
 
     public static readonly int[] MajorScaleDegrees = new int[] {
         0, 2, 4, 5, 7, 9, 11, 12, 14, 16, 17, 19, 21, 23, 24
