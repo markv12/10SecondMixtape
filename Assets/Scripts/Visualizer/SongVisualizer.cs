@@ -41,7 +41,7 @@ public class SongVisualizer : MonoBehaviour {
         StartCoroutine(MoveRoutine());
 
         IEnumerator MoveRoutine() {
-            yield return new WaitForSecondsRealtime((float)startWait - 0.2f);
+            yield return new WaitForSecondsRealtime((float)startWait);
             playheadRect.SetAsLastSibling();
             Vector2 startPos = playheadRect.anchoredPosition.SetX(startX);
             Vector2 endPos = playheadRect.anchoredPosition.SetX(endX);
