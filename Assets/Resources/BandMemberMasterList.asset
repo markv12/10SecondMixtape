@@ -13,6 +13,21 @@ MonoBehaviour:
   m_Name: BandMemberMasterList
   m_EditorClassIdentifier: 
   bandMembers:
-  - {fileID: 11400000, guid: b1f6e2f9bbb87174d8fcdf11f481acb2, type: 2}
+  - {fileID: 11400000, guid: 580c651766e9046bc867ae69a53361a5, type: 2}
+  - {fileID: 11400000, guid: 9ac9547775ae44dd7963ff689a4cd8bb, type: 2}
+  - {fileID: 11400000, guid: 67bfc2ece2d124b8da97e80f5230e7e8, type: 2}
+  - {fileID: 11400000, guid: 8b7a05dc7b82c44e9b32593ae9ff3791, type: 2}
+  - {fileID: 11400000, guid: 02e7b64fa776f490b9c85746285895f0, type: 2}
+  - {fileID: 11400000, guid: b43cedc5aa904496a8da04aa61bc7393, type: 2}
+  - {fileID: 11400000, guid: 89553fc542599440e9d5a57fd247f01f, type: 2}
+  - {fileID: 11400000, guid: b4f93f7a09ccb4e4aa1fccb260bab29d, type: 2}
   - {fileID: 11400000, guid: 91dfe909440cbce489fc9206bcfba7f8, type: 2}
   - {fileID: 11400000, guid: e433b0dde4e4aac44b7a08e2e9181eec, type: 2}
+  - {fileID: 11400000, guid: b1f6e2f9bbb87174d8fcdf11f481acb2, type: 2}
+  - {fileID: 11400000, guid: d89ba7867744e462eb8e3c60073f6aa5, type: 2}
+  - {fileID: 11400000, guid: 91c0c17bf750c43f19bd991723fdf0b8, type: 2}
+  - {fileID: 11400000, guid: 901f373321647414798d4e32b1f1c837, type: 2}
+  - {fileID: 11400000, guid: 74322848d9613426eac21a4b54c21515, type: 2}
+  - {fileID: 11400000, guid: 82d0d25e1d13c41a6afe8fd2256d0d4a, type: 2}
+  - {fileID: 11400000, guid: 1385e12e184dc46e293ba8a9ee5ab764, type: 2}
+  - {fileID: 11400000, guid: 867aad09502b547ca928a845071339e0, type: 2}

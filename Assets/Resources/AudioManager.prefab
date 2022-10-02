@@ -309,13 +309,10 @@ MonoBehaviour:
   - {fileID: 6000602895522405625}
   - {fileID: 2018346283031181977}
   - {fileID: 4975185209390006887}
-  success: {fileID: 0}
-  failure: {fileID: 0}
-  startDrawing: {fileID: 0}
-  brushes: []
-  talk: {fileID: 0}
-  paperFlip: {fileID: 0}
-  save: {fileID: 0}
+  success: {fileID: 8300000, guid: 54da6ebd9dd8f4d608464b0c0161fa46, type: 3}
+  plasticClick: {fileID: 8300000, guid: 95474ab399cca49a8b3cb6a94c0e0cb6, type: 3}
+  crowdMurmur: {fileID: 8300000, guid: 1b0d7c35b58a8437182a25312cc612a8, type: 3}
+  applause: {fileID: 8300000, guid: 4d23b56bee2e5405980109393e50689e, type: 3}
 --- !u!1 &8087591419327489437
 GameObject:
   m_ObjectHideFlags: 0

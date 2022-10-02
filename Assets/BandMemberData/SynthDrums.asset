@@ -17,4 +17,5 @@ MonoBehaviour:
   color: {r: 0.4156863, g: 0.2392157, b: 0.8941177, a: 1}
   mainSprite: {fileID: 21300000, guid: 46da1504418bc4af99ad4d80b55dadaa, type: 3}
   cassetteSprite: {fileID: 21300000, guid: a02d2b8d036514d4c83214383faa7b75, type: 3}
+  instrumentType: 2
   notes: []

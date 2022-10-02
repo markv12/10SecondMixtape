@@ -17,4 +17,14 @@ MonoBehaviour:
   color: {r: 0.8862746, g: 0.7686275, b: 0.078431375, a: 1}
   mainSprite: {fileID: 21300000, guid: 5919c6d2809334e0db50a584bc0c7fcf, type: 3}
   cassetteSprite: {fileID: 21300000, guid: 8a875314e8d9f48c39186af5d2497756, type: 3}
-  notes: []
+  instrumentType: 2
+  notes:
+  - {fileID: 8300000, guid: 187193b65fe024689b5efdcaa5ade672, type: 3}
+  - {fileID: 8300000, guid: e88ab339f97be4f0fba363830f7f8ec8, type: 3}
+  - {fileID: 8300000, guid: 4d39c4a09469a4856957abcedeeb02a0, type: 3}
+  - {fileID: 8300000, guid: 3b9ca3e6c84d4493b96e784b2a440b6f, type: 3}
+  - {fileID: 8300000, guid: 1629b1c95e90e4af98f814968ff27708, type: 3}
+  - {fileID: 8300000, guid: a82a23a7970b8463c989a02e18a2fdd5, type: 3}
+  - {fileID: 8300000, guid: 31b8d3b1bcb514c56803b32f847729a8, type: 3}
+  - {fileID: 8300000, guid: cceba0321c58e4bdb9a145eeb1482ae8, type: 3}
+  - {fileID: 8300000, guid: c054d1d2a5fbe4bcaa37362a91822cb1, type: 3}
