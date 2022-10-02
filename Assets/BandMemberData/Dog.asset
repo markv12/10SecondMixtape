@@ -19,4 +19,4 @@ MonoBehaviour:
   cassetteSprite: {fileID: 21300000, guid: 46d03fd8f112c46cda92ea75ffe26162, type: 3}
   cassetteTextWhite: 0
   instrumentType: 0
-  note: {fileID: 8300000, guid: 3953c91f6a94446df89290d7760fc19a, type: 3}
+  note: {fileID: 8300000, guid: 135e75471c02f450a98cee483b350f8b, type: 3}
