@@ -46,7 +46,7 @@ public class AudioManager : MonoBehaviour {
         PlaySFX(crowdMurmur, 0.1f * intensity, 1, true);
     }
     public void StopCrowdMurmur() {
-        StopSFX(crowdMurmur);
+        FadeOutSFX(crowdMurmur);
     }
 
     public void PlaySFX(AudioClip clip, float volume, float pitch = 1, bool loop = false) {
@@ -66,6 +66,20 @@ public class AudioManager : MonoBehaviour {
             if (source.clip == clip) {
                 source.loop = false;
                 source.Stop();
+            }
+        }
+    }
+
+    public void FadeOutSFX(AudioClip clip) {
+        foreach (AudioSource source in audioSources) {
+            if (source.clip == clip) {
+                float startVolume = source.volume;
+                this.CreateAnimationRoutine(0.75f, (float progress) => {
+                    source.volume = Mathf.Lerp(startVolume, 0, progress);
+                }, () => {
+                    source.loop = false;
+                    source.Stop();
+                });
             }
         }
     }
