@@ -79,7 +79,7 @@ public class RecordUI : MonoBehaviour {
     private void StartRecording(SessionData sessionData) {
         metronomePlayer.PlaySong(metronomeSong, STANDARD_WAIT, true);
         otherPartPlayer.PlayPart(sessionData.otherPart, STANDARD_WAIT, true);
-        //songRecorder.StartRecording(bandMember);
+        songRecorder.StartRecording(sessionData.yourMember);
     }
 
     private static readonly Song metronomeSong = new Song() {
