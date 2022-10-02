@@ -9,6 +9,22 @@ router.get('/', (req, res) => {
   res.send('Hello Songs!')
 })
 
+router.get(
+  '/byIdFragment/:idFragment',
+  async (req, res) => {
+    const idFragment = req.params.idFragment
+    const song = await db.songs.getByIdFragment(idFragment)
+    if (!song) {
+      c.error('No song found with id fragment', idFragment)
+      res.status(404).end()
+      return
+    }
+    res.send(song)
+
+    c.log(`Sent song with id fragment ${idFragment}`)
+  },
+)
+
 router.get('/some/:count', async (req, res) => {
   const count = parseInt(req.params.count)
   let randomSongs: SongData[] = [],
