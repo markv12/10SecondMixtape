@@ -12,6 +12,7 @@ const schemaFields: { [key in keyof SongData]: any } = {
   likes: { type: Number },
   dislikes: { type: Number },
   ratio: { type: Number },
+  recencyRatio: { type: Number },
   parts: Schema.Types.Mixed,
 }
 
@@ -19,9 +20,7 @@ const songSchema = new Schema(schemaFields)
 songSchema.plugin(getRandomDocs)
 const Song = model<SongData>(`Song`, songSchema)
 
-async function songDataToFrontendData(
-  song: SongData,
-): Promise<SongData> {
+function songDataToFrontendData(song: SongData): SongData {
   return {
     id: song.id,
     name: song.name,
@@ -36,9 +35,7 @@ export async function get(
   const dbObject: SongData | undefined = (
     await Song.find({ id }).limit(1)
   )[0]
-  return dbObject
-    ? await songDataToFrontendData(dbObject)
-    : null
+  return dbObject ? songDataToFrontendData(dbObject) : null
 }
 
 export async function getRandom(limit: number = 1) {
@@ -53,23 +50,44 @@ export async function getRandom(limit: number = 1) {
           c.error(err)
           return resolve([])
         }
-        const promises: Promise<SongData>[] = (
-          results || []
-        ).map(
-          async (song: SongData) =>
-            await songDataToFrontendData(song),
-        )
-        await Promise.all(promises).then((songs) =>
-          resolve(songs),
-        )
+        resolve((results || []).map(songDataToFrontendData))
       },
     )
   })
 }
 
+export async function getBest(
+  limit: number = 1,
+): Promise<SongData[]> {
+  // get highest recencyRatio
+  const filters: any = {}
+  const options: any = {
+    sort: { recencyRatio: -1 },
+    limit,
+  }
+  const results: SongData[] | null = await Song.find(
+    filters,
+    {},
+    options,
+  )
+  return (results || []).map(songDataToFrontendData)
+}
+
 export async function add(song: SongData) {
   song.id = song.id || uuidv4()
+  song.created = Date.now()
+  song.likes = 0
+  song.dislikes = 0
+  song.ratio = 0
+  song.recencyRatio = c.getRecencyRatio(song)
   const res = await Song.create(song)
+  return res
+}
+
+export async function update(song: SongData) {
+  const res = await Song.updateOne({ id: song.id }, song, {
+    upsert: true,
+  })
   return res
 }
 

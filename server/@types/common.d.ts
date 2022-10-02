@@ -21,6 +21,7 @@ interface SongData {
   likes?: number
   dislikes?: number
   ratio?: number
+  recencyRatio?: number
   parts: PartData[]
 }
 
@@ -32,6 +33,7 @@ interface PartData {
   chosen?: number
   given?: number
   ratio?: number
+  recencyRatio?: number
   notes: NoteData[][]
 }
 

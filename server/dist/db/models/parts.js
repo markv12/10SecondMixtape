@@ -26,7 +26,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.wipe = exports.removeById = exports.add = exports.getRandom = exports.get = void 0;
+exports.wipe = exports.removeById = exports.add = exports.getRandom = exports.getBest = exports.get = void 0;
 const mongoose_1 = require("mongoose");
 const c = __importStar(require("../../common"));
 const mongoose_simple_random_1 = __importDefault(require("mongoose-simple-random"));
@@ -39,6 +39,7 @@ const schemaFields = {
     chosen: { type: Number },
     given: { type: Number },
     ratio: { type: Number },
+    recencyRatio: { type: Number },
     notes: mongoose_1.Schema.Types.Mixed,
 };
 const partSchema = new mongoose_1.Schema(schemaFields);
@@ -57,6 +58,17 @@ async function get(id) {
     return dbObject ? toFrontendData(dbObject) : null;
 }
 exports.get = get;
+async function getBest(limit = 1) {
+    // get highest recencyRatio
+    const filters = {};
+    const options = {
+        sort: { recencyRatio: -1 },
+        limit,
+    };
+    const results = await Part.find(filters, {}, options);
+    return (results || []).map(toFrontendData);
+}
+exports.getBest = getBest;
 async function getRandom(limit = 1) {
     return new Promise((resolve) => {
         const filters = {};
@@ -70,6 +82,11 @@ async function getRandom(limit = 1) {
 exports.getRandom = getRandom;
 async function add(part) {
     part.id = part.id || (0, uuid_1.v4)();
+    part.created = Date.now();
+    part.chosen = 0;
+    part.given = 0;
+    part.ratio = 0;
+    part.recencyRatio = c.getRecencyRatio(part);
     const res = await Part.create(part);
     c.log(`Added part ${part.id}`);
     return res;

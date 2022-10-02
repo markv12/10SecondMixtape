@@ -11,6 +11,7 @@ const schemaFields: { [key in keyof PartData]: any } = {
   chosen: { type: Number },
   given: { type: Number },
   ratio: { type: Number },
+  recencyRatio: { type: Number },
   notes: Schema.Types.Mixed,
 }
 
@@ -36,6 +37,23 @@ export async function get(
   return dbObject ? toFrontendData(dbObject) : null
 }
 
+export async function getBest(
+  limit: number = 1,
+): Promise<PartData[]> {
+  // get highest recencyRatio
+  const filters: any = {}
+  const options: any = {
+    sort: { recencyRatio: -1 },
+    limit,
+  }
+  const results: PartData[] | null = await Part.find(
+    filters,
+    {},
+    options,
+  )
+  return (results || []).map(toFrontendData)
+}
+
 export async function getRandom(
   limit: number = 1,
 ): Promise<PartData[]> {
@@ -55,6 +73,11 @@ export async function getRandom(
 
 export async function add(part: PartData) {
   part.id = part.id || uuidv4()
+  part.created = Date.now()
+  part.chosen = 0
+  part.given = 0
+  part.ratio = 0
+  part.recencyRatio = c.getRecencyRatio(part)
   const res = await Part.create(part)
   c.log(`Added part ${part.id}`)
   return res

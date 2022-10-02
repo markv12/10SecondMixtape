@@ -26,7 +26,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.wipe = exports.removeById = exports.add = exports.getRandom = exports.get = void 0;
+exports.wipe = exports.removeById = exports.update = exports.add = exports.getBest = exports.getRandom = exports.get = void 0;
 const mongoose_1 = require("mongoose");
 const c = __importStar(require("../../common"));
 const mongoose_simple_random_1 = __importDefault(require("mongoose-simple-random"));
@@ -39,12 +39,13 @@ const schemaFields = {
     likes: { type: Number },
     dislikes: { type: Number },
     ratio: { type: Number },
+    recencyRatio: { type: Number },
     parts: mongoose_1.Schema.Types.Mixed,
 };
 const songSchema = new mongoose_1.Schema(schemaFields);
 songSchema.plugin(mongoose_simple_random_1.default);
 const Song = (0, mongoose_1.model)(`Song`, songSchema);
-async function songDataToFrontendData(song) {
+function songDataToFrontendData(song) {
     return {
         id: song.id,
         name: song.name,
@@ -54,9 +55,7 @@ async function songDataToFrontendData(song) {
 }
 async function get(id) {
     const dbObject = (await Song.find({ id }).limit(1))[0];
-    return dbObject
-        ? await songDataToFrontendData(dbObject)
-        : null;
+    return dbObject ? songDataToFrontendData(dbObject) : null;
 }
 exports.get = get;
 async function getRandom(limit = 1) {
@@ -67,18 +66,40 @@ async function getRandom(limit = 1) {
                 c.error(err);
                 return resolve([]);
             }
-            const promises = (results || []).map(async (song) => await songDataToFrontendData(song));
-            await Promise.all(promises).then((songs) => resolve(songs));
+            resolve((results || []).map(songDataToFrontendData));
         });
     });
 }
 exports.getRandom = getRandom;
+async function getBest(limit = 1) {
+    // get highest recencyRatio
+    const filters = {};
+    const options = {
+        sort: { recencyRatio: -1 },
+        limit,
+    };
+    const results = await Song.find(filters, {}, options);
+    return (results || []).map(songDataToFrontendData);
+}
+exports.getBest = getBest;
 async function add(song) {
     song.id = song.id || (0, uuid_1.v4)();
+    song.created = Date.now();
+    song.likes = 0;
+    song.dislikes = 0;
+    song.ratio = 0;
+    song.recencyRatio = c.getRecencyRatio(song);
     const res = await Song.create(song);
     return res;
 }
 exports.add = add;
+async function update(song) {
+    const res = await Song.updateOne({ id: song.id }, song, {
+        upsert: true,
+    });
+    return res;
+}
+exports.update = update;
 async function removeById(id) {
     await Song.deleteOne({ id });
 }
