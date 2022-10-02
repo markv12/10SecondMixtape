@@ -2588,7 +2588,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4265281608499332254, guid: e59bc34ec8bd049bb955cd3a995edd67, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4265281608499332260, guid: e59bc34ec8bd049bb955cd3a995edd67, type: 3}
       propertyPath: m_Pivot.x
@@ -2673,6 +2673,18 @@ PrefabInstance:
     - target: {fileID: 4265281608499332260, guid: e59bc34ec8bd049bb955cd3a995edd67, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4265281608874754168, guid: e59bc34ec8bd049bb955cd3a995edd67, type: 3}
+      propertyPath: m_fontSize
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 4265281608874754168, guid: e59bc34ec8bd049bb955cd3a995edd67, type: 3}
+      propertyPath: m_fontSizeMax
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 4265281608874754168, guid: e59bc34ec8bd049bb955cd3a995edd67, type: 3}
+      propertyPath: m_VerticalAlignment
+      value: 512
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e59bc34ec8bd049bb955cd3a995edd67, type: 3}
