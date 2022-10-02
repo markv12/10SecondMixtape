@@ -68,6 +68,7 @@ router.get('/like/:id', async (req, res) => {
   song.likes = song.likes || 0
   song.likes++
   song.ratio = song.likes / (song.dislikes || 1)
+  if (!song.created) song.created = Date.now()
   song.recencyRatio = c.getRecencyRatio(song)
   await db.songs.update(song)
   res.status(200).end()
@@ -99,8 +100,9 @@ router.get('/dislike/:id', async (req, res) => {
   song.dislikes = song.dislikes || 0
   song.dislikes++
   song.ratio = (song.likes || 0) / (song.dislikes || 1)
+  if (!song.created) song.created = Date.now()
   song.recencyRatio = c.getRecencyRatio(song)
-  const dbRes = await db.songs.update(song)
+  await db.songs.update(song)
   res.status(200).end()
 
   c.log(

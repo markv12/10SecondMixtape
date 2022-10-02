@@ -2,7 +2,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getRecencyRatio = void 0;
 function getRecencyRatio(el) {
-    console.log('recency', el);
     if (el.ratio === undefined || !el.created)
         return 0;
     const age = Date.now() - el.created;
