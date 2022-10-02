@@ -1,5 +1,95 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &206143057874278088
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7381038314887128963}
+  - component: {fileID: 5812286700622596926}
+  m_Layer: 0
+  m_Name: AudioSourcePool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7381038314887128963
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 206143057874278088}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -959.7929, y: -540, z: 0}
+  m_LocalScale: {x: 0.9318378, y: 0.9318378, z: 0.9318378}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8918423012822690827}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5812286700622596926
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 206143057874278088}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2252b1633fac46b4585414b7d737050b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parentT: {fileID: 7381038314887128963}
+--- !u!1 &4215164360881071776
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 925731304627229202}
+  - component: {fileID: 4706804703286527388}
+  m_Layer: 0
+  m_Name: otherPartPlayer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &925731304627229202
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4215164360881071776}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -959.7929, y: -540, z: 0}
+  m_LocalScale: {x: 0.9318378, y: 0.9318378, z: 0.9318378}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8918423012822690827}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4706804703286527388
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4215164360881071776}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0d5d65369e5b5e4d9350fb8ef0c6564, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSourcePool: {fileID: 5812286700622596926}
 --- !u!1 &4979933781222223977
 GameObject:
   m_ObjectHideFlags: 0
@@ -37,6 +127,51 @@ RectTransform:
   m_AnchoredPosition: {x: -330, y: 0}
   m_SizeDelta: {x: 910, y: 590}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &6108975223242718033
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 430975217792282731}
+  - component: {fileID: 3759802253287666717}
+  m_Layer: 0
+  m_Name: SongRecorder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &430975217792282731
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6108975223242718033}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -959.7929, y: -540, z: 0}
+  m_LocalScale: {x: 0.9318378, y: 0.9318378, z: 0.9318378}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8918423012822690827}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3759802253287666717
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6108975223242718033}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab2d10a725d6fe146ab8dcf900533ddb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSourcePool: {fileID: 5812286700622596926}
 --- !u!1 &8571390522855348286
 GameObject:
   m_ObjectHideFlags: 0
@@ -113,6 +248,51 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &8666649050098182703
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8133574902229589274}
+  - component: {fileID: 8725945745608593714}
+  m_Layer: 0
+  m_Name: MetronomePlayer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8133574902229589274
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8666649050098182703}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -959.7929, y: -540, z: 0}
+  m_LocalScale: {x: 0.9318378, y: 0.9318378, z: 0.9318378}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8918423012822690827}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8725945745608593714
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8666649050098182703}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0d5d65369e5b5e4d9350fb8ef0c6564, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSourcePool: {fileID: 5812286700622596926}
 --- !u!1 &8918423010922058404
 GameObject:
   m_ObjectHideFlags: 0
@@ -1903,6 +2083,10 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8918423012553694343}
+  - {fileID: 925731304627229202}
+  - {fileID: 430975217792282731}
+  - {fileID: 8133574902229589274}
+  - {fileID: 7381038314887128963}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1930,6 +2114,9 @@ MonoBehaviour:
   clearButton: {fileID: 8918423011178237722}
   backButton: {fileID: 8918423012010612602}
   songVisualizer: {fileID: 4199489142580832465}
+  songRecorder: {fileID: 3759802253287666717}
+  otherPartPlayer: {fileID: 4706804703286527388}
+  metronomePlayer: {fileID: 8725945745608593714}
   yourMemberImage: {fileID: 8918423011684582457}
   otherMemberImage: {fileID: 8918423011402094351}
   bandNameText: {fileID: 8918423012388880176}

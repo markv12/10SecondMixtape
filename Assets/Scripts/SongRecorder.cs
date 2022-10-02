@@ -11,16 +11,16 @@ public class SongRecorder : MonoBehaviour {
     private Song currentSong;
     private BandMember currentBandMember;
     private float startTime;
-    public void StartRecording(string instrumentId) {
+    public void StartRecording(BandMember bandMember) {
         startTime = Time.time;
-        currentBandMember = BandMemberMasterList.Instance.GetBandMemberForId(instrumentId);
+        currentBandMember = bandMember;
         currentSong = new Song() {
             name = "Test Song",
             length = 10,
             parts = new InstrumentTrack[] {
                 new InstrumentTrack() {
                     name = "Test Person",
-                    instrument = instrumentId,
+                    instrument = bandMember.id,
                     notes = Note.NoteTwoDArray(18)
                 }
             }
@@ -72,7 +72,7 @@ public class SongRecorder : MonoBehaviour {
 
         IEnumerator FadeRoutine() {
             if(initialWait > 0) {
-                yield return new WaitForSecondsRealtime((float)initialWait);
+                yield return new WaitForSeconds((float)initialWait);
             }
             float startVolume = audioSource.volume;
             this.CreateAnimationRoutine(SongPlayer.FADE_TIME, (float progress) => {

@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9397d6f4323b8a4483b38bff87ede03, type: 3}
+  m_Name: Metronome
+  m_EditorClassIdentifier: 
+  id: Metronome
+  instrumentDisplayName: Metronome
+  color: {r: 0, g: 0, b: 0, a: 1}
+  mainSprite: {fileID: 21300000, guid: 01ecaa74b2bfd43f5a038ab7ab68a9d1, type: 3}
+  cassetteSprite: {fileID: 21300000, guid: 5f49cbfc19f6a4b6d9a1f0256dc2cbbd, type: 3}
+  instrumentType: 2
+  note: {fileID: 8300000, guid: 4a5f8efb226f5449db3bf7a64b1e2c6f, type: 3}

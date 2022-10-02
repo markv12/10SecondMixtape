@@ -20,6 +20,14 @@ public class SongPlayer : MonoBehaviour {
         QueueSongAtOffset(song, dspStartOffset, startOffset);
     }
 
+    public void PlayPart(InstrumentTrack part, double startWait, bool _loop) {
+        Song song = new Song() {
+            length = 10,
+            parts = new InstrumentTrack[] { part },
+        };
+        PlaySong(song, startWait, _loop);
+    }
+
     public void StopSong() {
         loop = false;
         noteQueue.Clear();
@@ -56,7 +64,7 @@ public class SongPlayer : MonoBehaviour {
 
         IEnumerator EndRoutine() {
             if(note.endTime > 0) {
-                yield return new WaitForSecondsRealtime(note.endTime - Time.time);
+                yield return new WaitForSeconds(note.endTime - Time.time);
                 float startVolume = audioSource.volume;
                 this.CreateAnimationRoutine(FADE_TIME, (float progress) => {
                     audioSource.volume = Mathf.Lerp(startVolume, 0, progress);
@@ -64,8 +72,8 @@ public class SongPlayer : MonoBehaviour {
                     DisposeAudioSource(audioSource);
                 });
             } else {
-                float waitTime = (float)(note.dspStartTime - AudioSettings.dspTime) + audioSource.clip.length + FADE_TIME;
-                yield return new WaitForSecondsRealtime(waitTime);
+                float waitTime = (float)(note.dspStartTime - DspTimeEstimator.Instance.DspTime) + audioSource.clip.length + FADE_TIME;
+                yield return new WaitForSeconds(waitTime);
                 DisposeAudioSource(audioSource);
             }
         }

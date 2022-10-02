@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,10 +15,15 @@ public class RecordUI : MonoBehaviour {
     public Button backButton;
     public SongVisualizer songVisualizer;
 
+    public SongRecorder songRecorder;
+    public SongPlayer otherPartPlayer;
+    public SongPlayer metronomePlayer;
+
     public Image yourMemberImage;
     public Image otherMemberImage;
     public TMP_Text bandNameText;
     public TMP_Text otherMemberNameText;
+    private const double STANDARD_WAIT = 0.5;
 
     private void Awake() {
         doneButton.onClick.AddListener(Done);
@@ -65,7 +71,39 @@ public class RecordUI : MonoBehaviour {
                 rectT.anchoredPosition = Vector2.Lerp(offScreenPos, onScreenPos, easedProgress);
             });
             yield return new WaitForSeconds(0.8f);
-            songVisualizer.ShowPart(sessionData.otherPart, 0.5, 10);
+            songVisualizer.ShowPart(sessionData.otherPart, STANDARD_WAIT, 10);
+            StartRecording(sessionData);
         }
     }
+
+    private void StartRecording(SessionData sessionData) {
+        metronomePlayer.PlaySong(metronomeSong, STANDARD_WAIT, true);
+        otherPartPlayer.PlayPart(sessionData.otherPart, STANDARD_WAIT, true);
+        //songRecorder.StartRecording(bandMember);
+    }
+
+    private static readonly Song metronomeSong = new Song() {
+        length = 2.5f,
+        parts = new InstrumentTrack[] {
+            new InstrumentTrack {
+                instrument = "Metronome",
+                notes = new List<List<Note>>() {
+                    new List<Note>(){
+                        new Note() {
+                            start = 0
+                        },
+                         new Note() {
+                            start = 1
+                        },
+                        new Note() {
+                            start = 2
+                        },
+                         new Note() {
+                            start = 3
+                        }
+                    }
+                }
+            }
+        }
+    };
 }

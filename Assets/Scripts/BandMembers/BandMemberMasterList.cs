@@ -16,12 +16,14 @@ public class BandMemberMasterList : ScriptableObject {
     }
 
     public BandMember[] bandMembers;
+    public BandMember metronome;
     private readonly Dictionary<string, BandMember> bandMemberMap = new Dictionary<string, BandMember>();
     private void Initialize() {
         for (int i = 0; i < bandMembers.Length; i++) {
             BandMember instrument = bandMembers[i];
             bandMemberMap[instrument.id] = instrument;
         }
+        bandMemberMap[metronome.id] = metronome;
     }
 
     public BandMember GetBandMemberForId(string id) {

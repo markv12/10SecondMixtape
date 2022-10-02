@@ -31,3 +31,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 82d0d25e1d13c41a6afe8fd2256d0d4a, type: 2}
   - {fileID: 11400000, guid: 1385e12e184dc46e293ba8a9ee5ab764, type: 2}
   - {fileID: 11400000, guid: 867aad09502b547ca928a845071339e0, type: 2}
+  metronome: {fileID: 11400000, guid: 252c73e5b8cedd846a437976e335082c, type: 2}
