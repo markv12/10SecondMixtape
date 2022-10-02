@@ -29,6 +29,7 @@ function toFrontendData(p: PartData): PartData {
     given: p.given,
     ratio: p.ratio,
     recencyRatio: p.recencyRatio,
+    created: p.created,
   }
 }
 

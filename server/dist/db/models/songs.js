@@ -55,6 +55,7 @@ function songDataToFrontendData(song) {
         dislikes: song.dislikes,
         ratio: song.ratio,
         recencyRatio: song.recencyRatio,
+        created: song.created,
     };
 }
 async function get(id) {

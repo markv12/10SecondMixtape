@@ -30,6 +30,7 @@ function songDataToFrontendData(song: SongData): SongData {
     dislikes: song.dislikes,
     ratio: song.ratio,
     recencyRatio: song.recencyRatio,
+    created: song.created,
   }
 }
 
