@@ -14,4 +14,5 @@ public class MultiSoundBandMember : BandMember {
         };
     }
     public override int NoteCount => notes.Length;
+    public override bool IsPitched => false;
 }

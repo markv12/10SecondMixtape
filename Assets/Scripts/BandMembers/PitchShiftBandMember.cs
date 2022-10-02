@@ -12,4 +12,5 @@ public class PitchShiftBandMember : BandMember {
         };
     }
     public override int NoteCount => 11;
+    public override bool IsPitched => true;
 }

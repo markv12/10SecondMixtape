@@ -10,7 +10,7 @@ public class SongVisualizer : MonoBehaviour {
     public NoteSquare noteSquarePrefab;
 
     private List<NoteLine> noteLines;
-    private List<NoteSquare> noteSquares = new List<NoteSquare>();
+    private readonly List<NoteSquare> noteSquares = new List<NoteSquare>();
     public void ShowPart(InstrumentTrack track, double startWait, float songLength) {
         int lineCount = GetLastLineIndex(track) + 1;
         noteLines = new List<NoteLine>(new NoteLine[lineCount]);

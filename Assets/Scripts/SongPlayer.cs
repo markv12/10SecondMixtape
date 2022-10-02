@@ -6,7 +6,7 @@ using UnityEngine;
 public class SongPlayer : MonoBehaviour {
 
     public AudioSourcePool audioSourcePool;
-    public event Action<double, float> onLoop;
+    public Action<double, float> onLoop;
     private bool loop = false;
 
     private Song currentSong;
@@ -107,6 +107,9 @@ public class SongPlayer : MonoBehaviour {
                 for (int k = 0; k < noteList.Count; k++) {
                     Note note = noteList[k];
                     double startTime = note.start * SECONDS_PER_BEAT;
+                    if(bandMember.IsPitched && note.end == 0) {
+                        note.end = 16;
+                    }
                     double endTime = note.end * SECONDS_PER_BEAT;
                     InstrumentNote instrumentNote = bandMember.GetInstrumentNote(j);
                     QueueNote(dspStartOffset, startOffset, startTime, endTime, instrumentNote);

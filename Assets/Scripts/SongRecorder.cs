@@ -39,7 +39,7 @@ public class SongRecorder : MonoBehaviour {
         if (isRecording) {
             for (int i = 0; i < pitchedKeyboard.Length; i++) {
                 InstrumentKey key = pitchedKeyboard[i];
-                if (InputUtility.GetKeyDown(key.key)) {
+                if (InputUtility.GetKeyDown(key.key) && currentBandMember.HasNoteIndex(key.noteIndex)) {
                     InstrumentNote note = currentBandMember.GetInstrumentNote(key.noteIndex);
                     AudioSource audioSource = audioSourcePool.GetAudioSource(note);
                     audioSource.Play();
@@ -49,7 +49,7 @@ public class SongRecorder : MonoBehaviour {
                     currentTrack.notes[key.noteIndex].Add(newNote);
                     key.currentNote = newNote;
                     key.currentSource = audioSource;
-                } else if (InputUtility.GetKeyUp(key.key)) {
+                } else if (InputUtility.GetKeyUp(key.key) && currentBandMember.HasNoteIndex(key.noteIndex)) {
                     if (key.currentNote != null) {
                         double end = Quantize((Time.time - startTime) % 10f);
                         double extension = (key.currentNote.start == end) ? 0.25 : 0;
@@ -59,6 +59,9 @@ public class SongRecorder : MonoBehaviour {
                             key.currentSource = null;
                         }
                         key.currentNote.end = end;
+                        if(key.currentNote.start > key.currentNote.end) {
+                            key.currentNote.end = 16;
+                        }
                         onNoteAdded?.Invoke(key.currentNote, key.noteIndex);
                         key.currentNote = null;
                     }

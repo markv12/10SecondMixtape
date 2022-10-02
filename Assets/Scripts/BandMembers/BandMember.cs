@@ -9,6 +9,10 @@ public abstract class BandMember : ScriptableObject {
     public bool cassetteTextWhite;
     public abstract InstrumentNote GetInstrumentNote(int noteIndex);
     public abstract int NoteCount { get; }
+    public abstract bool IsPitched { get; }
+    public bool HasNoteIndex(int noteIndex) {
+        return noteIndex < NoteCount;
+    } 
     public enum InstrumentType {
         Lead,
         Bass,
