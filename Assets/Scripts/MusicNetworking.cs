@@ -15,8 +15,8 @@ public class MusicNetworking : Singleton<MusicNetworking> {
         }));
     }
 
-    public Coroutine GetRandomPart(Action<InstrumentTrack> onComplete) {
-        return StartCoroutine(NetUtility.Get("parts/some/1", (string json) => {
+    public Coroutine GetRandomPart(string scaleType, Action<InstrumentTrack> onComplete) {
+        return StartCoroutine(NetUtility.Get("parts/some/1/" + scaleType, (string json) => {
             onComplete?.Invoke(InstrumentTrack.CreateListFromJson(json)[0]);
         }));
     }

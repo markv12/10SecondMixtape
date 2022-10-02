@@ -48,7 +48,7 @@ public class MenuManager : MonoBehaviour{
     }
 
     IEnumerator LoadBandMate() {
-        yield return MusicNetworking.Instance.GetRandomPart((InstrumentTrack part) => {
+        yield return MusicNetworking.Instance.GetRandomPart('major', (InstrumentTrack part) => {
             bandmatePreviewUI.SetupNewBandmatePairing(part);
         });
     }
