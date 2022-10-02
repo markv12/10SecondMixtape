@@ -26,7 +26,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.wipe = exports.removeById = exports.update = exports.add = exports.getBest = exports.getRandom = exports.get = void 0;
+exports.wipe = exports.removeById = exports.update = exports.add = exports.getBest = exports.getRandom = exports.getByIdFragment = exports.get = void 0;
 const mongoose_1 = require("mongoose");
 const c = __importStar(require("../../common"));
 const mongoose_simple_random_1 = __importDefault(require("mongoose-simple-random"));
@@ -63,6 +63,11 @@ async function get(id) {
     return dbObject ? songDataToFrontendData(dbObject) : null;
 }
 exports.get = get;
+async function getByIdFragment(idFragment) {
+    const dbObject = (await Song.find({ id: { $regex: idFragment } }).limit(1))[0];
+    return dbObject ? songDataToFrontendData(dbObject) : null;
+}
+exports.getByIdFragment = getByIdFragment;
 async function getRandom(limit = 1) {
     return new Promise((resolve) => {
         const filters = {};

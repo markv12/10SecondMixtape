@@ -43,6 +43,13 @@ export async function get(
   return dbObject ? songDataToFrontendData(dbObject) : null
 }
 
+export async function getByIdFragment(idFragment: string) {
+  const dbObject: SongData | undefined = (
+    await Song.find({ id: { $regex: idFragment } }).limit(1)
+  )[0]
+  return dbObject ? songDataToFrontendData(dbObject) : null
+}
+
 export async function getRandom(limit: number = 1) {
   return new Promise<SongData[]>((resolve) => {
     const filters: any = {}
