@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class BandmatePreviewUI : MonoBehaviour {
 
+    public InterstitialUIAnimator uiAnimator;
+
     public TMP_Text bandNameLabel;
 
     public BandMemberCard yourCard;
@@ -43,12 +45,13 @@ public class BandmatePreviewUI : MonoBehaviour {
 
     private void WaitThenGoToRecord(SessionData sessionData) {
         gameObject.SetActive(true);
+        uiAnimator.RunAnimation();
         StartCoroutine(WaitRoutine());
 
         IEnumerator WaitRoutine() {
             yield return new WaitForSeconds(7f);
             recordUI.Startup(sessionData);
-            yield return new WaitForSeconds(3);
+            yield return new WaitForSeconds(RecordUI.MOVE_IN_TIME + 0.3f);
             gameObject.SetActive(false);
         }
     }

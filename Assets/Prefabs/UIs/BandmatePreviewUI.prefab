@@ -753,9 +753,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c250e78d3943a454e96adc1cebb879b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiAnimator: {fileID: 2730700269536621297}
   bandNameLabel: {fileID: 4265281608874754168}
   yourCard: {fileID: 2605398717829481669}
   otherMemberCard: {fileID: 1496021493812810851}
+  recordUI: {fileID: 0}
 --- !u!114 &2730700269536621297
 MonoBehaviour:
   m_ObjectHideFlags: 0

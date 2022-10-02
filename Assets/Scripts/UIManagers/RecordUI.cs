@@ -11,6 +11,7 @@ public class RecordUI : MonoBehaviour {
 
     public Button doneButton;
     public Button clearButton;
+    public Button backButton;
     public SongVisualizer songVisualizer;
 
     public Image yourMemberImage;
@@ -21,6 +22,7 @@ public class RecordUI : MonoBehaviour {
     private void Awake() {
         doneButton.onClick.AddListener(Done);
         clearButton.onClick.AddListener(Clear);
+        backButton.onClick.AddListener(Back);
     }
 
     private void Done() {
@@ -31,6 +33,18 @@ public class RecordUI : MonoBehaviour {
         AudioManager.Instance.PlayPlasticClickSound(1);
     }
 
+    private void Back() {
+        LoadingScreen.LoadScene(BackRoutine());
+
+        IEnumerator BackRoutine() {
+            yield return null;
+            rectT.anchoredPosition = offScreenPos;
+            AudioManager.Instance.StartCrowdMurmur(1f);
+            gameObject.SetActive(false);
+        }
+    }
+
+    public const float MOVE_IN_TIME = 1.333f;
     public void Startup(SessionData sessionData) {
         rectT.anchoredPosition = offScreenPos;
 
@@ -46,7 +60,7 @@ public class RecordUI : MonoBehaviour {
 
         IEnumerator StartupRoutine() {
             AudioManager.Instance.StopCrowdMurmur();
-            yield return this.CreateAnimationRoutine(1.3f, (float progress) => {
+            yield return this.CreateAnimationRoutine(MOVE_IN_TIME, (float progress) => {
                 float easedProgress = Easing.easeOutSine(0, 1, progress);
                 rectT.anchoredPosition = Vector2.Lerp(offScreenPos, onScreenPos, easedProgress);
             });
