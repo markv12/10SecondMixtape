@@ -493,7 +493,7 @@ GameObject:
   - component: {fileID: 4265281607971799040}
   - component: {fileID: 4265281607971799041}
   m_Layer: 5
-  m_Name: Image
+  m_Name: BandNameContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -869,7 +869,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 1
+  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 1
   m_TargetDisplay: 0
