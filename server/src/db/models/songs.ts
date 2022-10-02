@@ -110,6 +110,7 @@ export async function add(song: SongData) {
   song.likes = 0
   song.dislikes = 0
   song.ratio = 0.5
+  song.key = song.key || 0
   song.scaleType = (
     song.scaleType || 'major'
   ).toLowerCase() as ScaleType

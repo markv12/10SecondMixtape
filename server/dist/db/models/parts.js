@@ -96,6 +96,7 @@ async function add(part) {
     part.created = Date.now();
     part.chosen = 0;
     part.given = 0;
+    part.instrument = part.instrument || 'piano';
     part.scaleType = (part.scaleType || 'major').toLowerCase();
     part.ratio = 0.5;
     part.recencyRatio = c.getRecencyRatio(part);

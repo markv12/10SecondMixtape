@@ -88,6 +88,7 @@ export async function add(part: PartData) {
   part.created = Date.now()
   part.chosen = 0
   part.given = 0
+  part.instrument = part.instrument || 'piano'
   part.scaleType = (
     part.scaleType || 'major'
   ).toLowerCase() as ScaleType
