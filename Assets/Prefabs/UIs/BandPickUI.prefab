@@ -248,7 +248,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 838, y: -199}
+  m_AnchoredPosition: {x: 838, y: -145}
   m_SizeDelta: {x: 230, y: 230}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2385884709653751048
@@ -596,10 +596,10 @@ RectTransform:
   m_Father: {fileID: 6862939538846428494}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -2.54}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 4, y: 5}
-  m_SizeDelta: {x: 130.3846, y: 122.9775}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 1.5, y: 5.500001}
+  m_SizeDelta: {x: -60.999992, y: -85}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2261648100773011190
 CanvasRenderer:
@@ -631,7 +631,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Get
 
-    More'
+    More
+
+    Tapes'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0d51d8d2ce76542c2a15deb2aec5ac9d, type: 2}
   m_sharedMaterial: {fileID: -8896783588259706405, guid: 0d51d8d2ce76542c2a15deb2aec5ac9d, type: 2}
@@ -658,10 +660,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 30
+  m_fontSize: 26.4
   m_fontSizeBase: 30
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 1
@@ -1034,6 +1036,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 163a6ac043949a745802e0aa01dbef17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cancelButton: {fileID: 6218378071033356137}
   yourCard: {fileID: 1955784813895551265}
   otherMemberCard: {fileID: 4674320475477906321}
   bandNameLabel: {fileID: 744161849612014699}
@@ -1145,8 +1148,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 832, y: -27}
-  m_SizeDelta: {x: 160, y: 150}
+  m_AnchoredPosition: {x: 493.9, y: 301}
+  m_SizeDelta: {x: 190, y: 178}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6845423937063706310
 CanvasRenderer:

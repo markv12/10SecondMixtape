@@ -29,7 +29,10 @@ public class RecordUI : MonoBehaviour {
 
     private void Awake() {
         doneButton.onClick.AddListener(Done);
-        clearButton.onClick.AddListener(ClearYourPart);
+        clearButton.onClick.AddListener(() => {
+            AudioManager.Instance.PlayPlasticClickSound(1);
+            ClearYourPart();
+        });
         backButton.onClick.AddListener(Back);
     }
 
@@ -37,11 +40,15 @@ public class RecordUI : MonoBehaviour {
         AudioManager.Instance.PlayPlasticClickSound(1);
         StopAllMusic();
         bandPickUI.gameObject.SetActive(true);
-        MoveUI(offScreenPos);
+        StartCoroutine(DoneRoutine());
+        IEnumerator DoneRoutine() {
+            yield return MoveUI(offScreenPos);
+            ClearYourPart();
+            songVisualizer.ClearLinesAndStop();
+        }
     }
 
     private void ClearYourPart() {
-        AudioManager.Instance.PlayPlasticClickSound(1);
         StopYourPart();
         songRecorder.Clear();
         songVisualizer.ClearNoteSquares();
