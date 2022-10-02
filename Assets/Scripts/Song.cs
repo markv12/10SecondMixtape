@@ -21,6 +21,67 @@ public class Song {
             parts = new InstrumentTrack[] { part },
         };
     }
+
+    public static readonly Song METRONOME_SONG = new Song() {
+        length = 10f,
+        parts = new InstrumentTrack[] {
+            new InstrumentTrack {
+                instrument = "Metronome",
+                notes = new List<List<Note>>() {
+                    new List<Note>(){
+                        new Note() {
+                            start = 0
+                        },
+                         new Note() {
+                            start = 1
+                        },
+                        new Note() {
+                            start = 2
+                        },
+                         new Note() {
+                            start = 3
+                        },
+                        new Note() {
+                            start = 4
+                        },
+                         new Note() {
+                            start = 5
+                        },
+                        new Note() {
+                            start = 6
+                        },
+                         new Note() {
+                            start = 7
+                        },
+                        new Note() {
+                            start = 8
+                        },
+                         new Note() {
+                            start = 9
+                        },
+                        new Note() {
+                            start = 10
+                        },
+                         new Note() {
+                            start = 11
+                        },
+                        new Note() {
+                            start = 12
+                        },
+                         new Note() {
+                            start = 13
+                        },
+                        new Note() {
+                            start = 14
+                        },
+                         new Note() {
+                            start = 15
+                        },
+                    }
+                }
+            }
+        }
+    };
 }
 
 [Serializable]

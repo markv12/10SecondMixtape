@@ -17,7 +17,7 @@ public class RecordUI : MonoBehaviour {
 
     public SongRecorder songRecorder;
     public SongPlayer otherPartPlayer;
-    public SongPlayer yourPartPlayer;
+    public SongPlayer[] yourPartPlayers;
     public SongPlayer metronomePlayer;
 
     public Image yourMemberImage;
@@ -76,74 +76,19 @@ public class RecordUI : MonoBehaviour {
             });
             yield return new WaitForSeconds(0.8f);
             songVisualizer.ShowInstrument(sessionData.yourMember, STANDARD_WAIT, 10);
-            metronomePlayer.PlaySong(metronomeSong, STANDARD_WAIT, true);
+            metronomePlayer.PlaySong(Song.METRONOME_SONG, STANDARD_WAIT, true);
             metronomePlayer.onLoop += (double dspStartOffset, float startOffset) => {
-                yourPartPlayer.PlayPartAtTime(songRecorder.currentTrack, dspStartOffset, startOffset, false);
+                GetYourPartPlayer().PlayPartAtTime(songRecorder.currentTrack, dspStartOffset, startOffset, false);
             };
             otherPartPlayer.PlayPart(sessionData.otherPart, STANDARD_WAIT, true);
             songRecorder.StartRecording(sessionData.yourMember, STANDARD_WAIT, songVisualizer.AddNote);
         }
     }
 
-
-    private static readonly Song metronomeSong = new Song() {
-        length = 10f,
-        parts = new InstrumentTrack[] {
-            new InstrumentTrack {
-                instrument = "Metronome",
-                notes = new List<List<Note>>() {
-                    new List<Note>(){
-                        new Note() {
-                            start = 0
-                        },
-                         new Note() {
-                            start = 1
-                        },
-                        new Note() {
-                            start = 2
-                        },
-                         new Note() {
-                            start = 3
-                        },
-                        new Note() {
-                            start = 4
-                        },
-                         new Note() {
-                            start = 5
-                        },
-                        new Note() {
-                            start = 6
-                        },
-                         new Note() {
-                            start = 7
-                        },
-                        new Note() {
-                            start = 8
-                        },
-                         new Note() {
-                            start = 9
-                        },
-                        new Note() {
-                            start = 10
-                        },
-                         new Note() {
-                            start = 11
-                        },
-                        new Note() {
-                            start = 12
-                        },
-                         new Note() {
-                            start = 13
-                        },
-                        new Note() {
-                            start = 14
-                        },
-                         new Note() {
-                            start = 15
-                        },
-                    }
-                }
-            }
-        }
-    };
+    private int yourPartPlayerIndex = 0;
+    private SongPlayer GetYourPartPlayer() {
+        SongPlayer result = yourPartPlayers[yourPartPlayerIndex];
+        yourPartPlayerIndex = (yourPartPlayerIndex + 1) % yourPartPlayers.Length;
+        return result;
+    }
 }
