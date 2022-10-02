@@ -75,8 +75,11 @@ router.get('/like/:id', async (req, res) => {
   c.log(
     'gray',
     `Upvoted song ${id}, now has ${song.likes} likes and ${
-      song.dislikes
-    } dislikes (ratio ${c.r2(song.recencyRatio, 4)})`,
+      song.dislikes || 0
+    } dislikes (recencyRatio ${c.r2(
+      song.recencyRatio,
+      4,
+    )})`,
   )
 })
 
@@ -103,7 +106,7 @@ router.get('/dislike/:id', async (req, res) => {
   c.log(
     'gray',
     `Downvoted song ${id}, now has ${
-      song.likes
+      song.likes || 0
     } likes and ${song.dislikes} dislikes (ratio ${c.r2(
       song.recencyRatio,
       4,

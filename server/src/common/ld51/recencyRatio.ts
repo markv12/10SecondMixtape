@@ -2,7 +2,7 @@ export function getRecencyRatio(el: {
   ratio?: number
   created?: number
 }) {
-  if (!el.ratio || !el.created) return 0
+  if (el.ratio === undefined || !el.created) return 0
   const age = Date.now() - el.created
   const yearsAfterLaunch =
     age / 1000 / 60 / 60 / 24 / 365 - 2022

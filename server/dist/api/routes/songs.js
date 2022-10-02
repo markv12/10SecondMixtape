@@ -80,7 +80,7 @@ router.get('/like/:id', async (req, res) => {
     song.recencyRatio = c.getRecencyRatio(song);
     await db_1.db.songs.update(song);
     res.status(200).end();
-    c.log('gray', `Upvoted song ${id}, now has ${song.likes} likes and ${song.dislikes} dislikes (ratio ${c.r2(song.recencyRatio, 4)})`);
+    c.log('gray', `Upvoted song ${id}, now has ${song.likes} likes and ${song.dislikes || 0} dislikes (recencyRatio ${c.r2(song.recencyRatio, 4)})`);
 });
 router.get('/dislike/:id', async (req, res) => {
     const id = req.params.id;
@@ -101,7 +101,7 @@ router.get('/dislike/:id', async (req, res) => {
     song.recencyRatio = c.getRecencyRatio(song);
     await db_1.db.songs.update(song);
     res.status(200).end();
-    c.log('gray', `Downvoted song ${id}, now has ${song.likes} likes and ${song.dislikes} dislikes (ratio ${c.r2(song.recencyRatio, 4)})`);
+    c.log('gray', `Downvoted song ${id}, now has ${song.likes || 0} likes and ${song.dislikes} dislikes (ratio ${c.r2(song.recencyRatio, 4)})`);
 });
 exports.default = router;
 //# sourceMappingURL=songs.js.map
