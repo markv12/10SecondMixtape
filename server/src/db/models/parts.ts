@@ -133,3 +133,10 @@ export async function wipe() {
   const res = await Part.deleteMany({})
   c.log(`Wiped parts DB`, res)
 }
+
+getBest(100).then((parts) => {
+  parts.forEach((p) => {
+    p.scaleType = 'major'
+    update(p)
+  })
+})

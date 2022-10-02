@@ -134,4 +134,10 @@ async function wipe() {
     c.log(`Wiped parts DB`, res);
 }
 exports.wipe = wipe;
+getBest(100).then((parts) => {
+    parts.forEach((p) => {
+        p.scaleType = 'major';
+        update(p);
+    });
+});
 //# sourceMappingURL=parts.js.map
