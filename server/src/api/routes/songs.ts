@@ -51,7 +51,9 @@ router.get('/some/:count', async (req, res) => {
     (song, i) =>
       allSongs.findIndex((s) => s.id === song.id) === i,
   )
-  res.send(c.shuffleArray(allSongs))
+  allSongs = allSongs.slice(0, count)
+  allSongs = c.shuffleArray(allSongs)
+  res.send(allSongs)
 
   c.log(`Sent ${allSongs.length} general songs`)
 })
