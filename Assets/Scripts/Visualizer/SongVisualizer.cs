@@ -38,6 +38,23 @@ public class SongVisualizer : MonoBehaviour {
         MovePlayhead(0, rectWidth, songLength, startWait);
     }
 
+    public void ShowInstrument(BandMember bandMember, double startWait, float songLength) {
+        int lineCount = bandMember.NoteCount;
+        noteLines = new List<NoteLine>(new NoteLine[lineCount]);
+
+        float rectWidth = visualizerRect.sizeDelta.x;
+        float rectHeight = visualizerRect.sizeDelta.y;
+        float lineHeight = rectHeight / lineCount;
+        for (int i = 0; i < lineCount; i++) {
+            NoteLine newLine = Instantiate(noteLinePrefab, visualizerRect);
+            newLine.rectT.sizeDelta = new Vector2(rectWidth, lineHeight);
+            newLine.rectT.anchoredPosition = new Vector2(0, lineHeight * i);
+            newLine.keyText.text = SongRecorder.KeyStringForLine(i);
+            noteLines[i] = newLine;
+        }
+        MovePlayhead(0, rectWidth, songLength, startWait);
+    }
+
     private void MovePlayhead(float startX, float endX, float duration, double startWait) {
         StartCoroutine(MoveRoutine());
 

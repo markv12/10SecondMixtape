@@ -71,7 +71,7 @@ public class RecordUI : MonoBehaviour {
                 rectT.anchoredPosition = Vector2.Lerp(offScreenPos, onScreenPos, easedProgress);
             });
             yield return new WaitForSeconds(0.8f);
-            songVisualizer.ShowPart(sessionData.otherPart, STANDARD_WAIT, 10);
+            songVisualizer.ShowInstrument(sessionData.yourMember, STANDARD_WAIT, 10);
             StartRecording(sessionData);
         }
     }
