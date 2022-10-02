@@ -8,10 +8,12 @@ public class MenuManager : MonoBehaviour{
 
     private void Awake() {
         playButton.onClick.AddListener(Play);
+        AudioManager.Instance.StartCrowdMurmur(1.0f);
     }
 
     private void Play() {
         LoadingScreen.LoadScene(0.333f, LoadBandMate());
+        AudioManager.Instance.PlaySuccessSound(1.0f);
     }
 
     IEnumerator LoadBandMate() {

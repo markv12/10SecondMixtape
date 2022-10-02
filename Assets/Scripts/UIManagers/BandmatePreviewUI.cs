@@ -12,6 +12,14 @@ public class BandmatePreviewUI : MonoBehaviour {
     public BandMemberCard yourCard;
     public BandMemberCard otherMemberCard;
 
+    void Awake() {
+        IEnumerator SoundCoroutine() {
+            yield return new WaitForSeconds(1.5f);
+            AudioManager.Instance.PlayTimpaniSound(1.0f);
+        }
+        StartCoroutine(SoundCoroutine());
+    }
+
     public void SetupNewBandmatePairing(InstrumentTrack part) {
         BandMember otherMember = BandMemberMasterList.Instance.GetBandMemberForId(part.instrument);
         BandMember yourMember = BandMemberMasterList.Instance.GetBandMemberOfDifferentType(otherMember.instrumentType);

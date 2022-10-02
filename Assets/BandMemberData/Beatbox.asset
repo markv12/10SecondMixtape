@@ -9,13 +9,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f9397d6f4323b8a4483b38bff87ede03, type: 3}
+  m_Script: {fileID: 11500000, guid: bb0eecc6a8ac9cb4e8634b274b239014, type: 3}
   m_Name: Beatbox
   m_EditorClassIdentifier: 
   id: Beatbox
   instrumentDisplayName: Beatbox
-  color: {r: 0.21960786, g: 0.21960786, b: 0.21960786, a: 1}
-  mainSprite: {fileID: 21300000, guid: 871e79baeb02c44f6b43fc7db48bb083, type: 3}
+  color: {r: 0.5188679, g: 0.14440192, b: 0.42660812, a: 1}
+  mainSprite: {fileID: 21300000, guid: b55e2746576594178a1176d1a281a634, type: 3}
   cassetteSprite: {fileID: 0}
   instrumentType: 2
-  note: {fileID: 0}
+  notes:
+  - {fileID: 8300000, guid: 8521b1e57a14b4702a47753623c071f9, type: 3}
+  - {fileID: 8300000, guid: c28f14ddcf38d4fb2b030d2b34186b87, type: 3}
+  - {fileID: 8300000, guid: 2d66deab744b14e6191401ebe33c33ea, type: 3}
+  - {fileID: 8300000, guid: e0058ec0cd3e745fd94e5ba60b60e271, type: 3}
+  - {fileID: 8300000, guid: 5b93e6a6094bf4c5195b53eaf98fa5cb, type: 3}

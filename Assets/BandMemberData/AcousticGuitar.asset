@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: AcousticGuitar
   instrumentDisplayName: Acoustic Guitar
-  color: {r: 0.21960786, g: 0.21960786, b: 0.21960786, a: 1}
+  color: {r: 0.8301887, g: 0.38580754, b: 0.23887502, a: 1}
   mainSprite: {fileID: 21300000, guid: cf2b17bd492b344f7be78bc66c257636, type: 3}
   cassetteSprite: {fileID: 0}
-  note: {fileID: 0}
+  instrumentType: 0
+  note: {fileID: 8300000, guid: bd7637571d4a449ddb3a999a5eb50947, type: 3}

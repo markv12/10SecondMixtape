@@ -313,6 +313,7 @@ MonoBehaviour:
   plasticClick: {fileID: 8300000, guid: 95474ab399cca49a8b3cb6a94c0e0cb6, type: 3}
   crowdMurmur: {fileID: 8300000, guid: 1b0d7c35b58a8437182a25312cc612a8, type: 3}
   applause: {fileID: 8300000, guid: 4d23b56bee2e5405980109393e50689e, type: 3}
+  timpani: {fileID: 8300000, guid: a31d579060a0b474c88492fd500582d2, type: 3}
 --- !u!1 &8087591419327489437
 GameObject:
   m_ObjectHideFlags: 0

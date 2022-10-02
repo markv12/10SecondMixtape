@@ -24,9 +24,10 @@ public class AudioManager : MonoBehaviour {
     public AudioClip plasticClick;
     public AudioClip crowdMurmur;
     public AudioClip applause;
+    public AudioClip timpani;
 
     public void PlaySuccessSound(float intensity) {
-        PlaySFX(success, 0.5f * intensity);
+        PlaySFX(success, 0.4f * intensity);
     }
 
     public void PlayPlasticClickSound(float intensity) {
@@ -34,11 +35,15 @@ public class AudioManager : MonoBehaviour {
     }
 
     public void PlayApplauseSound(float intensity) {
-        PlaySFX(applause, 0.8f * intensity);
+        PlaySFX(applause, 0.7f * intensity);
+    }
+
+    public void PlayTimpaniSound(float intensity) {
+        PlaySFX(timpani, 0.8f * intensity);
     }
 
     public void StartCrowdMurmur(float intensity) {
-        PlaySFX(crowdMurmur, 1.0f * intensity, 1, true);
+        PlaySFX(crowdMurmur, 0.3f * intensity, 1, true);
     }
     public void StopCrowdMurmur() {
         StopSFX(crowdMurmur);
@@ -49,7 +54,11 @@ public class AudioManager : MonoBehaviour {
         source.volume = volume;
         source.pitch = pitch;
         source.loop = loop;
-        source.PlayOneShot(clip);
+        source.clip = clip;
+        if (loop)
+            source.Play();
+        else
+            source.PlayOneShot(clip);
     }
 
     public void StopSFX(AudioClip clip) {
@@ -63,6 +72,10 @@ public class AudioManager : MonoBehaviour {
 
     private AudioSource GetNextAudioSource() {
         AudioSource result = audioSources[audioSourceIndex];
+        while (result.isPlaying) {
+            audioSourceIndex = (audioSourceIndex + 1) % audioSources.Length;
+            result = audioSources[audioSourceIndex];
+        }
         audioSourceIndex = (audioSourceIndex + 1) % audioSources.Length;
         return result;
     }

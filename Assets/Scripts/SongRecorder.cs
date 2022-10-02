@@ -89,7 +89,7 @@ public class SongRecorder : MonoBehaviour {
     private static readonly int[] MinorScaleDegrees = new int[] {
         0, 2, 3, 5, 7, 8, 10, 12, 14, 15, 17, 19, 20, 22, 24
     };
-    private static int[] ScaleDegreesToUse = MinorScaleDegrees;
+    private static int[] ScaleDegreesToUse = MajorScaleDegrees;
 
     private static readonly InstrumentKey[] keyboard = new InstrumentKey[]{
         new InstrumentKey() {

@@ -68,7 +68,9 @@ public static class NameGenerator
       "cool",
       "groovy",
       "high",
-      "jammin'"
+      "jammin'",
+      "quiet",
+      "loud"
     };
 
     private static readonly string[] adjectives = new string[] {
