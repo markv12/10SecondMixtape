@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: RockDrums
   m_EditorClassIdentifier: 
   id: RockDrums
-  instrumentDisplayName: 
-  color: {r: 0, g: 0, b: 0, a: 0}
-  mainSprite: {fileID: 0}
-  cassetteSprite: {fileID: 0}
+  instrumentDisplayName: Rock Drums
+  color: {r: 0.19607845, g: 0.5372549, b: 0.45882356, a: 1}
+  mainSprite: {fileID: 21300000, guid: 01ecaa74b2bfd43f5a038ab7ab68a9d1, type: 3}
+  cassetteSprite: {fileID: 21300000, guid: b869c011596dc463cba191edb1e69c13, type: 3}
   notes:
   - {fileID: 8300000, guid: 80b5f24bdbcda2047ac6d51de2540142, type: 3}
   - {fileID: 8300000, guid: 47a953470c554454a8ef8caa98b491cb, type: 3}

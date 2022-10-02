@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: Piano
   instrumentDisplayName: Piano
-  color: {r: 0, g: 0, b: 0, a: 0}
-  mainSprite: {fileID: 0}
+  color: {r: 0.2509804, g: 0.41176474, b: 0.9294118, a: 1}
+  mainSprite: {fileID: 21300000, guid: 22bf9dde6361145a991e14d888a45357, type: 3}
   cassetteSprite: {fileID: 21300000, guid: 9e4bec131e9e249ee85c1d063cd6d854, type: 3}
   note: {fileID: 8300000, guid: d4900c0c96c492b4eb4badb06e04e48d, type: 3}
