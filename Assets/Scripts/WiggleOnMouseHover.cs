@@ -59,6 +59,7 @@ public class WiggleOnMouseHover : MonoBehaviour, IPointerEnterHandler, IPointerE
     public void OnPointerEnter(PointerEventData eventData)
     {
         isHovering = true;
+        AudioManager.Instance.PlayTouchSound(1.0f);
     }
 
     public void OnPointerExit(PointerEventData eventData)
