@@ -9,6 +9,7 @@ const schemaFields: { [key in keyof SongData]: any } = {
   created: { type: Number },
   name: { type: String },
   key: { type: Number },
+  scaleType: { type: String },
   likes: { type: Number },
   dislikes: { type: Number },
   ratio: { type: Number },
@@ -25,6 +26,7 @@ function songDataToFrontendData(song: SongData): SongData {
     id: song.id,
     name: song.name,
     key: song.key,
+    scaleType: song.scaleType || 'major',
     parts: song.parts,
     likes: song.likes,
     dislikes: song.dislikes,
@@ -108,6 +110,9 @@ export async function add(song: SongData) {
   song.likes = 0
   song.dislikes = 0
   song.ratio = 0.5
+  song.scaleType = (
+    song.scaleType || 'major'
+  ).toLowerCase() as ScaleType
   song.recencyRatio = c.getRecencyRatio(song)
   await Song.create(song)
   return song.id

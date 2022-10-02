@@ -59,7 +59,7 @@ router.get('/some/:count', async (req, res) => {
     allSongs = allSongs.slice(0, count);
     allSongs = c.shuffleArray(allSongs);
     res.send(allSongs);
-    c.log(`Sent ${allSongs.length} general songs`);
+    c.log(`Sent ${allSongs.length} general song/s`);
 });
 router.post('/new', async (req, res) => {
     const song = req.body;

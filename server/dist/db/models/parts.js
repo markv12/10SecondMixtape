@@ -36,6 +36,7 @@ const schemaFields = {
     created: { type: Number },
     name: { type: String },
     instrument: { type: String },
+    scaleType: { type: String },
     chosen: { type: Number },
     given: { type: Number },
     ratio: { type: Number },
@@ -50,6 +51,7 @@ function toFrontendData(p) {
         id: p.id,
         name: p.name,
         instrument: p.instrument,
+        scaleType: p.scaleType || 'major',
         notes: p.notes,
         chosen: p.chosen,
         given: p.given,
@@ -63,9 +65,11 @@ async function get(id) {
     return dbObject ? toFrontendData(dbObject) : null;
 }
 exports.get = get;
-async function getBest(limit = 1) {
+async function getBest(limit = 1, scaleType) {
     // get highest recencyRatio
     const filters = {};
+    if (scaleType)
+        filters.scaleType = scaleType.toLowerCase();
     const options = {
         sort: { recencyRatio: -1 },
         limit,
@@ -74,9 +78,11 @@ async function getBest(limit = 1) {
     return (results || []).map(toFrontendData);
 }
 exports.getBest = getBest;
-async function getRandom(limit = 1) {
+async function getRandom(limit = 1, scaleType) {
     return new Promise((resolve) => {
         const filters = {};
+        if (scaleType)
+            filters.scaleType = scaleType.toLowerCase();
         Part.findRandom(filters, {}, { limit }, function (err, results) {
             if (err)
                 c.error(err);
@@ -90,6 +96,7 @@ async function add(part) {
     part.created = Date.now();
     part.chosen = 0;
     part.given = 0;
+    part.scaleType = (part.scaleType || 'major').toLowerCase();
     part.ratio = 0.5;
     part.recencyRatio = c.getRecencyRatio(part);
     const res = await Part.create(part);

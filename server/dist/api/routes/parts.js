@@ -30,21 +30,22 @@ const router = (0, express_1.Router)();
 router.get('/', (req, res) => {
     res.send('Hello Songs!');
 });
-router.get('/some/:count', async (req, res) => {
+router.get('/some/:count/?:scaleType', async (req, res) => {
     const count = parseInt(req.params.count);
+    const scaleType = req.params.scaleType;
     let randomParts = [], bestParts = [];
-    randomParts = await db_1.db.parts.getRandom(Math.ceil(count / 2));
+    randomParts = await db_1.db.parts.getRandom(Math.ceil(count / 2), scaleType);
     if (randomParts.length < count)
-        bestParts = await db_1.db.parts.getBest(count - randomParts.length);
+        bestParts = await db_1.db.parts.getBest(count - randomParts.length, scaleType);
     let allParts = [...randomParts, ...bestParts];
     // remove just one of duplicate ids
-    allParts = allParts.filter((song, i) => allParts.findIndex((s) => s.id === song.id) === i);
+    allParts = allParts.filter((song, i) => allParts.findIndex((s) => s.id === song.id) === i, scaleType);
     res.send(c.shuffleArray(allParts));
     if (count > 1)
         allParts.forEach((p) => {
             db_1.db.parts.incrementGiven(p.id);
         });
-    c.log(`Sent ${allParts.length} general parts`);
+    c.log(`Sent ${allParts.length} general part/s${scaleType ? ` of scale type ${scaleType}` : ``}`);
 });
 router.get('/chosen/:id', async (req, res) => {
     const id = req.params.id;

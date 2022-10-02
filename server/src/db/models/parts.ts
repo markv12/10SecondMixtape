@@ -8,6 +8,7 @@ const schemaFields: { [key in keyof PartData]: any } = {
   created: { type: Number },
   name: { type: String },
   instrument: { type: String },
+  scaleType: { type: String },
   chosen: { type: Number },
   given: { type: Number },
   ratio: { type: Number },
@@ -24,6 +25,7 @@ function toFrontendData(p: PartData): PartData {
     id: p.id,
     name: p.name,
     instrument: p.instrument,
+    scaleType: p.scaleType || 'major',
     notes: p.notes,
     chosen: p.chosen,
     given: p.given,
@@ -44,9 +46,11 @@ export async function get(
 
 export async function getBest(
   limit: number = 1,
+  scaleType?: ScaleType,
 ): Promise<PartData[]> {
   // get highest recencyRatio
   const filters: any = {}
+  if (scaleType) filters.scaleType = scaleType.toLowerCase()
   const options: any = {
     sort: { recencyRatio: -1 },
     limit,
@@ -61,9 +65,12 @@ export async function getBest(
 
 export async function getRandom(
   limit: number = 1,
+  scaleType?: ScaleType,
 ): Promise<PartData[]> {
   return new Promise<PartData[]>((resolve) => {
     const filters: any = {}
+    if (scaleType)
+      filters.scaleType = scaleType.toLowerCase()
     ;(Part as any).findRandom(
       filters,
       {},
@@ -81,6 +88,9 @@ export async function add(part: PartData) {
   part.created = Date.now()
   part.chosen = 0
   part.given = 0
+  part.scaleType = (
+    part.scaleType || 'major'
+  ).toLowerCase() as ScaleType
   part.ratio = 0.5
   part.recencyRatio = c.getRecencyRatio(part)
   const res = await Part.create(part)
