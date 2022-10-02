@@ -50,9 +50,8 @@ public class AudioManager : MonoBehaviour {
         source.pitch = pitch;
         source.loop = loop;
         source.PlayOneShot(clip);
-        // log state of audio source
-        Debug.Log(source.name + " is playing " + clip.name + " at volume " + volume + " and pitch " + pitch + " and looping " + loop);
     }
+
     public void StopSFX(AudioClip clip) {
         foreach (AudioSource source in audioSources) {
             if (source.clip == clip) {

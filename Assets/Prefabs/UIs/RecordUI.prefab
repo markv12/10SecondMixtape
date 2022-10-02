@@ -91,19 +91,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 0}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6634466761475341818, guid: 802a9f8542289734285c1dbb098052d8, type: 3}
-        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
-        m_MethodName: PlayPlasticClickSound
-        m_Mode: 4
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 1
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 1
+      m_Calls: []
 --- !u!114 &8918423010922058392
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -440,19 +428,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 0}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6634466761475341818, guid: 802a9f8542289734285c1dbb098052d8, type: 3}
-        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
-        m_MethodName: PlayPlasticClickSound
-        m_Mode: 4
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 1
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 1
+      m_Calls: []
 --- !u!114 &8918423011178237720
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1933,6 +1909,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8918423012822690827}
+  - component: {fileID: 6214269781578044424}
   - component: {fileID: 8918423012822690826}
   - component: {fileID: 8918423012822690837}
   - component: {fileID: 8918423012822690836}
@@ -1975,6 +1952,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &6214269781578044424
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8918423012822690833}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 394d478cf356f1e448b3324127dc3a33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  doneButton: {fileID: 8918423010922058394}
+  clearButton: {fileID: 8918423011178237722}
 --- !u!223 &8918423012822690826
 Canvas:
   m_ObjectHideFlags: 0
