@@ -27,16 +27,16 @@ public class BandmatePreviewUI : MonoBehaviour {
 
         bandNameLabel.text = NameGenerator.GenerateBandName();
 
-        WaitThenGoToRecord();
+        WaitThenGoToRecord(part);
     }
 
-    private void WaitThenGoToRecord() {
+    private void WaitThenGoToRecord(InstrumentTrack part) {
         gameObject.SetActive(true);
         StartCoroutine(WaitRoutine());
 
         IEnumerator WaitRoutine() {
-            yield return new WaitForSeconds(5.5f);
-            recordUI.Startup();
+            yield return new WaitForSeconds(7f);
+            recordUI.Startup(part);
             yield return new WaitForSeconds(3);
             gameObject.SetActive(false);
         }

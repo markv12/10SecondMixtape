@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -24,13 +25,20 @@ public class RecordUI : MonoBehaviour {
         AudioManager.Instance.PlayPlasticClickSound(1);
     }
 
-    public void Startup() {
+    public void Startup(InstrumentTrack part) {
         rectT.anchoredPosition = offScreenPos;
 
         gameObject.SetActive(true);
-        this.CreateAnimationRoutine(1f, (float progress) => {
-            float easedProgress = Easing.easeOutSine(0, 1, progress);
-            rectT.anchoredPosition = Vector2.Lerp(offScreenPos, onScreenPos, easedProgress);
-        });
+
+        StartCoroutine(StartupRoutine());
+
+        IEnumerator StartupRoutine() {
+            yield return this.CreateAnimationRoutine(1f, (float progress) => {
+                float easedProgress = Easing.easeOutSine(0, 1, progress);
+                rectT.anchoredPosition = Vector2.Lerp(offScreenPos, onScreenPos, easedProgress);
+            });
+            yield return new WaitForSeconds(1f);
+            songVisualizer.ShowPart(part, 0.5, 10);
+        }
     }
 }
