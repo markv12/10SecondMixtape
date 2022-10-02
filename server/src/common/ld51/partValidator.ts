@@ -41,12 +41,12 @@ export function validatePart(part: PartData) {
           `Voice ${i} note ${j} has invalid start`,
         )
 
-      if ((note.start * 4) % 1 !== 0)
+      if ((note.start * 8) % 1 !== 0)
         errors.push(
           `Voice ${i} note ${j} has invalid start timing`,
         )
 
-      if (note.end && (note.end * 4) % 1 !== 0)
+      if (note.end && (note.end * 8) % 1 !== 0)
         errors.push(
           `Voice ${i} note ${j} has invalid end timing`,
         )
