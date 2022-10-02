@@ -14,6 +14,11 @@ public class BandPickUI : MonoBehaviour {
 
     private void Awake() {
         cancelButton.onClick.AddListener(Cancel);
+        StartCoroutine(SoundSchedule());
+    }
+    private IEnumerator SoundSchedule() {
+        yield return new WaitForSeconds(0.5f);
+        AudioManager.Instance.PlayTapeScatterSound(1.0f);
     }
 
     private void Cancel() {
