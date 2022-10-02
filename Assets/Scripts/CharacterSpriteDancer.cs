@@ -6,7 +6,7 @@ public class CharacterSpriteDancer : MonoBehaviour
 {
     // get the sprite renderer
     private SpriteRenderer spriteRenderer;
-    private ParticleSystem particleSystem;
+    private new ParticleSystem particleSystem;
     // get the original position
     private Vector3 originalPosition;
     private Vector3 originalScale;

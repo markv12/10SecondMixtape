@@ -40,7 +40,11 @@ public class RecordUI : MonoBehaviour {
     }
 
     private void Back() {
-        LoadingScreen.LoadScene(BackRoutine());
+        LoadingScreen.ShowTransition(BackRoutine());
+
+        songRecorder.StopRecording();
+        metronomePlayer.StopSong();
+        otherPartPlayer.StopSong();
 
         IEnumerator BackRoutine() {
             yield return null;
@@ -61,7 +65,6 @@ public class RecordUI : MonoBehaviour {
 
         gameObject.SetActive(true);
 
-
         StartCoroutine(StartupRoutine());
 
         IEnumerator StartupRoutine() {
@@ -72,14 +75,10 @@ public class RecordUI : MonoBehaviour {
             });
             yield return new WaitForSeconds(0.8f);
             songVisualizer.ShowInstrument(sessionData.yourMember, STANDARD_WAIT, 10);
-            StartRecording(sessionData);
+            metronomePlayer.PlaySong(metronomeSong, STANDARD_WAIT, true);
+            otherPartPlayer.PlayPart(sessionData.otherPart, STANDARD_WAIT, true);
+            songRecorder.StartRecording(sessionData.yourMember, STANDARD_WAIT, songVisualizer.AddNote);
         }
-    }
-
-    private void StartRecording(SessionData sessionData) {
-        metronomePlayer.PlaySong(metronomeSong, STANDARD_WAIT, true);
-        otherPartPlayer.PlayPart(sessionData.otherPart, STANDARD_WAIT, true);
-        songRecorder.StartRecording(sessionData.yourMember);
     }
 
     private static readonly Song metronomeSong = new Song() {

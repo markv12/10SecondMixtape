@@ -6,7 +6,7 @@ public class LoadingScreen : MonoBehaviour {
 
     private const string LOADING_SCREEN_PATH = "LoadingScreen";
     private static LoadingScreen instance;
-    public static void LoadScene(IEnumerator onHitOpaque) {
+    public static void ShowTransition(IEnumerator onHitOpaque) {
         if (instance == null) {
             instance = Instantiate(Resources.Load<LoadingScreen>(LOADING_SCREEN_PATH));
             DontDestroyOnLoad(instance);

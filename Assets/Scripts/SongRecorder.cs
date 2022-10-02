@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -11,8 +12,9 @@ public class SongRecorder : MonoBehaviour {
     private Song currentSong;
     private BandMember currentBandMember;
     private float startTime;
-    public void StartRecording(BandMember bandMember) {
-        startTime = Time.time;
+    private Action<Note, int> onNoteAdded;
+    public void StartRecording(BandMember bandMember, double startOffset, Action<Note, int> _onNoteAdded) {
+        startTime = Time.time + (float)startOffset;
         currentBandMember = bandMember;
         currentSong = new Song() {
             name = "Test Song",
@@ -25,6 +27,7 @@ public class SongRecorder : MonoBehaviour {
                 }
             }
         };
+        onNoteAdded = _onNoteAdded;
         isRecording = true;
     }
 
@@ -64,6 +67,7 @@ public class SongRecorder : MonoBehaviour {
                             key.currentSource = null;
                         }
                         key.currentNote.end = end;
+                        onNoteAdded?.Invoke(key.currentNote, key.noteIndex);
                         key.currentNote = null;
                     }
                 }
@@ -205,6 +209,6 @@ public class SongRecorder : MonoBehaviour {
 
     public double Quantize(double value) {
         double beat = value / SongPlayer.SECONDS_PER_BEAT;
-        return System.Math.Round(beat * NOTE_QUANTIZE_MULTIPLE) / NOTE_QUANTIZE_MULTIPLE;
+        return Math.Round(beat * NOTE_QUANTIZE_MULTIPLE) / NOTE_QUANTIZE_MULTIPLE;
     }
 }

@@ -43,7 +43,7 @@ public class MenuManager : MonoBehaviour{
     }
 
     private void Play() {
-        LoadingScreen.LoadScene(LoadBandMate());
+        LoadingScreen.ShowTransition(LoadBandMate());
         AudioManager.Instance.PlaySuccessSound(1.0f);
     }
 

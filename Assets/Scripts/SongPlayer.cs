@@ -72,7 +72,8 @@ public class SongPlayer : MonoBehaviour {
                     DisposeAudioSource(audioSource);
                 });
             } else {
-                float waitTime = (float)(note.dspStartTime - DspTimeEstimator.Instance.DspTime) + audioSource.clip.length + FADE_TIME;
+                float clipLength = audioSource.clip == null ? FADE_TIME : audioSource.clip.length;
+                float waitTime = (float)(note.dspStartTime - DspTimeEstimator.Instance.DspTime) + clipLength + FADE_TIME;
                 yield return new WaitForSeconds(waitTime);
                 DisposeAudioSource(audioSource);
             }
