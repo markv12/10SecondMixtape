@@ -30,7 +30,7 @@ interface SongData {
 interface PartData {
   id?: string // unneeded when sent from frontend, assigned in code here
   instrument: string
-  scaleType: ScaleType
+  scaleType?: ScaleType
   name: string
   created?: number
   chosen?: number

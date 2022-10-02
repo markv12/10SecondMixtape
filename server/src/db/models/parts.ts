@@ -50,7 +50,12 @@ export async function getBest(
 ): Promise<PartData[]> {
   // get highest recencyRatio
   const filters: any = {}
-  if (scaleType) filters.scaleType = scaleType.toLowerCase()
+  if (scaleType) {
+    filters.$or = [
+      { scaleType },
+      { scaleType: { $exists: false } },
+    ]
+  }
   const options: any = {
     sort: { recencyRatio: -1 },
     limit,
@@ -69,8 +74,12 @@ export async function getRandom(
 ): Promise<PartData[]> {
   return new Promise<PartData[]>((resolve) => {
     const filters: any = {}
-    if (scaleType)
-      filters.scaleType = scaleType.toLowerCase()
+    if (scaleType) {
+      filters.$or = [
+        { scaleType },
+        { scaleType: { $exists: false } },
+      ]
+    }
     ;(Part as any).findRandom(
       filters,
       {},
@@ -89,9 +98,9 @@ export async function add(part: PartData) {
   part.chosen = 0
   part.given = 0
   part.instrument = part.instrument || 'piano'
-  part.scaleType = (
-    part.scaleType || 'major'
-  ).toLowerCase() as ScaleType
+  if (part.scaleType)
+    part.scaleType =
+      part.scaleType.toLowerCase() as ScaleType
   part.ratio = 0.5
   part.recencyRatio = c.getRecencyRatio(part)
   const res = await Part.create(part)
@@ -133,10 +142,3 @@ export async function wipe() {
   const res = await Part.deleteMany({})
   c.log(`Wiped parts DB`, res)
 }
-
-getBest(100).then((parts) => {
-  parts.forEach((p) => {
-    p.scaleType = 'major'
-    update(p)
-  })
-})

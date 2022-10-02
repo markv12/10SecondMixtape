@@ -68,8 +68,12 @@ exports.get = get;
 async function getBest(limit = 1, scaleType) {
     // get highest recencyRatio
     const filters = {};
-    if (scaleType)
-        filters.scaleType = scaleType.toLowerCase();
+    if (scaleType) {
+        filters.$or = [
+            { scaleType },
+            { scaleType: { $exists: false } },
+        ];
+    }
     const options = {
         sort: { recencyRatio: -1 },
         limit,
@@ -81,8 +85,13 @@ exports.getBest = getBest;
 async function getRandom(limit = 1, scaleType) {
     return new Promise((resolve) => {
         const filters = {};
-        if (scaleType)
-            filters.scaleType = scaleType.toLowerCase();
+        if (scaleType) {
+            filters.$or = [
+                { scaleType },
+                { scaleType: { $exists: false } },
+            ];
+        }
+        ;
         Part.findRandom(filters, {}, { limit }, function (err, results) {
             if (err)
                 c.error(err);
@@ -97,7 +106,9 @@ async function add(part) {
     part.chosen = 0;
     part.given = 0;
     part.instrument = part.instrument || 'piano';
-    part.scaleType = (part.scaleType || 'major').toLowerCase();
+    if (part.scaleType)
+        part.scaleType =
+            part.scaleType.toLowerCase();
     part.ratio = 0.5;
     part.recencyRatio = c.getRecencyRatio(part);
     const res = await Part.create(part);
@@ -134,10 +145,4 @@ async function wipe() {
     c.log(`Wiped parts DB`, res);
 }
 exports.wipe = wipe;
-getBest(100).then((parts) => {
-    parts.forEach((p) => {
-        p.scaleType = 'major';
-        update(p);
-    });
-});
 //# sourceMappingURL=parts.js.map
