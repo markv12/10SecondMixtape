@@ -40,9 +40,10 @@ router.get('/some/:count', async (req, res) => {
     // remove just one of duplicate ids
     allParts = allParts.filter((song, i) => allParts.findIndex((s) => s.id === song.id) === i);
     res.send(c.shuffleArray(allParts));
-    allParts.forEach((p) => {
-        db_1.db.parts.incrementGiven(p.id);
-    });
+    if (count > 1)
+        allParts.forEach((p) => {
+            db_1.db.parts.incrementGiven(p.id);
+        });
     c.log(`Sent ${allParts.length} general parts`);
 });
 router.post('/new', async (req, res) => {

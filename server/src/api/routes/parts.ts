@@ -29,9 +29,10 @@ router.get('/some/:count', async (req, res) => {
   )
   res.send(c.shuffleArray(allParts))
 
-  allParts.forEach((p) => {
-    db.parts.incrementGiven(p.id!)
-  })
+  if (count > 1)
+    allParts.forEach((p) => {
+      db.parts.incrementGiven(p.id!)
+    })
 
   c.log(`Sent ${allParts.length} general parts`)
 })
