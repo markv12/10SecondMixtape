@@ -65,7 +65,7 @@ router.post('/new', async (req, res) => {
   c.log('gray', 'Uploading new part', part)
   part.created = Date.now()
   await db.parts.add(part)
-  res.status(200).end()
+  res.status(200).send(part.id)
 })
 
 export default router

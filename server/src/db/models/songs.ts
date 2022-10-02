@@ -92,8 +92,8 @@ export async function add(song: SongData) {
   song.dislikes = 0
   song.ratio = 0.5
   song.recencyRatio = c.getRecencyRatio(song)
-  const res = await Song.create(song)
-  return res
+  await Song.create(song)
+  return song.id
 }
 
 export async function update(song: SongData) {

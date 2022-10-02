@@ -70,7 +70,7 @@ router.post('/new', async (req, res) => {
     }
     c.log('gray', 'Uploading new song', song);
     await db_1.db.songs.add(song);
-    res.status(200).end();
+    res.status(200).send(song.id);
 });
 router.get('/like/:id', async (req, res) => {
     const id = req.params.id;
