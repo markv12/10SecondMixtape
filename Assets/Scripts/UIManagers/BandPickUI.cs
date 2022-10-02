@@ -26,6 +26,7 @@ public class BandPickUI : MonoBehaviour {
 
         IEnumerator CancelRoutine() {
             yield return null;
+            AudioManager.Instance.StartCrowdMurmur(1);
             gameObject.SetActive(false);
         }
     }
