@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,7 +6,7 @@ using UnityEngine;
 public class SongPlayer : MonoBehaviour {
 
     public AudioSourcePool audioSourcePool;
-
+    public event Action<double, float> onLoop;
     private bool loop = false;
 
     private Song currentSong;
@@ -20,12 +21,20 @@ public class SongPlayer : MonoBehaviour {
         QueueSongAtOffset(song, dspStartOffset, startOffset);
     }
 
+    public void PlaySongAtTime(Song song, double _dspStartOffset, float _startOffset, bool _loop) {
+        StopSong();
+        loop = _loop;
+        currentSong = song;
+        dspStartOffset = _dspStartOffset;
+        startOffset = _startOffset;
+        QueueSongAtOffset(song, dspStartOffset, startOffset);
+    }
+
     public void PlayPart(InstrumentTrack part, double startWait, bool _loop) {
-        Song song = new Song() {
-            length = 10,
-            parts = new InstrumentTrack[] { part },
-        };
-        PlaySong(song, startWait, _loop);
+        PlaySong(Song.CreateFromPart(part), startWait, _loop);
+    }
+    public void PlayPartAtTime(InstrumentTrack part, double _dspStartOffset, float _startOffset, bool _loop) {
+        PlaySongAtTime(Song.CreateFromPart(part), _dspStartOffset, _startOffset, _loop);
     }
 
     public void StopSong() {
@@ -41,6 +50,7 @@ public class SongPlayer : MonoBehaviour {
         if(loop && (Time.time - startOffset) > (currentSong.length - 0.5f)) {
             dspStartOffset += currentSong.length;
             startOffset += currentSong.length;
+            onLoop?.Invoke(dspStartOffset, startOffset);
             QueueSongAtOffset(currentSong, dspStartOffset, startOffset);
         }
         for (int i = 0; i < noteQueue.Count; i++) {

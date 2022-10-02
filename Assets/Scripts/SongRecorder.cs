@@ -9,23 +9,17 @@ public class SongRecorder : MonoBehaviour {
 
     private bool isRecording = false;
 
-    private Song currentSong;
+    public InstrumentTrack currentTrack;
     private BandMember currentBandMember;
     private float startTime;
     private Action<Note, int> onNoteAdded;
     public void StartRecording(BandMember bandMember, double startOffset, Action<Note, int> _onNoteAdded) {
         startTime = Time.time + (float)startOffset;
         currentBandMember = bandMember;
-        currentSong = new Song() {
-            name = "Test Song",
-            length = 10,
-            parts = new InstrumentTrack[] {
-                new InstrumentTrack() {
-                    name = "Test Person",
-                    instrument = bandMember.id,
-                    notes = Note.NoteTwoDArray(18)
-                }
-            }
+        currentTrack = new InstrumentTrack() {
+            name = "Test Person",
+            instrument = bandMember.id,
+            notes = Note.NoteTwoDArray(18)
         };
         onNoteAdded = _onNoteAdded;
         isRecording = true;
@@ -33,8 +27,8 @@ public class SongRecorder : MonoBehaviour {
 
     public Song StopRecording() {
         isRecording = false;
-        Song result = currentSong;
-        currentSong = null;
+        Song result = Song.CreateFromPart(currentTrack);
+        currentTrack = null;
         return result;
     }
 
@@ -42,24 +36,21 @@ public class SongRecorder : MonoBehaviour {
     public const double NOTE_QUANTIZE_MULTIPLE = 1.0 / SMALLEST_NOTE_LENGTH;
     private void Update() {
         if (isRecording) {
-            InstrumentKey[] keyboardToUse = currentBandMember is MultiSoundBandMember ? 
-                chromaticKeyboard :
-                pitchedKeyboard;
-            for (int i = 0; i < keyboardToUse.Length; i++) {
-                InstrumentKey key = keyboardToUse[i];
+            for (int i = 0; i < pitchedKeyboard.Length; i++) {
+                InstrumentKey key = pitchedKeyboard[i];
                 if (InputUtility.GetKeyDown(key.key)) {
                     InstrumentNote note = currentBandMember.GetInstrumentNote(key.noteIndex);
                     AudioSource audioSource = audioSourcePool.GetAudioSource(note);
                     audioSource.Play();
                     Note newNote = new Note() {
-                        start = Quantize((Time.time - startTime) % currentSong.length)
+                        start = Quantize((Time.time - startTime) % 10f)
                     };
-                    currentSong.parts[0].notes[key.noteIndex].Add(newNote);
+                    currentTrack.notes[key.noteIndex].Add(newNote);
                     key.currentNote = newNote;
                     key.currentSource = audioSource;
                 } else if (InputUtility.GetKeyUp(key.key)) {
                     if (key.currentNote != null) {
-                        double end = Quantize((Time.time - startTime) % currentSong.length);
+                        double end = Quantize((Time.time - startTime) % 10f);
                         double extension = (key.currentNote.start == end) ? 0.25 : 0;
                         end += extension;
                         if(key.currentSource != null) {
@@ -93,7 +84,7 @@ public class SongRecorder : MonoBehaviour {
 
 
 
-    private static readonly int[] MajorScaleDegrees = new int[] {
+    public static readonly int[] MajorScaleDegrees = new int[] {
         0, 2, 4, 5, 7, 9, 11, 12, 14, 16, 17, 19, 21, 23, 24
     };
     private static readonly int[] MinorScaleDegrees = new int[] {
@@ -102,53 +93,6 @@ public class SongRecorder : MonoBehaviour {
     private static int[] ScaleDegreesToUse = MajorScaleDegrees;
 
     private static readonly InstrumentKey[] pitchedKeyboard = new InstrumentKey[]{
-        new InstrumentKey() {
-            key = Key.A,
-            noteIndex = ScaleDegreesToUse[0],
-        },
-        new InstrumentKey() {
-            key = Key.S,
-            noteIndex = ScaleDegreesToUse[1],
-        },
-        new InstrumentKey() {
-            key = Key.D,
-            noteIndex = ScaleDegreesToUse[2],
-        },
-        new InstrumentKey() {
-            key = Key.F,
-            noteIndex = ScaleDegreesToUse[3],
-        },
-        new InstrumentKey() {
-            key = Key.G,
-            noteIndex = ScaleDegreesToUse[4],
-        },
-        new InstrumentKey() {
-            key = Key.H,
-            noteIndex = ScaleDegreesToUse[5],
-        },
-        new InstrumentKey() {
-            key = Key.J,
-            noteIndex = ScaleDegreesToUse[6],
-        },
-        new InstrumentKey() {
-            key = Key.K,
-            noteIndex = ScaleDegreesToUse[7],
-        },
-        new InstrumentKey() {
-            key = Key.L,
-            noteIndex = ScaleDegreesToUse[8],
-        },
-        new InstrumentKey() {
-            key = Key.Semicolon,
-            noteIndex = ScaleDegreesToUse[9],
-        },
-        new InstrumentKey() {
-            key = Key.Quote,
-            noteIndex = ScaleDegreesToUse[10],
-        },
-    };
-
-    private static readonly InstrumentKey[] chromaticKeyboard = new InstrumentKey[]{
         new InstrumentKey() {
             key = Key.A,
             noteIndex = 0,

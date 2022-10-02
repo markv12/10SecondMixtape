@@ -14,10 +14,17 @@ public class Song {
     public static Song[] CreateListFromJson(string json) {
         return JsonConvert.DeserializeObject<Song[]>(json);
     }
+
+    public static Song CreateFromPart(InstrumentTrack part) {
+        return new Song() {
+            length = 10,
+            parts = new InstrumentTrack[] { part },
+        };
+    }
 }
 
 [Serializable]
-public struct InstrumentTrack {
+public class InstrumentTrack {
     public string name;
     public string id;
     public string instrument;
