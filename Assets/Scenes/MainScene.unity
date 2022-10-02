@@ -485,18 +485,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4265281608874754168, guid: e59bc34ec8bd049bb955cd3a995edd67, type: 3}
-      propertyPath: m_fontSize
-      value: 18
-      objectReference: {fileID: 0}
-    - target: {fileID: 4265281608874754168, guid: e59bc34ec8bd049bb955cd3a995edd67, type: 3}
-      propertyPath: m_fontSizeMax
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 4265281608874754168, guid: e59bc34ec8bd049bb955cd3a995edd67, type: 3}
-      propertyPath: m_VerticalAlignment
-      value: 512
-      objectReference: {fileID: 0}
     - target: {fileID: 6583604117295597816, guid: e59bc34ec8bd049bb955cd3a995edd67, type: 3}
       propertyPath: recordUI
       value: 
@@ -622,34 +610,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2123128513890020761, guid: f3492731507dfc441a93976244591390, type: 3}
-      propertyPath: m_Pivot.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2123128513890020761, guid: f3492731507dfc441a93976244591390, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2123128513890020761, guid: f3492731507dfc441a93976244591390, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2123128513890020761, guid: f3492731507dfc441a93976244591390, type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2123128513890020761, guid: f3492731507dfc441a93976244591390, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 1920
-      objectReference: {fileID: 0}
-    - target: {fileID: 2123128513890020761, guid: f3492731507dfc441a93976244591390, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 1080
-      objectReference: {fileID: 0}
-    - target: {fileID: 2123128513890020761, guid: f3492731507dfc441a93976244591390, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8873338266673689799, guid: f3492731507dfc441a93976244591390, type: 3}
       propertyPath: bandmatePreviewUI
       value: 
@@ -701,10 +661,6 @@ PrefabInstance:
     - target: {fileID: 8873338266673689801, guid: f3492731507dfc441a93976244591390, type: 3}
       propertyPath: m_Name
       value: MenuManager
-      objectReference: {fileID: 0}
-    - target: {fileID: 8873338266673689801, guid: f3492731507dfc441a93976244591390, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f3492731507dfc441a93976244591390, type: 3}
