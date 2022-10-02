@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f9397d6f4323b8a4483b38bff87ede03, type: 3}
-  m_Name: RockBass
+  m_Name: Sax
   m_EditorClassIdentifier: 
-  id: RockBass
-  instrumentDisplayName: Rock Bass
-  color: {r: 0.058823533, g: 0.5019608, b: 0.050980397, a: 1}
-  mainSprite: {fileID: 21300000, guid: 61d38e347be164faf8816468140cca19, type: 3}
-  cassetteSprite: {fileID: 21300000, guid: 4d68b652b3cb34e9881159053a68a991, type: 3}
-  note: {fileID: 8300000, guid: ea4c989ddca990f4cbb1e2c81e9789c0, type: 3}
+  id: Sax
+  instrumentDisplayName: Sax
+  color: {r: 0.21960786, g: 0.21960786, b: 0.21960786, a: 1}
+  mainSprite: {fileID: 21300000, guid: 42b4e9850505b4e82977c6750381c986, type: 3}
+  cassetteSprite: {fileID: 0}
+  note: {fileID: 0}
