@@ -94,13 +94,13 @@ public class SongRecorder : MonoBehaviour {
         }
     }
 
-    public static readonly int[] MajorScaleDegrees = new int[] {
+    private static readonly int[] MajorScaleDegrees = new int[] {
         0, 2, 4, 5, 7, 9, 11, 12, 14, 16, 17, 19, 21, 23, 24
     };
     private static readonly int[] MinorScaleDegrees = new int[] {
         0, 2, 3, 5, 7, 8, 11, 12, 14, 15, 17, 19, 20, 23, 24
     };
-    private static int[] ScaleDegreesToUse = MajorScaleDegrees;
+    public static int[] ScaleDegreesToUse = MajorScaleDegrees;
 
     private static readonly InstrumentKey[] pitchedKeyboard = new InstrumentKey[]{
         new InstrumentKey() {

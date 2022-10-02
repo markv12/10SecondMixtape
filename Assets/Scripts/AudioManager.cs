@@ -28,6 +28,9 @@ public class AudioManager : MonoBehaviour {
     public AudioClip touch;
     public AudioClip swish;
     public AudioClip boo;
+    public AudioClip tapeStart;
+    public AudioClip tapeOut;
+    public AudioClip tapeScatter;
 
     public void PlaySuccessSound(float intensity) {
         PlaySFX(success, 0.2f * intensity);
@@ -55,6 +58,18 @@ public class AudioManager : MonoBehaviour {
 
     public void PlayBooSound(float intensity) {
         PlaySFX(boo, 0.4f * intensity);
+    }
+
+    public void PlayTapeStartSound(float intensity) {
+        PlaySFX(tapeStart, 0.4f * intensity);
+    }
+
+    public void PlayTapeOutSound(float intensity) {
+        PlaySFX(tapeOut, 0.4f * intensity);
+    }
+
+    public void PlayTapeScatterSound(float intensity) {
+        PlaySFX(tapeScatter, 0.4f * intensity);
     }
 
     public void StartCrowdMurmur(float intensity) {

@@ -31,10 +31,12 @@ public class RecordUI : MonoBehaviour {
         doneButton.onClick.AddListener(Done);
         clearButton.onClick.AddListener(ClearYourPart);
         backButton.onClick.AddListener(Back);
+        AudioManager.Instance.PlayTapeStartSound(1.0f);
     }
 
     private void Done() {
         AudioManager.Instance.PlayPlasticClickSound(1);
+        AudioManager.Instance.PlayTapeOutSound(1.0f);
         StopAllMusic();
         bandPickUI.gameObject.SetActive(true);
         MoveUI(offScreenPos);

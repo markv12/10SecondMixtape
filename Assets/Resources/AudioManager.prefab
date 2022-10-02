@@ -837,6 +837,9 @@ MonoBehaviour:
   touch: {fileID: 8300000, guid: f66680b0516554b3ca891615c4f2495d, type: 3}
   swish: {fileID: 8300000, guid: 7286bb56d0515456ea36fee965c8e290, type: 3}
   boo: {fileID: 8300000, guid: 5a3173b3f879d4569a20de427b447bca, type: 3}
+  tapeStart: {fileID: 8300000, guid: c16a2cee7bdf44527a871e4023a55ebc, type: 3}
+  tapeOut: {fileID: 8300000, guid: 1f22a26628cc648c69cb6e71caf98766, type: 3}
+  tapeScatter: {fileID: 8300000, guid: 5c80e96812fae4ed0a69e8c84822644d, type: 3}
 --- !u!1 &8087591419327489437
 GameObject:
   m_ObjectHideFlags: 0
