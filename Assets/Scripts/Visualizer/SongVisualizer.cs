@@ -20,6 +20,7 @@ public class SongVisualizer : MonoBehaviour {
             NoteLine newLine = Instantiate(noteLinePrefab, visualizerRect);
             newLine.rectT.sizeDelta = new Vector2(rectWidth, lineHeight);
             newLine.rectT.anchoredPosition = new Vector2(0, lineHeight * i);
+            newLine.keyText.text = SongRecorder.KeyStringForLine(i);
             noteLines[i] = newLine;
 
             List<Note> noteList = track.notes[i];

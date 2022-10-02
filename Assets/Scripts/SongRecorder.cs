@@ -138,6 +138,11 @@ public class SongRecorder : MonoBehaviour {
         },
     };
 
+    private const string KEY_LETTERS = "ASDFGHJKL;'";
+    public static string KeyStringForLine(int lineIndex) {
+        return KEY_LETTERS[lineIndex].ToString();
+    }
+
     private class InstrumentKey {
         public Key key;
         public int noteIndex;
