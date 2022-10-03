@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class BandPickUI : MonoBehaviour {
     public Button cancelButton;
+    public Button getMoreTapesButton;
     public Button doneButton;
     public MenuManager menuManager;
 
@@ -21,6 +22,7 @@ public class BandPickUI : MonoBehaviour {
 
     private void Awake() {
         cancelButton.onClick.AddListener(Cancel);
+        getMoreTapesButton.onClick.AddListener(LoadParts);
         doneButton.onClick.AddListener(Done);
         StartCoroutine(SoundSchedule());
 
@@ -98,6 +100,7 @@ public class BandPickUI : MonoBehaviour {
     }
 
     public void LoadParts() {
+        selectedTracks.Clear();
         MusicNetworking.Instance.Get9Parts("Major", (InstrumentTrack[] tracks) => {
             for (int i = 0; i < cassetteButtons.Length; i++) {
                 CassetteButton cassetteButton = cassetteButtons[i];

@@ -42,8 +42,9 @@ public class CassetteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         cassetteImage.sprite = bandMember.cassetteSprite;
         nameText.text = instrumentTrack.name;
         instrumentText.text = bandMember.instrumentDisplayName;
-        selectedImage.SetActive(false);
-        selectedImage2.SetActive(false);
+        selected = false;
+        selectedImage.SetActive(selected);
+        selectedImage2.SetActive(selected);
 
         nameText.color = bandMember.cassetteTextWhite ? Color.white : Color.black;
         instrumentText.color = bandMember.cassetteTextWhite ? Color.white : Color.black;
