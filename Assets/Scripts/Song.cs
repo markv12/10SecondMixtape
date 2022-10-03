@@ -22,6 +22,15 @@ public class Song {
         };
     }
 
+    public void AddSongParts(Song song) {
+        for (int i = 0; i < song.parts.Length; i++) {
+            InstrumentTrack part = song.parts[i];
+            if(part != null) {
+                AddPart(part);
+            }
+        }
+    }
+
     public void AddPart(InstrumentTrack part) {
         InstrumentTrack[] existingParts = parts;
         int existingLength = existingParts == null ? 0 : existingParts.Length;
