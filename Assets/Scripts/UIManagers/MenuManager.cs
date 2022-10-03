@@ -57,6 +57,10 @@ public class MenuManager : MonoBehaviour{
             downvoteButton.gameObject.SetActive(false);
         }
 
+        MusicNetworking.Instance.GetRandomSong((Song song) => {
+            concertPlayer.PlaySong(song);
+        });
+
         endConcertButton.onClick.AddListener(EndConcert);
     }
 

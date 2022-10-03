@@ -1,11 +1,33 @@
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class MusicNetworking : Singleton<MusicNetworking> {
+    private readonly List<Song> randomSongs = new List<Song>();
+    private int randomSongIndex = 0;
     public void GetRandomSong(Action<Song> onComplete) {
-        StartCoroutine(NetUtility.Get("songs/some/1", (string json) => {
-            onComplete?.Invoke(Song.CreateListFromJson(json)[0]);
+        if(randomSongIndex < randomSongs.Count) {
+            Song result = randomSongs[randomSongIndex];
+            randomSongIndex++;
+            onComplete?.Invoke(result);
+            if(randomSongs.Count - randomSongIndex < 4) {
+                LoadMoreRandomSongs((Song[] newSongs) => {
+                    randomSongs.AddRange(newSongs);
+                });
+            }
+        } else {
+            LoadMoreRandomSongs((Song[] newSongs) => {
+                randomSongs.AddRange(newSongs);
+                onComplete?.Invoke(randomSongs[randomSongIndex]);
+                randomSongIndex++;
+            });
+        }
+    }
+
+    private void LoadMoreRandomSongs(Action<Song[]> onComplete) {
+        StartCoroutine(NetUtility.Get("songs/some/9", (string json) => {
+            onComplete?.Invoke(Song.CreateListFromJson(json));
         }));
     }
 
