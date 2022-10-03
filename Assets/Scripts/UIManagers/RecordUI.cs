@@ -31,7 +31,8 @@ public class RecordUI : MonoBehaviour {
         doneButton.onClick.AddListener(Done);
         clearButton.onClick.AddListener(() => {
             AudioManager.Instance.PlayPlasticClickSound(1);
-            ClearYourPart();
+            TurnOffYourPart();
+            songRecorder.Clear();
         });
         backButton.onClick.AddListener(Back);
         AudioManager.Instance.PlayTapeStartSound(1.0f);
@@ -41,18 +42,23 @@ public class RecordUI : MonoBehaviour {
         AudioManager.Instance.PlayPlasticClickSound(1);
         AudioManager.Instance.PlayTapeOutSound(1.0f);
         StopAllMusic();
+
+        Song newSong = new Song() {
+            name = currentSessionData.bandName,
+            parts = new InstrumentTrack[] { songRecorder.currentTrack, currentSessionData.otherPart },
+        };
+        bandPickUI.SetYourSong(newSong);
         bandPickUI.gameObject.SetActive(true);
         StartCoroutine(DoneRoutine());
         IEnumerator DoneRoutine() {
             yield return MoveUI(offScreenPos);
-            ClearYourPart();
+            TurnOffYourPart();
             songVisualizer.ClearLinesAndStop();
         }
     }
 
-    private void ClearYourPart() {
+    private void TurnOffYourPart() {
         StopYourPart();
-        songRecorder.Clear();
         songVisualizer.ClearNoteSquares();
     }
 
@@ -68,7 +74,7 @@ public class RecordUI : MonoBehaviour {
         songRecorder.StopRecording();
         metronomePlayer.StopSong();
         otherPartPlayer.StopSong();
-        ClearYourPart();
+        TurnOffYourPart();
         songVisualizer.ClearLinesAndStop();
 
         IEnumerator BackRoutine() {
@@ -89,6 +95,7 @@ public class RecordUI : MonoBehaviour {
     public const float MOVE_IN_TIME = 1.333f;
     public SessionData currentSessionData;
     public void Startup(SessionData sessionData) {
+        currentSessionData = sessionData;
         rectT.anchoredPosition = offScreenPos;
 
         yourMemberImage.sprite = sessionData.yourMember.mainSprite;

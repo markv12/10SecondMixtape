@@ -26,11 +26,8 @@ public class SongRecorder : MonoBehaviour {
         isRecording = true;
     }
 
-    public Song StopRecording() {
+    public void StopRecording() {
         isRecording = false;
-        Song result = Song.CreateFromPart(currentTrack);
-        currentTrack = null;
-        return result;
     }
 
     public const double SMALLEST_NOTE_LENGTH = 0.125;

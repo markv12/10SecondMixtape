@@ -7,8 +7,8 @@ public class BandPickUI : MonoBehaviour {
     public Button cancelButton;
     public BandMemberCard yourCard;
     public BandMemberCard otherMemberCard;
-    public TMP_Text bandNameLabel;
     public CassetteButton[] cassetteButtons;
+    public YourCassetteButton yourCassetteButton;
     public SongPlayer songPlayer;
 
     private void Awake() {
@@ -17,15 +17,25 @@ public class BandPickUI : MonoBehaviour {
 
         for (int i = 0; i < cassetteButtons.Length; i++) {
             CassetteButton cassetteButton = cassetteButtons[i];
-            cassetteButton.playPart = (InstrumentTrack part) => {
-                songPlayer.StopSong();
-                songPlayer.PlayPart(part, 0.5, true);
-            };
-            cassetteButton.stopPart = () => { songPlayer.StopSong(); };
+            cassetteButton.playPart = PlayPart;
+            cassetteButton.stopPart = songPlayer.StopSong;
         }
+        yourCassetteButton.playSong = PlaySong;
+        yourCassetteButton.stopSong = songPlayer.StopSong;
     }
+
+    private void PlayPart(InstrumentTrack part) {
+        songPlayer.StopSong();
+        songPlayer.PlayPart(part, 0.333, true);
+    }
+
+    private void PlaySong(Song song) {
+        songPlayer.StopSong();
+        songPlayer.PlaySong(song, 0.333, true);
+    }
+
     private IEnumerator SoundSchedule() {
-        yield return new WaitForSeconds(0.333f);
+        yield return new WaitForSeconds(0.5f);
         AudioManager.Instance.PlayTapeScatterSound(1.0f);
     }
 
@@ -42,7 +52,10 @@ public class BandPickUI : MonoBehaviour {
     public void ShowSessionData(SessionData sessionData) {
         yourCard.ShowMember(sessionData.yourMember, sessionData.yourName);
         otherMemberCard.ShowMember(sessionData.otherMember, sessionData.otherName);
-        bandNameLabel.text = sessionData.bandName;
+    }
+
+    public void SetYourSong(Song newSong) {
+        yourCassetteButton.ShowSong(newSong);
     }
 
     public void LoadParts() {
