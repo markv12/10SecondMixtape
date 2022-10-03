@@ -11,6 +11,7 @@ public class RecordUI : MonoBehaviour {
     public Button doneButton;
     public Button clearButton;
     public Button backButton;
+    public MenuManager menuManager;
     public SongVisualizer songVisualizer;
 
     public SongRecorder songRecorder;
@@ -77,10 +78,11 @@ public class RecordUI : MonoBehaviour {
         TurnOffYourPart();
         songVisualizer.ClearLinesAndStop();
 
+        menuManager.Enable();
+
         IEnumerator BackRoutine() {
             yield return null;
             rectT.anchoredPosition = offScreenPos;
-            AudioManager.Instance.StartCrowdMurmur(1f);
             gameObject.SetActive(false);
         }
     }

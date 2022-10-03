@@ -23,14 +23,17 @@ public class MenuManager : MonoBehaviour{
     public GameObject feedbackText;
     private bool canVote = false;
 
+    private bool canStart = true;
+
     private void Awake() {
+        Enable();
+        
         if(string.IsNullOrWhiteSpace(PlayerName)) {
             RefreshName();
         } else {
             nameText.text = PlayerName;
         }
         playButton.onClick.AddListener(Play);
-        AudioManager.Instance.StartCrowdMurmur(1.0f);
         refreshNameButton.onClick.AddListener(RefreshName);
 
         upvoteButton.onClick.AddListener(Upvote);
@@ -42,9 +45,21 @@ public class MenuManager : MonoBehaviour{
         }
     }
 
+    public void Enable() {
+        AudioManager.Instance.StartCrowdMurmur(1.0f);
+        canStart = true;
+    }
+
     private void Play() {
+        if (!canStart) return;
+        canStart = false;
         LoadingScreen.ShowTransition(LoadBandMate());
         AudioManager.Instance.PlaySuccessSound(1.0f);
+
+        IEnumerator Hider() {
+            yield return new WaitForSeconds(1.0f);
+            gameObject.SetActive(false);
+        }
     }
 
     IEnumerator LoadBandMate() {
