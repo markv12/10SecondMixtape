@@ -22,8 +22,8 @@ function validatePart(part) {
     if (part.notes?.length > 25)
         errors.push(`Has more than 25 different notes (${part.notes.length})`);
     part.notes?.forEach((track, i) => {
-        if (track.length > 30)
-            errors.push(`Track ${i} has more than 30 notes being played (${track.length})`);
+        if (track.length > 50)
+            errors.push(`Track ${i} has more than 50 notes being played (${track.length})`);
         track.forEach((note, j) => {
             if (note.start === undefined)
                 errors.push(`Voice ${i} note ${j} has no start`);

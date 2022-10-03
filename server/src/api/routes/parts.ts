@@ -13,9 +13,10 @@ router.get(
   '/some/:count?/:scaleType?',
   async (req, res) => {
     const count = parseInt(req.params.count || '1') || 1
-    const scaleType = req.params.scaleType as
-      | ScaleType
-      | undefined
+    let scaleType: ScaleType | undefined = (
+      req.params.scaleType || ''
+    ).toLowerCase() as ScaleType
+    if (!scaleType) scaleType = undefined
 
     if (count === 1) {
       // looking for initial partner, but we don't want an AWFUL partner.
