@@ -41,8 +41,8 @@ public class MenuManager : MonoBehaviour{
 
     private void Awake() {
         Enable();
-        
-        if(string.IsNullOrWhiteSpace(PlayerName)) {
+
+        if (string.IsNullOrWhiteSpace(PlayerName)) {
             RefreshName();
         } else {
             nameText.text = PlayerName;
@@ -58,13 +58,33 @@ public class MenuManager : MonoBehaviour{
             downvoteButton.gameObject.SetActive(false);
         }
 
-        MusicNetworking.Instance.GetRandomSong((Song song) => {
+        StartPlayingSongs();
+
+        endConcertButton.onClick.AddListener(EndConcert);
+    }
+
+    private void StartPlayingSongs() {
+        StartCoroutine(PlayRoutine());
+
+        IEnumerator PlayRoutine() {
+            yield return new WaitForSeconds(1f);
+            MusicNetworking.Instance.GetRandomSong((Song song) => {
+                WaitThenPlaySong(song);
+            });
+        }
+    }
+
+    private void WaitThenPlaySong(Song song) {
+        StartCoroutine(WaitRoutine());
+
+        IEnumerator WaitRoutine() {
+            yield return null;
+            yield return null;
+            yield return null;
             concertPlayer.PlaySong(song);
             bandNameText.text = song.name;
             SetCanVote(true);
-        });
-
-        endConcertButton.onClick.AddListener(EndConcert);
+        }
     }
 
     public void Enable() {

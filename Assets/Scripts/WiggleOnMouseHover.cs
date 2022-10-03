@@ -15,8 +15,7 @@ public class WiggleOnMouseHover : MonoBehaviour, IPointerEnterHandler, IPointerE
 
     bool isHovering = false;
 
-    void Start()
-    {
+    void Start() {
         button = GetComponent<Button>();
         originalPosition = transform.localPosition;
         originalScale = transform.localScale;
