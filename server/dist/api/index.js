@@ -52,8 +52,8 @@ const parts_1 = __importDefault(require("./routes/parts"));
 app.use(`/${subdirectory}/parts`, parts_1.default);
 // import tokenRoutes, { tokenIdCombos } from './routes/token'
 // app.use(`/${subdirectory}/token`, tokenRoutes)
-// import adminRoutes from './routes/admin'
-// app.use(`/${subdirectory}/admin`, adminRoutes)
+const admin_1 = __importDefault(require("./routes/admin"));
+app.use(`/${subdirectory}/admin`, admin_1.default);
 // // * ------------------ routes below line require a token ------------------
 // // token check
 // app.use((req, res, next) => {

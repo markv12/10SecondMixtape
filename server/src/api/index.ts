@@ -32,8 +32,8 @@ app.use(`/${subdirectory}/parts`, partsRoutes)
 // import tokenRoutes, { tokenIdCombos } from './routes/token'
 // app.use(`/${subdirectory}/token`, tokenRoutes)
 
-// import adminRoutes from './routes/admin'
-// app.use(`/${subdirectory}/admin`, adminRoutes)
+import adminRoutes from './routes/admin'
+app.use(`/${subdirectory}/admin`, adminRoutes)
 
 // // * ------------------ routes below line require a token ------------------
 // // token check

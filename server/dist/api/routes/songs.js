@@ -73,11 +73,6 @@ router.get('/page/:page', async (req, res) => {
         ...bestSongs,
         ...recentSongs,
     ];
-    allSongs.forEach((s) => {
-        if (s.name === 'Resentful Settlement') {
-            c.log(JSON.stringify(s));
-        }
-    });
     // remove just one of duplicate ids
     allSongs = allSongs.filter((song, i) => allSongs.findIndex((s) => s.id === song.id) === i);
     allSongs = allSongs.slice(0, perPage);
