@@ -32,7 +32,9 @@ router.get('/', (req, res) => {
 });
 router.get('/some/:count?/:scaleType?', async (req, res) => {
     const count = parseInt(req.params.count || '1') || 1;
-    const scaleType = req.params.scaleType;
+    let scaleType = (req.params.scaleType || '').toLowerCase();
+    if (!scaleType)
+        scaleType = undefined;
     if (count === 1) {
         // looking for initial partner, but we don't want an AWFUL partner.
         const randomParts = await db_1.db.parts.getRandom(5, scaleType);
