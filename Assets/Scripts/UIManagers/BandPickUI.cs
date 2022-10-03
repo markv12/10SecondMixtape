@@ -1,10 +1,13 @@
+using System;
 using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class BandPickUI : MonoBehaviour {
     public Button cancelButton;
+    public Button doneButton;
     public MenuManager menuManager;
 
     public BandMemberCard yourCard;
@@ -13,14 +16,19 @@ public class BandPickUI : MonoBehaviour {
     public YourCassetteButton yourCassetteButton;
     public SongPlayer songPlayer;
 
+    private Song yourSong;
+    private List<InstrumentTrack> selectedTracks = new List<InstrumentTrack>();
+
     private void Awake() {
         cancelButton.onClick.AddListener(Cancel);
+        doneButton.onClick.AddListener(Done);
         StartCoroutine(SoundSchedule());
 
         for (int i = 0; i < cassetteButtons.Length; i++) {
             CassetteButton cassetteButton = cassetteButtons[i];
             cassetteButton.playPart = PlayPart;
             cassetteButton.stopPart = songPlayer.StopSong;
+            cassetteButton.setPartSelected = SetPartSelected;
         }
         yourCassetteButton.playSong = PlaySong;
         yourCassetteButton.stopSong = songPlayer.StopSong;
@@ -36,9 +44,30 @@ public class BandPickUI : MonoBehaviour {
         songPlayer.PlaySong(song, 0.333, true);
     }
 
+    private void SetPartSelected(InstrumentTrack part, bool selected) {
+        if (selected) {
+            selectedTracks.Add(part);
+        } else {
+            selectedTracks.Remove(part);
+        }
+    }
+
     private IEnumerator SoundSchedule() {
         yield return new WaitForSeconds(0.5f);
         AudioManager.Instance.PlayTapeScatterSound(1.0f);
+    }
+
+    private void Done() {
+        for (int i = 0; i < selectedTracks.Count; i++) {
+            yourSong.AddPart(selectedTracks[i]);
+        }
+        LoadingScreen.ShowTransition(DoneRoutine());
+
+        IEnumerator DoneRoutine() {
+            yield return null;
+            gameObject.SetActive(false);
+            menuManager.GoToYourBandMode(yourSong);
+        }
     }
 
     private void Cancel() {
@@ -57,7 +86,8 @@ public class BandPickUI : MonoBehaviour {
     }
 
     public void SetYourSong(Song newSong) {
-        yourCassetteButton.ShowSong(newSong);
+        yourSong = newSong;
+        yourCassetteButton.ShowSong(yourSong);
     }
 
     public void LoadParts() {
