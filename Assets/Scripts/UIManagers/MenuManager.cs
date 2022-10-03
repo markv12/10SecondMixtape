@@ -31,6 +31,8 @@ public class MenuManager : MonoBehaviour{
     public RectTransform feedbackUI;
     public Button upvoteButton;
     public Button downvoteButton;
+    public Button nextBandButton;
+    public RectTransform nextBandButtonT;
     public GameObject feedbackText;
     private bool canVote = false;
 
@@ -52,6 +54,7 @@ public class MenuManager : MonoBehaviour{
 
         upvoteButton.onClick.AddListener(Upvote);
         downvoteButton.onClick.AddListener(Downvote);
+        nextBandButton.onClick.AddListener(NextBand);
 
         if (!canVote) {
             feedbackUI.anchoredPosition = FEEDBACK_OFFSCREEN_POS;
@@ -154,7 +157,7 @@ public class MenuManager : MonoBehaviour{
         AudioManager.Instance.PlayApplauseSound(0.4f);
         MusicNetworking.Instance.UpvoteSong(currentSong);
         SetCanVote(false);
-        WaitThenLoadNewBand(5);
+        SetNextBandButtonVisible(true);
     }
 
     private void Downvote() {
@@ -162,8 +165,20 @@ public class MenuManager : MonoBehaviour{
         AudioManager.Instance.PlayBooSound(0.9f);
         MusicNetworking.Instance.DownvoteSong(currentSong);
         SetCanVote(false);
+        StartCoroutine(WaitThenStop());
+        WaitThenLoadNewBand(5.5f);
+    }
+
+    private void NextBand() {
+        AudioManager.Instance.PlayApplauseSound(0.4f);
+        StartCoroutine(WaitThenStop());
+        WaitThenLoadNewBand(4);
+        SetNextBandButtonVisible(true);
+    }
+
+    private IEnumerator WaitThenStop() {
+        yield return new WaitForSeconds(1);
         concertPlayer.StopSong();
-        WaitThenLoadNewBand(5);
     }
 
     private void WaitThenLoadNewBand(float waitTime) {
@@ -182,13 +197,13 @@ public class MenuManager : MonoBehaviour{
     private IEnumerator HideVoteButtons() {
         yield return this.CreateAnimationRoutine(.6f, (float progress) => {
             upvoteButton.gameObject.transform.localScale = Vector3.Lerp(
-                new Vector3(1, 1, 1),
-                new Vector3(0, 0, 0),
+                Vector3.one,
+                Vector3.zero,
                 Easing.easeInQuad(0, 1, progress)
             );
             downvoteButton.gameObject.transform.localScale = Vector3.Lerp(
-                new Vector3(1, 1, 1),
-                new Vector3(0, 0, 0),
+                Vector3.one,
+                Vector3.zero,
                 Easing.easeInQuad(0, 1, progress)
             );
         });
@@ -197,16 +212,16 @@ public class MenuManager : MonoBehaviour{
         feedbackText.SetActive(true);
         yield return this.CreateAnimationRoutine(.6f, (float progress) => {
             feedbackText.transform.localScale = Vector3.Lerp(
-                new Vector3(0, 0, 0),
-                new Vector3(1, 1, 1),
+                Vector3.zero,
+                Vector3.one,
                 Easing.easeOutQuad(0, 1, progress)
             );
         });
         yield return new WaitForSeconds(3.0f);
         yield return this.CreateAnimationRoutine(.6f, (float progress) => {
             feedbackText.transform.localScale = Vector3.Lerp(
-                new Vector3(1, 1, 1),
-                new Vector3(0, 0, 0),
+                Vector3.one,
+                Vector3.zero,
                 Easing.easeInQuad(0, 1, progress)
             );
         });
@@ -217,15 +232,29 @@ public class MenuManager : MonoBehaviour{
         feedbackUI.anchoredPosition = FEEDBACK_ONSCREEN_POS;
          yield return this.CreateAnimationRoutine(.6f, (float progress) => {
             upvoteButton.gameObject.transform.localScale = Vector3.Lerp(
-                new Vector3(0, 0, 0),
-                new Vector3(1, 1, 1),
+                Vector3.zero,
+                Vector3.one,
                 Easing.easeOutQuad(0, 1, progress)
             );
             downvoteButton.gameObject.transform.localScale = Vector3.Lerp(
-                new Vector3(0, 0, 0),
-                new Vector3(1, 1, 1),
+                Vector3.zero,
+                Vector3.one,
                 Easing.easeOutQuad(0, 1, progress)
             );
+        });
+    }
+
+    private static readonly Vector2 NEXT_BAND_OFFSCREEN_POS = new Vector2(0, -690);
+    private static readonly Vector2 NEXT_BAND_ONSCREEN_POS = new Vector2(0, -415);
+    Coroutine nextButtonRoutine;
+    private void SetNextBandButtonVisible(bool visible) {
+        this.EnsureCoroutineStopped(ref nextButtonRoutine);
+        nextBandButtonT.anchoredPosition = visible ? NEXT_BAND_ONSCREEN_POS : NEXT_BAND_OFFSCREEN_POS;
+
+        Vector3 startScale = visible ? Vector3.zero : Vector3.one;
+        Vector3 endScale = visible ? Vector3.one : Vector3.zero;
+        nextButtonRoutine = this.CreateAnimationRoutine(0.6f, (float progress) => {
+            nextBandButtonT.localScale = Vector3.Lerp(startScale, endScale, progress);
         });
     }
 }
