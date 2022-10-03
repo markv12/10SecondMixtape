@@ -8,7 +8,6 @@ public class WiggleOnMouseHover : MonoBehaviour, IPointerEnterHandler, IPointerE
     public float speed = 1.0f;
     public bool playSound = true;
 
-    private Button button;
     private Vector3 originalPosition;
     private Vector3 originalScale;
     private Vector3 originalRotation;
@@ -16,7 +15,6 @@ public class WiggleOnMouseHover : MonoBehaviour, IPointerEnterHandler, IPointerE
     bool isHovering = false;
 
     void Start() {
-        button = GetComponent<Button>();
         originalPosition = transform.localPosition;
         originalScale = transform.localScale;
         originalRotation = transform.localEulerAngles;
