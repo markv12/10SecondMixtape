@@ -49,7 +49,7 @@ public class BandmatePreviewUI : MonoBehaviour {
         StartCoroutine(WaitRoutine());
 
         IEnumerator WaitRoutine() {
-            yield return new WaitForSeconds(7f);
+            yield return new WaitForSeconds(7.5f);
             recordUI.Startup(sessionData);
             yield return new WaitForSeconds(RecordUI.MOVE_IN_TIME + 0.3f);
             gameObject.SetActive(false);

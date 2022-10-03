@@ -66,6 +66,7 @@ public class BandPickUI : MonoBehaviour {
         IEnumerator DoneRoutine() {
             yield return null;
             gameObject.SetActive(false);
+            menuManager.GoToYourBandMode(yourSong);
         }
     }
 

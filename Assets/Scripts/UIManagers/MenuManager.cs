@@ -13,6 +13,11 @@ public class MenuManager : MonoBehaviour{
         }
     }
 
+    public Transform mainCameraT;
+    public Transform startMenuCameraT;
+    public Transform yourBandCameraT;
+
+    public GameObject startMenuUI;
     public Button playButton;
     public BandmatePreviewUI bandmatePreviewUI;
     public Button refreshNameButton;
@@ -48,6 +53,11 @@ public class MenuManager : MonoBehaviour{
     public void Enable() {
         AudioManager.Instance.StartCrowdMurmur(1.0f);
         canStart = true;
+    }
+
+    public void GoToYourBandMode(Song yourSong) {
+        mainCameraT.SetPositionAndRotation(yourBandCameraT.position, yourBandCameraT.rotation);
+        startMenuUI.SetActive(false);
     }
 
     private void Play() {
