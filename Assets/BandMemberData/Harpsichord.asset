@@ -15,7 +15,7 @@ MonoBehaviour:
   id: Harpsichord
   instrumentDisplayName: Harpsichord
   color: {r: 0.76470596, g: 0.82745105, b: 0.91372555, a: 1}
-  noteColor: {r: 0.24313727, g: 0.3803922, b: 0.7254902, a: 0}
+  noteColor: {r: 0.24313727, g: 0.3803922, b: 0.7254902, a: 1}
   mainSprite: {fileID: 21300000, guid: 9bb820d7946c54df09dd5d135e5d84a4, type: 3}
   cassetteSprite: {fileID: 21300000, guid: 650f06fa0772d4ec5b41f696f834201d, type: 3}
   cassetteTextWhite: 0

@@ -15,7 +15,7 @@ MonoBehaviour:
   id: Percussion
   instrumentDisplayName: Percussion
   color: {r: 0.8862746, g: 0.7686275, b: 0.078431375, a: 1}
-  noteColor: {r: 0.8862746, g: 0.7686275, b: 0.078431375, a: 0}
+  noteColor: {r: 0.8862746, g: 0.7686275, b: 0.078431375, a: 1}
   mainSprite: {fileID: 21300000, guid: 5919c6d2809334e0db50a584bc0c7fcf, type: 3}
   cassetteSprite: {fileID: 21300000, guid: 8a875314e8d9f48c39186af5d2497756, type: 3}
   cassetteTextWhite: 0
