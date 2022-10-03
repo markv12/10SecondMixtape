@@ -38,7 +38,10 @@ public class BandPickUI : MonoBehaviour {
 
     private void PlayPart(InstrumentTrack part) {
         songPlayer.StopSong();
-        songPlayer.PlayPart(part, 0.333, true);
+        Song combinedSong = new Song();
+        combinedSong.AddSongParts(yourSong);
+        combinedSong.AddPart(part);
+        songPlayer.PlaySong(combinedSong, 0.333, true);
     }
 
     private void PlaySong(Song song) {
