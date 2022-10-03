@@ -177,8 +177,8 @@ public class MenuManager : MonoBehaviour{
         }
     }
 
-    private static readonly Vector2 FEEDBACK_OFFSCREEN_POS = new Vector2(160, -690);
-    private static readonly Vector2 FEEDBACK_ONSCREEN_POS = new Vector2(160, -415);
+    private static readonly Vector2 FEEDBACK_OFFSCREEN_POS = new Vector2(300, -690);
+    private static readonly Vector2 FEEDBACK_ONSCREEN_POS = new Vector2(300, -415);
     private IEnumerator HideVoteButtons() {
         yield return this.CreateAnimationRoutine(.6f, (float progress) => {
             upvoteButton.gameObject.transform.localScale = Vector3.Lerp(
