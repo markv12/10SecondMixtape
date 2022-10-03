@@ -40,21 +40,23 @@ public class RecordUI : MonoBehaviour {
     }
 
     private void Done() {
-        AudioManager.Instance.PlayPlasticClickSound(1);
-        AudioManager.Instance.PlayTapeOutSound(1.0f);
-        StopAllMusic();
+        if (songRecorder.IsRecording) {
+            AudioManager.Instance.PlayPlasticClickSound(1);
+            AudioManager.Instance.PlayTapeOutSound(1.0f);
+            StopAllMusic();
 
-        Song newSong = new Song() {
-            name = currentSessionData.bandName,
-            parts = new InstrumentTrack[] { songRecorder.currentTrack, currentSessionData.otherPart },
-        };
-        bandPickUI.SetYourSong(newSong);
-        bandPickUI.gameObject.SetActive(true);
-        StartCoroutine(DoneRoutine());
-        IEnumerator DoneRoutine() {
-            yield return MoveUI(offScreenPos);
-            TurnOffYourPart();
-            songVisualizer.ClearLinesAndStop();
+            Song newSong = new Song() {
+                name = currentSessionData.bandName,
+                parts = new InstrumentTrack[] { songRecorder.currentTrack, currentSessionData.otherPart },
+            };
+            bandPickUI.SetYourSong(newSong);
+            bandPickUI.gameObject.SetActive(true);
+            StartCoroutine(DoneRoutine());
+            IEnumerator DoneRoutine() {
+                yield return MoveUI(offScreenPos);
+                TurnOffYourPart();
+                songVisualizer.ClearLinesAndStop();
+            }
         }
     }
 
