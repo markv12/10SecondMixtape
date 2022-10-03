@@ -6,6 +6,7 @@ public class WiggleOnMouseHover : MonoBehaviour, IPointerEnterHandler, IPointerE
 {
     public float intensity = 1.0f;
     public float speed = 1.0f;
+    public bool playSound = true;
 
     private Button button;
     private Vector3 originalPosition;
@@ -59,7 +60,8 @@ public class WiggleOnMouseHover : MonoBehaviour, IPointerEnterHandler, IPointerE
     public void OnPointerEnter(PointerEventData eventData)
     {
         isHovering = true;
-        AudioManager.Instance.PlayTouchSound(1.0f);
+        if (playSound)
+          AudioManager.Instance.PlayTouchSound(1.0f);
     }
 
     public void OnPointerExit(PointerEventData eventData)

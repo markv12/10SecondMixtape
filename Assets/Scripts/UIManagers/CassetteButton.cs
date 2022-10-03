@@ -15,6 +15,7 @@ public class CassetteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     public Action<InstrumentTrack, bool> setPartSelected;
 
     public GameObject selectedImage;
+    public GameObject selectedImage2;
     private bool selected = false;
     private bool Selected {
         get {
@@ -23,6 +24,7 @@ public class CassetteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         set {
             selected = value;
             selectedImage.SetActive(selected);
+            selectedImage2.SetActive(selected);
             setPartSelected?.Invoke(part, selected);
         }
     }
@@ -41,6 +43,7 @@ public class CassetteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         nameText.text = instrumentTrack.name;
         instrumentText.text = bandMember.instrumentDisplayName;
         selectedImage.SetActive(false);
+        selectedImage2.SetActive(false);
 
         nameText.color = bandMember.cassetteTextWhite ? Color.white : Color.black;
         instrumentText.color = bandMember.cassetteTextWhite ? Color.white : Color.black;
