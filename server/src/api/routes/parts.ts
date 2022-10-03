@@ -26,7 +26,7 @@ router.get(
       const best = randomParts.sort(
         (a, b) => (b.ratio ?? -10000) - (a.ratio ?? -10000),
       )[0]
-      res.send(best)
+      res.send([best])
       c.log(
         `Sent best of 5 random parts for scale type ${scaleType}`,
       )
