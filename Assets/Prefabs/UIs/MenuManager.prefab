@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 456101488}
   - component: {fileID: 456101487}
   m_Layer: 5
-  m_Name: CurrentBand
+  m_Name: FinalBandName
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -225,7 +225,7 @@ GameObject:
   - component: {fileID: 1972345674}
   - component: {fileID: 1972345673}
   m_Layer: 5
-  m_Name: BandNameText
+  m_Name: FinalBandNameText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3205,6 +3205,7 @@ MonoBehaviour:
   refreshNameButton: {fileID: 8873338266722306134}
   nameText: {fileID: 8463182087361549622}
   bandNameText: {fileID: 6234688701959381713}
+  finalBandNameText: {fileID: 1972345673}
   feedbackUI: {fileID: 2388140923519079057}
   upvoteButton: {fileID: 1215877614995012646}
   downvoteButton: {fileID: 8830746623590905377}

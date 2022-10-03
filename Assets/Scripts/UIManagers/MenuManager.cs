@@ -26,6 +26,7 @@ public class MenuManager : MonoBehaviour{
     public Button refreshNameButton;
     public TMP_Text nameText;
     public TMP_Text bandNameText;
+    public TMP_Text finalBandNameText;
 
     public RectTransform feedbackUI;
     public Button upvoteButton;
@@ -75,6 +76,7 @@ public class MenuManager : MonoBehaviour{
             if (canStart) {
                 concertPlayer.PlaySong(song);
                 bandNameText.text = song.name;
+                finalBandNameText.text = song.name;
                 SetCanVote(true);
             }
         }
