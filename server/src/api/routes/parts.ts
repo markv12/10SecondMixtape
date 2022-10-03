@@ -28,7 +28,9 @@ router.get(
       )[0]
       res.send([best])
       c.log(
-        `Sent best of 5 random parts for scale type ${scaleType}`,
+        `Sent ${
+          [best].length
+        } best part of 5 random parts for scale type ${scaleType}`,
       )
       return
     }
