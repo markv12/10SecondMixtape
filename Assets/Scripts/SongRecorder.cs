@@ -32,6 +32,7 @@ public class SongRecorder : MonoBehaviour {
 
     public const double SMALLEST_NOTE_LENGTH = 0.125;
     public const double NOTE_QUANTIZE_MULTIPLE = 1.0 / SMALLEST_NOTE_LENGTH;
+    public const float TIME_ADJUST = -0.02f;
     private void Update() {
         if (isRecording && Time.time > startTime) {
             for (int i = 0; i < pitchedKeyboard.Length; i++) {
@@ -40,8 +41,9 @@ public class SongRecorder : MonoBehaviour {
                     InstrumentNote note = currentBandMember.GetInstrumentNote(key.noteIndex);
                     AudioSource audioSource = audioSourcePool.GetAudioSource(note);
                     audioSource.Play();
+                    float timeOffset = (Time.time - startTime) + TIME_ADJUST;
                     Note newNote = new Note() {
-                        start = Quantize((Time.time - startTime) % 10f)
+                        start = Quantize(timeOffset % 10f)
                     };
                     currentTrack.notes[key.noteIndex].Add(newNote);
                     key.currentNote = newNote;
