@@ -122,7 +122,7 @@ public class MenuManager : MonoBehaviour{
     private void StartGame() {
         if (canStart) {
             canStart = false;
-            LoadingScreen.ShowTransition(LoadBandMate());
+            LoadingScreen.ShowTransition(LoadBandMatePreview());
             AudioManager.Instance.PlaySuccessSound(1.0f);
 
             //IEnumerator Hider() {
@@ -130,14 +130,15 @@ public class MenuManager : MonoBehaviour{
             //    gameObject.SetActive(false);
             //}
         }
-    }
 
-    IEnumerator LoadBandMate() {
-        SetCanVote(false);
-        yield return MusicNetworking.Instance.GetRandomPart("major", (InstrumentTrack part) => {
-            concertPlayer.StopSong();
-            bandmatePreviewUI.SetupNewBandmatePairing(part);
-        });
+        IEnumerator LoadBandMatePreview() {
+            SetCanVote(false);
+            SetNextBandButtonVisible(false);
+            yield return MusicNetworking.Instance.GetRandomPart("major", (InstrumentTrack part) => {
+                concertPlayer.StopSong();
+                bandmatePreviewUI.SetupNewBandmatePairing(part);
+            });
+        }
     }
 
     private void RefreshName() {

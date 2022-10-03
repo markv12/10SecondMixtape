@@ -29,6 +29,7 @@ public class RecordUI : MonoBehaviour {
     private const double STANDARD_WAIT = 0.5;
 
     private void Awake() {
+        rectT.anchoredPosition = offScreenPos;
         doneButton.onClick.AddListener(Done);
         clearButton.onClick.AddListener(() => {
             AudioManager.Instance.PlayPlasticClickSound(1);
@@ -85,7 +86,6 @@ public class RecordUI : MonoBehaviour {
         IEnumerator BackRoutine() {
             yield return null;
             rectT.anchoredPosition = offScreenPos;
-            gameObject.SetActive(false);
         }
     }
 
@@ -108,8 +108,6 @@ public class RecordUI : MonoBehaviour {
         otherMemberNameText.text = "Playing along with " + sessionData.otherName + "'s track.";
         bandPickUI.ShowSessionData(sessionData);
         bandPickUI.LoadParts();
-
-        gameObject.SetActive(true);
 
         StartCoroutine(StartupRoutine());
 

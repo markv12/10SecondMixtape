@@ -739,6 +739,10 @@ PrefabInstance:
       propertyPath: menuManager
       value: 
       objectReference: {fileID: 77937040}
+    - target: {fileID: 8918423012553694343, guid: 31e4079fed27f472c9e5c1c8ed4641cf, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 1100
+      objectReference: {fileID: 0}
     - target: {fileID: 8918423012822690827, guid: 31e4079fed27f472c9e5c1c8ed4641cf, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -829,7 +833,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8918423012822690833, guid: 31e4079fed27f472c9e5c1c8ed4641cf, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 31e4079fed27f472c9e5c1c8ed4641cf, type: 3}
