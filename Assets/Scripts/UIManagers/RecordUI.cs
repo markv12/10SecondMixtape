@@ -73,19 +73,21 @@ public class RecordUI : MonoBehaviour {
     }
 
     private void Back() {
-        LoadingScreen.ShowTransition(BackRoutine());
+        if (songRecorder.IsRecording) {
+            LoadingScreen.ShowTransition(BackRoutine());
 
-        songRecorder.StopRecording();
-        metronomePlayer.StopSong();
-        otherPartPlayer.StopSong();
-        TurnOffYourPart();
-        songVisualizer.ClearLinesAndStop();
+            songRecorder.StopRecording();
+            metronomePlayer.StopSong();
+            otherPartPlayer.StopSong();
+            TurnOffYourPart();
+            songVisualizer.ClearLinesAndStop();
 
-        menuManager.Enable();
+            menuManager.Enable();
 
-        IEnumerator BackRoutine() {
-            yield return null;
-            rectT.anchoredPosition = offScreenPos;
+            IEnumerator BackRoutine() {
+                yield return null;
+                rectT.anchoredPosition = offScreenPos;
+            }
         }
     }
 
