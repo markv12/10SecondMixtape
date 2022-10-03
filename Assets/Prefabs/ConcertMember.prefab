@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 7743053865396138279}
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
   m_LocalPosition: {x: -0.42467, y: -0.214, z: 0.6500015}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.95, y: 0.95, z: 0.95}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7916720652649829596}
@@ -99,8 +99,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62ddf45bbc2d614489a3664a8df0cd29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainT: {fileID: 783769386663975539}
   mainSprite: {fileID: 1519848629658820891}
   dancer: {fileID: 5327737232438210777}
+  onScreenPos: {x: 0, y: 0, z: 0}
+  offScreenPos: {x: 0, y: 0, z: 0}
 --- !u!114 &5327737232438210777
 MonoBehaviour:
   m_ObjectHideFlags: 0

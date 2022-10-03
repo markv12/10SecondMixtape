@@ -24,15 +24,14 @@ public class ConcertPlayer : MonoBehaviour {
 
     public void PlaySong(Song song) {
         SetupConcertMembers(song);
+        AnimateConcertMembers(true);
         songPlayer.PlaySong(song, 2, true);
         AudioManager.Instance.PlayApplauseSound(0.25f);
     }
 
     public void StopSong() {
         songPlayer.StopSong();
-        for (int i = 0; i < concertMembers.Length; i++) {
-            concertMembers[i].gameObject.SetActive(false);
-        }
+        AnimateConcertMembers(false);
     }
 
     private void SetupConcertMembers(Song song) {
@@ -41,12 +40,19 @@ public class ConcertPlayer : MonoBehaviour {
             ConcertMember member = concertMembers[i];
             if (i < song.parts.Length) {
                 InstrumentTrack part = song.parts[i];
+                member.SetOnScreen(false, false);
                 member.mainSprite.sprite = bmml.GetBandMemberForId(part.instrument).mainSprite;
                 member.gameObject.SetActive(true);
                 member.dancer.SetParticleColor(bmml.GetBandMemberForId(part.instrument).noteColor);
             } else {
                 member.gameObject.SetActive(false);
             }
+        }
+    }
+
+    private void AnimateConcertMembers(bool onScreen) {
+        for (int i = 0; i < concertMembers.Length; i++) {
+            concertMembers[i].SetOnScreen(onScreen, true);
         }
     }
 }

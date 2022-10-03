@@ -25,8 +25,11 @@ public class MusicNetworking : Singleton<MusicNetworking> {
         }
     }
 
+    private int currentRandomSongPage = 1;
     private void LoadMoreRandomSongs(Action<Song[]> onComplete) {
-        StartCoroutine(NetUtility.Get("songs/some/9", (string json) => {
+        int pageIndex = currentRandomSongPage;
+        currentRandomSongPage++;
+        StartCoroutine(NetUtility.Get("songs/page/" + pageIndex, (string json) => {
             onComplete?.Invoke(Song.CreateListFromJson(json));
         }));
     }

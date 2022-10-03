@@ -48,7 +48,7 @@ public class MenuManager : MonoBehaviour{
         } else {
             nameText.text = PlayerName;
         }
-        playButton.onClick.AddListener(Play);
+        playButton.onClick.AddListener(StartGame);
         refreshNameButton.onClick.AddListener(RefreshName);
 
         upvoteButton.onClick.AddListener(Upvote);
@@ -76,7 +76,6 @@ public class MenuManager : MonoBehaviour{
             if (canStart) {
                 concertPlayer.PlaySong(song);
                 bandNameText.text = song.name;
-                finalBandNameText.text = song.name;
                 SetCanVote(true);
             }
         }
@@ -91,17 +90,20 @@ public class MenuManager : MonoBehaviour{
     public void GoToFinalConcert(Song yourSong) {
         SetFinalConcertMode(true);
         concertPlayer.PlaySong(yourSong);
+        finalBandNameText.text = yourSong.name;
         AudioManager.Instance.StartCrowdMurmur(1.0f);
         AudioManager.Instance.PlayApplauseSound(0.5f);
     }
 
     private void EndConcert() {
+        AudioManager.Instance.PlayApplauseSound(0.5f);
         LoadingScreen.ShowTransition(EndRoutine());
 
         IEnumerator EndRoutine() {
             yield return null;
             SetFinalConcertMode(false);
             concertPlayer.StopSong();
+            WaitThenLoadNewBand(3);
             canStart = true;
         }
     }
@@ -113,7 +115,7 @@ public class MenuManager : MonoBehaviour{
         mainCameraT.SetPositionAndRotation(cameraT.position, cameraT.rotation);
     }
 
-    private void Play() {
+    private void StartGame() {
         if (!canStart) return;
         canStart = false;
         LoadingScreen.ShowTransition(LoadBandMate());
@@ -160,6 +162,7 @@ public class MenuManager : MonoBehaviour{
         AudioManager.Instance.PlayBooSound(0.9f);
         MusicNetworking.Instance.DownvoteSong(currentSong);
         SetCanVote(false);
+        concertPlayer.StopSong();
         WaitThenLoadNewBand(5);
     }
 
