@@ -755,14 +755,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2018057929087447517, guid: f3492731507dfc441a93976244591390, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -468.36975
-      objectReference: {fileID: 0}
-    - target: {fileID: 2018057929087447517, guid: f3492731507dfc441a93976244591390, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 1.041687
-      objectReference: {fileID: 0}
     - target: {fileID: 8873338266673689799, guid: f3492731507dfc441a93976244591390, type: 3}
       propertyPath: mainCameraT
       value: 
@@ -826,10 +818,6 @@ PrefabInstance:
     - target: {fileID: 8873338266673689801, guid: f3492731507dfc441a93976244591390, type: 3}
       propertyPath: m_Name
       value: MenuManager
-      objectReference: {fileID: 0}
-    - target: {fileID: 8873338266673689801, guid: f3492731507dfc441a93976244591390, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8873338266691235721, guid: f3492731507dfc441a93976244591390, type: 3}
       propertyPath: m_Camera

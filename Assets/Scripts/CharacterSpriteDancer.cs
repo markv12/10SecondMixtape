@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CharacterSpriteDancer : MonoBehaviour
@@ -17,7 +16,7 @@ public class CharacterSpriteDancer : MonoBehaviour
     private float jamDirection;
     private float jamSpeed;
 
-    void Start()
+    void Awake()
     {
         jamDirection = Random.Range(-1.0f, 1.0f);
         jamSpeed = Random.Range(.2f, .6f);
@@ -40,8 +39,6 @@ public class CharacterSpriteDancer : MonoBehaviour
         transformParent.transform.rotation = transform.rotation;
         transformParent.transform.localScale = transform.localScale;
         transform.parent = transformParent.transform;
-
-        StartCoroutine(RockRoutine());
     }
 
     // method to bounce the sprite up and down

@@ -16,6 +16,7 @@ public class MenuManager : MonoBehaviour{
     public Transform mainCameraT;
     public Transform startMenuCameraT;
     public Transform yourBandCameraT;
+    public ConcertPlayer concertPlayer;
 
     public GameObject startMenuUI;
     public Button playButton;
@@ -58,6 +59,7 @@ public class MenuManager : MonoBehaviour{
     public void GoToYourBandMode(Song yourSong) {
         mainCameraT.SetPositionAndRotation(yourBandCameraT.position, yourBandCameraT.rotation);
         startMenuUI.SetActive(false);
+        concertPlayer.PlaySong(yourSong);
     }
 
     private void Play() {
