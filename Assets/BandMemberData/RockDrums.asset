@@ -18,8 +18,15 @@ MonoBehaviour:
   mainSprite: {fileID: 21300000, guid: 01ecaa74b2bfd43f5a038ab7ab68a9d1, type: 3}
   cassetteSprite: {fileID: 21300000, guid: b869c011596dc463cba191edb1e69c13, type: 3}
   cassetteTextWhite: 0
+  volume: 1
   instrumentType: 2
   notes:
-  - {fileID: 8300000, guid: 80b5f24bdbcda2047ac6d51de2540142, type: 3}
-  - {fileID: 8300000, guid: 47a953470c554454a8ef8caa98b491cb, type: 3}
-  - {fileID: 8300000, guid: fde4d68e5b9e6b94ea9477ce3b7cf701, type: 3}
+  - {fileID: 8300000, guid: 1a36223dc97bc4373a22ea50abdc5f70, type: 3}
+  - {fileID: 8300000, guid: 18097724ab81a41baaed798ecf1a3135, type: 3}
+  - {fileID: 8300000, guid: 37e01459c1d4c4d468d501a6fb69284c, type: 3}
+  - {fileID: 8300000, guid: 166e46572d43a4039952ed933a231b14, type: 3}
+  - {fileID: 8300000, guid: d4fa183dc0f78410b8c2f0508bdf7d13, type: 3}
+  - {fileID: 8300000, guid: ee16a3aff87344d0a8be9ae7232bdb61, type: 3}
+  - {fileID: 8300000, guid: 4a6627e8467734c82899302cde037b96, type: 3}
+  - {fileID: 8300000, guid: 7c10ed2ee2ffc4338a676f3b6b2185c5, type: 3}
+  - {fileID: 8300000, guid: 9c45a2e0d43c54fd381f06e8e3b54b3f, type: 3}

@@ -33,7 +33,7 @@ public class SongRecorder : MonoBehaviour {
         return result;
     }
 
-    public const double SMALLEST_NOTE_LENGTH = 0.25;
+    public const double SMALLEST_NOTE_LENGTH = 0.125;
     public const double NOTE_QUANTIZE_MULTIPLE = 1.0 / SMALLEST_NOTE_LENGTH;
     private void Update() {
         if (isRecording) {
