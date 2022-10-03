@@ -13,8 +13,8 @@ public class SongRecorder : MonoBehaviour {
     public InstrumentTrack currentTrack;
     private BandMember currentBandMember;
     private float startTime;
-    private Action<Note, int> onNoteAdded;
-    public void StartRecording(BandMember bandMember, double startOffset, Action<Note, int> _onNoteAdded) {
+    private Action<Note, int, Color> onNoteAdded;
+    public void StartRecording(BandMember bandMember, double startOffset, Action<Note, int, Color> _onNoteAdded) {
         startTime = Time.time + (float)startOffset;
         currentBandMember = bandMember;
         currentTrack = new InstrumentTrack() {
@@ -59,7 +59,7 @@ public class SongRecorder : MonoBehaviour {
                         if(key.currentNote.start > key.currentNote.end) {
                             key.currentNote.end = 16;
                         }
-                        onNoteAdded?.Invoke(key.currentNote, key.noteIndex);
+                        onNoteAdded?.Invoke(key.currentNote, key.noteIndex, currentBandMember.color);
                         key.currentNote = null;
                     }
                 }
