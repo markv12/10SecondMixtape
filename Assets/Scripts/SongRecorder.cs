@@ -146,6 +146,14 @@ public class SongRecorder : MonoBehaviour {
         },
     };
 
+    public void DeleteNote(Note note) {
+        if (currentTrack != null) {
+            for (int i = 0; i < currentTrack.notes.Count; i++) {
+                currentTrack.notes[i].Remove(note);
+            }
+        }
+    }
+
     private const string KEY_LETTERS = "ASDFGHJKL;'";
     public static string KeyStringForLine(int lineIndex) {
         return KEY_LETTERS[lineIndex].ToString();

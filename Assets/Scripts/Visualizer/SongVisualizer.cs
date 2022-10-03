@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -42,7 +43,7 @@ public class SongVisualizer : MonoBehaviour {
 
     private List<NoteLine> noteLines;
     private readonly List<NoteSquare> noteSquares = new List<NoteSquare>();
-    private void AddNoteSquare(Note note, float songLength, float rectWidth, Color color, NoteLine newLine) {
+    private void AddNoteSquare(Note note, float songLength, float rectWidth, Color color, NoteLine newLine, Action deleteAction) {
         NoteSquare newSquare = Instantiate(noteSquarePrefab, newLine.rectT);
 
         double end = note.end == 0 ? note.start + SongRecorder.SMALLEST_NOTE_LENGTH : note.end;
@@ -51,11 +52,15 @@ public class SongVisualizer : MonoBehaviour {
         newSquare.rectT.anchoredPosition = new Vector2(startX, 0);
         newSquare.rectT.sizeDelta = new Vector2(width, newLine.rectT.sizeDelta.y);
         newSquare.mainImage.color = color;
+        newSquare.deleteAction = () => {
+            noteSquares.Remove(newSquare);
+            deleteAction?.Invoke();
+        };
         noteSquares.Add(newSquare);
     }
 
-    private void AddNoteSquare(Note note, int lineIndex, Color color, float songLength) {
-        AddNoteSquare(note, songLength, visualizerRect.sizeDelta.x, color, noteLines[lineIndex]);
+    public void AddNoteSquare(Note note, int lineIndex, Color color, Action deleteAction) {
+        AddNoteSquare(note, 10f, visualizerRect.sizeDelta.x, color, noteLines[lineIndex], deleteAction);
     }
 
     public void ShowInstrument(BandMember bandMember, double startWait, float songLength) {
@@ -123,9 +128,5 @@ public class SongVisualizer : MonoBehaviour {
             }
         }
         return result;
-    }
-
-    public void AddNote(Note note, int noteIndex, Color color) {
-        AddNoteSquare(note, noteIndex, color, 10);
     }
 }
