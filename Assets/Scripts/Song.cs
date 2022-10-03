@@ -8,6 +8,7 @@ public class Song {
     public string id;
     public InstrumentTrack[] parts;
     public float length = 10;
+    public string scaleType = "Major";
     public static Song CreateFromJson(string json) {
         return JsonConvert.DeserializeObject<Song>(json);
     }
@@ -109,6 +110,7 @@ public class InstrumentTrack {
     public string id;
     public string instrument;
     public List<List<Note>> notes;
+    public string scaleType = "Major";
 
     public static InstrumentTrack[] CreateListFromJson(string json) {
         return JsonConvert.DeserializeObject<InstrumentTrack[]>(json);
