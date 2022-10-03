@@ -59,7 +59,7 @@ router.get('/some/:count', async (req, res) => {
 })
 
 router.get('/page/:page', async (req, res) => {
-  const perPage = 100
+  const perPage = 9
   const page = Math.max(
     0,
     parseInt(req.params.page || '1') - 1,

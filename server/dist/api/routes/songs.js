@@ -62,7 +62,7 @@ router.get('/some/:count', async (req, res) => {
     c.log(`Sent ${allSongs.length} general song/s`);
 });
 router.get('/page/:page', async (req, res) => {
-    const perPage = 100;
+    const perPage = 9;
     const page = Math.max(0, parseInt(req.params.page || '1') - 1);
     let randomSongs = [], bestSongs = [], recentSongs = [];
     randomSongs = await db_1.db.songs.getRandom(Math.ceil(perPage / 3));
