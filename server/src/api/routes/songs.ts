@@ -83,6 +83,11 @@ router.get('/page/:page', async (req, res) => {
     ...bestSongs,
     ...recentSongs,
   ]
+  allSongs.forEach((s) => {
+    if (s.name === 'Resentful Settlement') {
+      c.log(JSON.stringify(s))
+    }
+  })
   // remove just one of duplicate ids
   allSongs = allSongs.filter(
     (song, i) =>
@@ -112,7 +117,6 @@ router.post('/new', async (req, res) => {
   }
 
   c.log('gray', 'Uploading new song', song.name)
-  c.log(JSON.stringify(song))
   await db.songs.add(song)
   res.status(200).send(song.id)
 })
