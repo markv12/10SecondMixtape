@@ -28,6 +28,10 @@ public class ConcertPlayer : MonoBehaviour {
         AudioManager.Instance.PlayApplauseSound(0.25f);
     }
 
+    public void StopSong() {
+        songPlayer.StopSong();
+    }
+
     private void SetupConcertMembers(Song song) {
         BandMemberMasterList bmml = BandMemberMasterList.Instance;
         for (int i = 0; i < concertMembers.Length; i++) {

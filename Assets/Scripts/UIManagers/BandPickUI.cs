@@ -75,7 +75,7 @@ public class BandPickUI : MonoBehaviour {
             MusicNetworking.Instance.UploadTrack(yourSong.parts[0]);
             yield return null;
             gameObject.SetActive(false);
-            menuManager.GoToYourBandMode(yourSong);
+            menuManager.GoToFinalConcert(yourSong);
         }
     }
 

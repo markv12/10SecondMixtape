@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
 public class MenuManager : MonoBehaviour{
     private const string PLAYER_NAME_KEY = "player_name";
@@ -18,6 +19,7 @@ public class MenuManager : MonoBehaviour{
     public Transform yourBandCameraT;
     public ConcertPlayer concertPlayer;
 
+    [Header("Start Menu Fields")]
     public GameObject startMenuUI;
     public Button playButton;
     public BandmatePreviewUI bandmatePreviewUI;
@@ -30,6 +32,11 @@ public class MenuManager : MonoBehaviour{
     private bool canVote = false;
 
     private bool canStart = true;
+
+    [Header("Final Concert Fields")]
+    public GameObject finalConcertCanvas;
+    public Button endConcertButton;
+
 
     private void Awake() {
         Enable();
@@ -49,6 +56,8 @@ public class MenuManager : MonoBehaviour{
             upvoteButton.gameObject.SetActive(false);
             downvoteButton.gameObject.SetActive(false);
         }
+
+        endConcertButton.onClick.AddListener(EndConcert);
     }
 
     public void Enable() {
@@ -57,13 +66,29 @@ public class MenuManager : MonoBehaviour{
         canStart = true;
     }
 
-    public void GoToYourBandMode(Song yourSong) {
-        mainCameraT.SetPositionAndRotation(yourBandCameraT.position, yourBandCameraT.rotation);
-        startMenuUI.SetActive(false);
+    public void GoToFinalConcert(Song yourSong) {
+        SetFinalConcertMode(true);
         concertPlayer.PlaySong(yourSong);
         AudioManager.Instance.StartCrowdMurmur(1.0f);
         AudioManager.Instance.PlayApplauseSound(0.5f);
+    }
 
+    private void EndConcert() {
+        LoadingScreen.ShowTransition(EndRoutine());
+
+        IEnumerator EndRoutine() {
+            yield return null;
+            SetFinalConcertMode(false);
+            concertPlayer.StopSong();
+            canStart = true;
+        }
+    }
+
+    private void SetFinalConcertMode(bool finalConcertMode) {
+        startMenuUI.SetActive(!finalConcertMode);
+        finalConcertCanvas.SetActive(finalConcertMode);
+        Transform cameraT = finalConcertMode ? yourBandCameraT : startMenuCameraT;
+        mainCameraT.SetPositionAndRotation(cameraT.position, cameraT.rotation);
     }
 
     private void Play() {
