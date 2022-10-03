@@ -21,13 +21,15 @@ public class LoadingScreen : MonoBehaviour {
     }
 
     private Coroutine showRoutine = null;
-    private const float FADE_TIME = 0.5f;
+    private const float FADE_TIME = 0.6f;
     private IEnumerator CO_Show(IEnumerator onHitOpaque) {
         yield return this.CreateAnimationRoutine(FADE_TIME, (float progress) => {
             mainGroup.alpha = progress;
         });
         yield return null;
+        yield return null;
         yield return StartCoroutine(onHitOpaque);
+        yield return null;
         yield return null;
         yield return this.CreateAnimationRoutine(FADE_TIME, (float progress) => {
             mainGroup.alpha = 1 - progress;

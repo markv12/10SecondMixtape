@@ -24,7 +24,7 @@ public class ConcertPlayer : MonoBehaviour {
 
     public void PlaySong(Song song) {
         SetupConcertMembers(song);
-        songPlayer.PlaySong(song, 0.5, true);
+        songPlayer.PlaySong(song, 2, true);
         AudioManager.Instance.PlayApplauseSound(0.25f);
     }
 
