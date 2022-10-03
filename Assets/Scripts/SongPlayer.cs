@@ -47,7 +47,7 @@ public class SongPlayer : MonoBehaviour {
 
     private readonly List<QueuedNote> noteQueue = new List<QueuedNote>();
     private void Update() {
-        if(loop && (Time.time - startOffset) > (currentSong.length - 0.5f)) {
+        if(loop && (Time.time - startOffset) > (currentSong.length - 0.25f)) {
             dspStartOffset += currentSong.length;
             startOffset += currentSong.length;
             onLoop?.Invoke(dspStartOffset, startOffset);

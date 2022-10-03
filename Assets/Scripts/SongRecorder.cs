@@ -36,7 +36,7 @@ public class SongRecorder : MonoBehaviour {
     public const double SMALLEST_NOTE_LENGTH = 0.125;
     public const double NOTE_QUANTIZE_MULTIPLE = 1.0 / SMALLEST_NOTE_LENGTH;
     private void Update() {
-        if (isRecording) {
+        if (isRecording && Time.time > startTime) {
             for (int i = 0; i < pitchedKeyboard.Length; i++) {
                 InstrumentKey key = pitchedKeyboard[i];
                 if (InputUtility.GetKeyDown(key.key) && currentBandMember.HasNoteIndex(key.noteIndex)) {
