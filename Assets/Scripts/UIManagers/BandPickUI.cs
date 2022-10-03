@@ -58,12 +58,19 @@ public class BandPickUI : MonoBehaviour {
     }
 
     private void Done() {
-        for (int i = 0; i < selectedTracks.Count; i++) {
-            yourSong.AddPart(selectedTracks[i]);
-        }
         LoadingScreen.ShowTransition(DoneRoutine());
 
         IEnumerator DoneRoutine() {
+            yield return null;
+            for (int i = 0; i < selectedTracks.Count; i++) {
+                InstrumentTrack track = selectedTracks[i];
+                MusicNetworking.Instance.MarkPartAsChosen(track);
+                yourSong.AddPart(track);
+                yield return null;
+            }
+            MusicNetworking.Instance.UploadSong(yourSong);
+            yield return null;
+            MusicNetworking.Instance.UploadTrack(yourSong.parts[0]);
             yield return null;
             gameObject.SetActive(false);
             menuManager.GoToYourBandMode(yourSong);
