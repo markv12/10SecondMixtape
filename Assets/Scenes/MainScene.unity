@@ -654,6 +654,64 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1946675694478502662, guid: f3492731507dfc441a93976244591390, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -95.97
+      objectReference: {fileID: 0}
+    - target: {fileID: 2388140923519079057, guid: f3492731507dfc441a93976244591390, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 4566745946622931688, guid: f3492731507dfc441a93976244591390, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6089624450393648885, guid: f3492731507dfc441a93976244591390, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -42.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7103952420249705783, guid: f3492731507dfc441a93976244591390, type: 3}
+      propertyPath: m_text
+      value: 'They''ll play more/less
+
+        often for everyone.'
+      objectReference: {fileID: 0}
+    - target: {fileID: 7103952420249705783, guid: f3492731507dfc441a93976244591390, type: 3}
+      propertyPath: m_lineSpacing
+      value: -10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7103952420249705783, guid: f3492731507dfc441a93976244591390, type: 3}
+      propertyPath: m_VerticalAlignment
+      value: 256
+      objectReference: {fileID: 0}
+    - target: {fileID: 7103952420249705783, guid: f3492731507dfc441a93976244591390, type: 3}
+      propertyPath: m_HorizontalAlignment
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7713154171628131365, guid: f3492731507dfc441a93976244591390, type: 3}
+      propertyPath: m_text
+      value: Feedback Submitted!
+      objectReference: {fileID: 0}
+    - target: {fileID: 8518587699888397796, guid: f3492731507dfc441a93976244591390, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 102.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8704718895212596752, guid: f3492731507dfc441a93976244591390, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8704718895212596752, guid: f3492731507dfc441a93976244591390, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8704718895212596752, guid: f3492731507dfc441a93976244591390, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8704718895212596752, guid: f3492731507dfc441a93976244591390, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 302.12
+      objectReference: {fileID: 0}
     - target: {fileID: 8873338266673689799, guid: f3492731507dfc441a93976244591390, type: 3}
       propertyPath: mainCameraT
       value: 
