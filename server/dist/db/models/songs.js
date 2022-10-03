@@ -60,6 +60,7 @@ function songDataToFrontendData(song) {
         created: song.created,
     };
 }
+const perPage = 30;
 async function get(id) {
     const dbObject = (await Song.find({ id }).limit(1))[0];
     return dbObject ? songDataToFrontendData(dbObject) : null;
@@ -83,24 +84,28 @@ async function getRandom(limit = 1) {
     });
 }
 exports.getRandom = getRandom;
-async function getBest(limit = 1) {
+async function getBest(limit = 1, startFrom) {
     // get highest recencyRatio
     const filters = {};
     const options = {
         sort: { recencyRatio: -1 },
         limit,
     };
+    if (startFrom)
+        options.skip = startFrom;
     const results = await Song.find(filters, {}, options);
     return (results || []).map(songDataToFrontendData);
 }
 exports.getBest = getBest;
-async function getRecent(limit = 1) {
+async function getRecent(limit = 1, startFrom) {
     // get highest created
     const filters = {};
     const options = {
         sort: { created: -1 },
         limit,
     };
+    if (startFrom)
+        options.skip = startFrom;
     const results = await Song.find(filters, {}, options);
     return (results || []).map(songDataToFrontendData);
 }
