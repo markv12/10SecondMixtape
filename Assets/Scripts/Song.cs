@@ -22,6 +22,16 @@ public class Song {
         };
     }
 
+    public void AddPart(InstrumentTrack part) {
+        InstrumentTrack[] existingParts = parts;
+        int existingLength = existingParts == null ? 0 : existingParts.Length;
+        parts = new InstrumentTrack[existingLength + 1];
+        for (int i = 0; i < existingLength; i++) {
+            parts[i] = existingParts[i];
+        }
+        parts[parts.Length - 1] = part;
+    }
+
     public static readonly Song METRONOME_SONG = new Song() {
         length = 10f,
         parts = new InstrumentTrack[] {
