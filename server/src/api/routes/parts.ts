@@ -27,7 +27,6 @@ router.get(
         (a, b) => (b.ratio ?? -10000) - (a.ratio ?? -10000),
       )[0]
       res.send([best])
-      c.log([best])
       c.log(
         `Sent ${
           [best].length
