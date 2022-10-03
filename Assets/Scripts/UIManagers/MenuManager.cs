@@ -57,26 +57,18 @@ public class MenuManager : MonoBehaviour{
             feedbackUI.anchoredPosition = FEEDBACK_OFFSCREEN_POS;
         }
 
-        StartPlayingSongs();
+        WaitThenLoadNewBand(3);
 
         endConcertButton.onClick.AddListener(EndConcert);
     }
 
-    private void StartPlayingSongs() {
-        StartCoroutine(PlayRoutine());
-
-        IEnumerator PlayRoutine() {
-            yield return new WaitForSeconds(1f);
-            MusicNetworking.Instance.GetRandomSong((Song song) => {
-                WaitThenPlaySong(song);
-            });
-        }
-    }
-
-    private void WaitThenPlaySong(Song song) {
+    private Song currentSong;
+    private void PlaySongAfterFrames(Song song) {
+        currentSong = song;
         StartCoroutine(WaitRoutine());
 
         IEnumerator WaitRoutine() {
+            yield return null;
             yield return null;
             yield return null;
             yield return null;
@@ -156,19 +148,32 @@ public class MenuManager : MonoBehaviour{
     private void Upvote() {
         if (!canVote) return;
         AudioManager.Instance.PlayApplauseSound(0.4f);
-        // MusicNetworking.Instance.UpvoteSong(song);
+        MusicNetworking.Instance.UpvoteSong(currentSong);
         SetCanVote(false);
+        WaitThenLoadNewBand(5);
     }
 
     private void Downvote() {
         if (!canVote) return;
         AudioManager.Instance.PlayBooSound(0.9f);
-        // MusicNetworking.Instance.DownvoteSong(song);
+        MusicNetworking.Instance.DownvoteSong(currentSong);
         SetCanVote(false);
+        WaitThenLoadNewBand(5);
     }
 
-    private static readonly Vector2 FEEDBACK_OFFSCREEN_POS = new Vector2(300, -690);
-    private static readonly Vector2 FEEDBACK_ONSCREEN_POS = new Vector2(300, -415);
+    private void WaitThenLoadNewBand(float waitTime) {
+        StartCoroutine(WaitRoutine());
+
+        IEnumerator WaitRoutine() {
+            yield return new WaitForSeconds(waitTime);
+            MusicNetworking.Instance.GetRandomSong((Song song) => {
+                PlaySongAfterFrames(song);
+            });
+        }
+    }
+
+    private static readonly Vector2 FEEDBACK_OFFSCREEN_POS = new Vector2(160, -690);
+    private static readonly Vector2 FEEDBACK_ONSCREEN_POS = new Vector2(160, -415);
     private IEnumerator HideVoteButtons() {
         yield return this.CreateAnimationRoutine(.6f, (float progress) => {
             upvoteButton.gameObject.transform.localScale = Vector3.Lerp(

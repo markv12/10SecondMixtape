@@ -68,11 +68,11 @@ public class MusicNetworking : Singleton<MusicNetworking> {
     }
 
     public void UpvoteSong(Song song) {
-        StartCoroutine(NetUtility.Get("songs/upvote/" + song.id , (string json) => { }));
+        StartCoroutine(NetUtility.Get("songs/like/" + song.id , (string json) => { }));
     }
 
     public void DownvoteSong(Song song) {
-        StartCoroutine(NetUtility.Get("songs/downvote/" + song.id , (string json) => { }));
+        StartCoroutine(NetUtility.Get("songs/dislike/" + song.id , (string json) => { }));
     }
 
     public void MarkPartAsChosen(InstrumentTrack part) {
