@@ -10,7 +10,9 @@ public class ConcertPlayer : MonoBehaviour {
     }
 
     private void WaitThenBounce(int partIndex, double startTime) {
-        StartCoroutine(WaitRoutine());
+        if(partIndex < concertMembers.Length) {
+            StartCoroutine(WaitRoutine());
+        }
 
         IEnumerator WaitRoutine() {
             while(Time.time < startTime) {
