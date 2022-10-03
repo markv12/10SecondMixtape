@@ -25,6 +25,7 @@ public class MenuManager : MonoBehaviour{
     public BandmatePreviewUI bandmatePreviewUI;
     public Button refreshNameButton;
     public TMP_Text nameText;
+    public TMP_Text bandNameText;
 
     public Button upvoteButton;
     public Button downvoteButton;
@@ -59,6 +60,8 @@ public class MenuManager : MonoBehaviour{
 
         MusicNetworking.Instance.GetRandomSong((Song song) => {
             concertPlayer.PlaySong(song);
+            bandNameText.text = song.name;
+            SetCanVote(true);
         });
 
         endConcertButton.onClick.AddListener(EndConcert);
@@ -178,7 +181,6 @@ public class MenuManager : MonoBehaviour{
     }
 
     private IEnumerator ShowVoteButtons() {
-
         upvoteButton.gameObject.SetActive(true);
         downvoteButton.gameObject.SetActive(true);
          yield return this.CreateAnimationRoutine(.6f, (float progress) => {
