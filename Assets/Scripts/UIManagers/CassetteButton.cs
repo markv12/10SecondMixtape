@@ -5,13 +5,34 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class CassetteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler {
+    public Button mainButton;
     public Image cassetteImage;
     public TMP_Text nameText;
     public TMP_Text instrumentText;
     private InstrumentTrack part;
-    public GameObject selectedImage;
     public Action<InstrumentTrack> playPart;
     public Action stopPart;
+    public Action<InstrumentTrack, bool> setPartSelected;
+
+    public GameObject selectedImage;
+    private bool selected = false;
+    private bool Selected {
+        get {
+            return selected;
+        }
+        set {
+            selected = value;
+            selectedImage.SetActive(selected);
+            setPartSelected?.Invoke(part, selected);
+        }
+    }
+
+    private void Awake() {
+        mainButton.onClick.AddListener(() => {
+            AudioManager.Instance.PlayPlasticClickSound(1f);
+            Selected = !Selected;
+        });
+    }
 
     public void ShowTrack(InstrumentTrack instrumentTrack) {
         part = instrumentTrack;
