@@ -8,6 +8,7 @@ public class PitchShiftBandMember : BandMember {
         int notePower = SongRecorder.ScaleDegreesToUse[noteIndex] + 1;
         return new InstrumentNote() {
             clip = note,
+            volume = volume,
             pitch = Mathf.Pow(1.059463f, notePower)
         };
     }

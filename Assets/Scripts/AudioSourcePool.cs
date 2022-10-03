@@ -15,8 +15,8 @@ public class AudioSourcePool : MonoBehaviour {
             result = CreateAudioSource();
         }
         result.clip = note.clip;
+        result.volume = note.volume;
         result.pitch = note.pitch;
-        result.volume = 1;
         return result;
     }
 

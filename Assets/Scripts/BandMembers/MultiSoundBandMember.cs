@@ -10,6 +10,7 @@ public class MultiSoundBandMember : BandMember {
         }
         return new InstrumentNote() {
             clip = notes[noteIndex],
+            volume = volume,
             pitch = 1
         };
     }

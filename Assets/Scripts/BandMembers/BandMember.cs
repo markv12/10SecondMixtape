@@ -7,6 +7,8 @@ public abstract class BandMember : ScriptableObject {
     public Sprite mainSprite;
     public Sprite cassetteSprite;
     public bool cassetteTextWhite;
+    [Range(0f, 1f)]
+    public float volume = 1;
     public abstract InstrumentNote GetInstrumentNote(int noteIndex);
     public abstract int NoteCount { get; }
     public abstract bool IsPitched { get; }
