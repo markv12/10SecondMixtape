@@ -20,11 +20,11 @@ MonoBehaviour:
   cassetteTextWhite: 1
   instrumentType: 2
   notes:
-  - {fileID: 8300000, guid: dfccaf4d959d64487ba285cc4023ad3f, type: 3}
-  - {fileID: 8300000, guid: 3d14451e102574a1685f9d6c4d90cbed, type: 3}
+  - {fileID: 8300000, guid: e140602c960bf47b185aafa21e450ed8, type: 3}
   - {fileID: 8300000, guid: 53961d5fc52174cb88ed20fcc1ea9b1f, type: 3}
-  - {fileID: 8300000, guid: 53961d5fc52174cb88ed20fcc1ea9b1f, type: 3}
-  - {fileID: 8300000, guid: 4596cca6c0b084cfa9c93ed2d7854ca6, type: 3}
   - {fileID: 8300000, guid: e0b3e98aa360b491d81cf72dce03d862, type: 3}
+  - {fileID: 8300000, guid: 3d14451e102574a1685f9d6c4d90cbed, type: 3}
+  - {fileID: 8300000, guid: dfccaf4d959d64487ba285cc4023ad3f, type: 3}
+  - {fileID: 8300000, guid: 4596cca6c0b084cfa9c93ed2d7854ca6, type: 3}
   - {fileID: 8300000, guid: 82facb3560f9247b6be81f4dae4c60a1, type: 3}
   - {fileID: 8300000, guid: d54a3d2c6353441adb7dc9c5fa5950b2, type: 3}
