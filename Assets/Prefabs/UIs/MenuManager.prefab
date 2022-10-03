@@ -709,7 +709,7 @@ GameObject:
   - component: {fileID: 5913903389311009168}
   - component: {fileID: 7103952420249705783}
   m_Layer: 5
-  m_Name: FeedbackLabel (1)
+  m_Name: FeedbackSubtitleText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -732,7 +732,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -37}
+  m_AnchoredPosition: {x: 0, y: -42.6}
   m_SizeDelta: {x: 523.1741, y: 45.6396}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5913903389311009168
@@ -763,7 +763,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: (These are other players' real bands.)
+  m_text: 'They''ll play more/less
+
+    often for everyone.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0d51d8d2ce76542c2a15deb2aec5ac9d, type: 2}
   m_sharedMaterial: {fileID: -8896783588259706405, guid: 0d51d8d2ce76542c2a15deb2aec5ac9d, type: 2}
@@ -798,11 +800,11 @@ MonoBehaviour:
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 2
-  m_VerticalAlignment: 512
+  m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: 0
+  m_lineSpacing: -10
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
@@ -1381,7 +1383,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 140, y: 12}
+  m_AnchoredPosition: {x: 102.2, y: 12}
   m_SizeDelta: {x: 200, y: 178}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4282231864683384490
@@ -1846,7 +1848,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8704718895212596752
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1865,7 +1867,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 2.999939, y: 273}
+  m_AnchoredPosition: {x: 0, y: 302.12}
   m_SizeDelta: {x: 523.1741, y: 45.6396}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1090846176806729903
@@ -1896,7 +1898,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Feedback Recorded.
+  m_text: Feedback Submitted!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0d51d8d2ce76542c2a15deb2aec5ac9d, type: 2}
   m_sharedMaterial: {fileID: -8896783588259706405, guid: 0d51d8d2ce76542c2a15deb2aec5ac9d, type: 2}
@@ -2444,7 +2446,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -105.99997, y: 12}
+  m_AnchoredPosition: {x: -95.97, y: 12}
   m_SizeDelta: {x: 200, y: 178}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3588567825501382541
@@ -3364,7 +3366,8 @@ MonoBehaviour:
   downvoteButton: {fileID: 8830746623590905377}
   nextBandButton: {fileID: 7850481784192777128}
   nextBandButtonT: {fileID: 6823101526978455807}
-  feedbackText: {fileID: 4566745946622931688}
+  feedbackTextT: {fileID: 8704718895212596752}
+  feedbackSubtitleText: {fileID: 7103952420249705783}
   finalConcertCanvas: {fileID: 1855562304894245320}
   endConcertButton: {fileID: 6195154108740574150}
 --- !u!1 &8873338266691235725
