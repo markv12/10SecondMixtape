@@ -41,7 +41,6 @@ public class MenuManager : MonoBehaviour{
     public Button endConcertButton;
 
     private void Awake() {
-        Enable();
 
         if (string.IsNullOrWhiteSpace(PlayerName)) {
             RefreshName();
@@ -58,7 +57,7 @@ public class MenuManager : MonoBehaviour{
             feedbackUI.anchoredPosition = FEEDBACK_OFFSCREEN_POS;
         }
 
-        WaitThenLoadNewBand(3);
+        Enable();
 
         endConcertButton.onClick.AddListener(EndConcert);
     }
@@ -84,6 +83,7 @@ public class MenuManager : MonoBehaviour{
     public void Enable() {
         AudioManager.Instance.StopCrowdMurmur();
         AudioManager.Instance.StartCrowdMurmur(1.0f);
+        WaitThenLoadNewBand(3);
         canStart = true;
     }
 

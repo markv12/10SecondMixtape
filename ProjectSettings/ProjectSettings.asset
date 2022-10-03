@@ -583,6 +583,7 @@ PlayerSettings:
   il2cppCompilerConfiguration: {}
   managedStrippingLevel:
     Standalone: 3
+    WebGL: 3
   incrementalIl2cppBuild: {}
   suppressCommonWarnings: 1
   allowUnsafeCode: 0
