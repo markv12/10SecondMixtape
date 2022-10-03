@@ -27,6 +27,7 @@ public class MenuManager : MonoBehaviour{
     public TMP_Text nameText;
     public TMP_Text bandNameText;
 
+    public RectTransform feedbackUI;
     public Button upvoteButton;
     public Button downvoteButton;
     public GameObject feedbackText;
@@ -37,7 +38,6 @@ public class MenuManager : MonoBehaviour{
     [Header("Final Concert Fields")]
     public GameObject finalConcertCanvas;
     public Button endConcertButton;
-
 
     private void Awake() {
         Enable();
@@ -54,8 +54,7 @@ public class MenuManager : MonoBehaviour{
         downvoteButton.onClick.AddListener(Downvote);
 
         if (!canVote) {
-            upvoteButton.gameObject.SetActive(false);
-            downvoteButton.gameObject.SetActive(false);
+            feedbackUI.anchoredPosition = FEEDBACK_OFFSCREEN_POS;
         }
 
         StartPlayingSongs();
@@ -166,6 +165,8 @@ public class MenuManager : MonoBehaviour{
         SetCanVote(false);
     }
 
+    private static readonly Vector2 FEEDBACK_OFFSCREEN_POS = new Vector2(373, -690);
+    private static readonly Vector2 FEEDBACK_ONSCREEN_POS = new Vector2(373, -415);
     private IEnumerator HideVoteButtons() {
         yield return this.CreateAnimationRoutine(.6f, (float progress) => {
             upvoteButton.gameObject.transform.localScale = Vector3.Lerp(
@@ -179,8 +180,7 @@ public class MenuManager : MonoBehaviour{
                 Easing.easeInQuad(0, 1, progress)
             );
         });
-        upvoteButton.gameObject.SetActive(false);
-        downvoteButton.gameObject.SetActive(false);
+        feedbackUI.anchoredPosition = FEEDBACK_OFFSCREEN_POS;
 
         feedbackText.SetActive(true);
         yield return this.CreateAnimationRoutine(.6f, (float progress) => {
@@ -202,8 +202,7 @@ public class MenuManager : MonoBehaviour{
     }
 
     private IEnumerator ShowVoteButtons() {
-        upvoteButton.gameObject.SetActive(true);
-        downvoteButton.gameObject.SetActive(true);
+        feedbackUI.anchoredPosition = FEEDBACK_ONSCREEN_POS;
          yield return this.CreateAnimationRoutine(.6f, (float progress) => {
             upvoteButton.gameObject.transform.localScale = Vector3.Lerp(
                 new Vector3(0, 0, 0),

@@ -55,6 +55,5 @@ public class CharacterSpriteDancer : MonoBehaviour
                 Easing.easeInOutSine(0, 1, progress)
             );
         });
-
     }
 }
