@@ -1,13 +1,16 @@
+using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class CassetteButton : MonoBehaviour {
+public class CassetteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler {
     public Image cassetteImage;
     public TMP_Text nameText;
     public TMP_Text instrumentText;
     private InstrumentTrack part;
     public GameObject selectedImage;
+    public Action<InstrumentTrack> playPart;
 
     public void ShowTrack(InstrumentTrack instrumentTrack) {
         part = instrumentTrack;
@@ -19,5 +22,15 @@ public class CassetteButton : MonoBehaviour {
 
         nameText.color = bandMember.cassetteTextWhite ? Color.white : Color.black;
         instrumentText.color = bandMember.cassetteTextWhite ? Color.white : Color.black;
+    }
+
+    public void OnPointerEnter(PointerEventData eventData) {
+        if(part != null) {
+            playPart?.Invoke(part);
+        }
+    }
+
+    public void OnPointerExit(PointerEventData eventData) {
+
     }
 }

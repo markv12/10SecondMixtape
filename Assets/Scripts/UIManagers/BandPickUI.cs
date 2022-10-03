@@ -1,6 +1,4 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,10 +9,18 @@ public class BandPickUI : MonoBehaviour {
     public BandMemberCard otherMemberCard;
     public TMP_Text bandNameLabel;
     public CassetteButton[] cassetteButtons;
+    public SongPlayer songPlayer;
 
     private void Awake() {
         cancelButton.onClick.AddListener(Cancel);
         StartCoroutine(SoundSchedule());
+
+        for (int i = 0; i < cassetteButtons.Length; i++) {
+            cassetteButtons[i].playPart = (InstrumentTrack part) => {
+                songPlayer.StopSong();
+                songPlayer.PlayPart(part, 0.5, true);
+            };
+        }
     }
     private IEnumerator SoundSchedule() {
         yield return new WaitForSeconds(0.5f);
