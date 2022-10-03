@@ -37,8 +37,9 @@ router.get('/some/:count?/:scaleType?', async (req, res) => {
         // looking for initial partner, but we don't want an AWFUL partner.
         const randomParts = await db_1.db.parts.getRandom(5, scaleType);
         const best = randomParts.sort((a, b) => (b.ratio ?? -10000) - (a.ratio ?? -10000))[0];
-        res.send(best);
-        c.log(`Sent best of 5 random parts for scale type ${scaleType}`);
+        res.send([best]);
+        c.log([best]);
+        c.log(`Sent ${[best].length} best part of 5 random parts for scale type ${scaleType}`);
         return;
     }
     let randomParts = [], bestParts = [];
