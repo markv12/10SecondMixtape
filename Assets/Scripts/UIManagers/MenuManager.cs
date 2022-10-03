@@ -153,20 +153,20 @@ public class MenuManager : MonoBehaviour{
 
     private void Upvote() {
         if (!canVote) return;
-        AudioManager.Instance.PlayApplauseSound(0.3f);
+        AudioManager.Instance.PlayApplauseSound(0.4f);
         // MusicNetworking.Instance.UpvoteSong(song);
         SetCanVote(false);
     }
 
     private void Downvote() {
         if (!canVote) return;
-        AudioManager.Instance.PlayBooSound(0.5f);
+        AudioManager.Instance.PlayBooSound(0.9f);
         // MusicNetworking.Instance.DownvoteSong(song);
         SetCanVote(false);
     }
 
-    private static readonly Vector2 FEEDBACK_OFFSCREEN_POS = new Vector2(373, -690);
-    private static readonly Vector2 FEEDBACK_ONSCREEN_POS = new Vector2(373, -415);
+    private static readonly Vector2 FEEDBACK_OFFSCREEN_POS = new Vector2(300, -690);
+    private static readonly Vector2 FEEDBACK_ONSCREEN_POS = new Vector2(300, -415);
     private IEnumerator HideVoteButtons() {
         yield return this.CreateAnimationRoutine(.6f, (float progress) => {
             upvoteButton.gameObject.transform.localScale = Vector3.Lerp(
