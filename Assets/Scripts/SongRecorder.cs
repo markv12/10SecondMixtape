@@ -59,7 +59,14 @@ public class SongRecorder : MonoBehaviour {
                         }
                         key.currentNote.end = end;
                         if(key.currentNote.start > key.currentNote.end) {
+                            double oldEnd = key.currentNote.end;
                             key.currentNote.end = 16;
+                            Note startNote = new Note() {
+                                start = 0,
+                                end = oldEnd
+                            };
+                            currentTrack.notes[key.noteIndex].Add(startNote);
+                            onNoteAdded?.Invoke(startNote, key.noteIndex, currentBandMember.noteColor);
                         }
                         onNoteAdded?.Invoke(key.currentNote, key.noteIndex, currentBandMember.noteColor);
                         key.currentNote = null;
