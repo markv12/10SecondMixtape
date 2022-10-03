@@ -52,6 +52,7 @@ public class MenuManager : MonoBehaviour{
     }
 
     public void Enable() {
+        AudioManager.Instance.StopCrowdMurmur();
         AudioManager.Instance.StartCrowdMurmur(1.0f);
         canStart = true;
     }
@@ -60,6 +61,9 @@ public class MenuManager : MonoBehaviour{
         mainCameraT.SetPositionAndRotation(yourBandCameraT.position, yourBandCameraT.rotation);
         startMenuUI.SetActive(false);
         concertPlayer.PlaySong(yourSong);
+        AudioManager.Instance.StartCrowdMurmur(1.0f);
+        AudioManager.Instance.PlayApplauseSound(0.5f);
+
     }
 
     private void Play() {
