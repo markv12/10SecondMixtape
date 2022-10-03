@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class BandPickUI : MonoBehaviour {
     public Button cancelButton;
+    public MenuManager menuManager;
+
     public BandMemberCard yourCard;
     public BandMemberCard otherMemberCard;
     public TMP_Text bandNameLabel;
@@ -31,10 +33,10 @@ public class BandPickUI : MonoBehaviour {
 
     private void Cancel() {
         LoadingScreen.ShowTransition(CancelRoutine());
+        menuManager.Enable();
 
         IEnumerator CancelRoutine() {
             yield return null;
-            AudioManager.Instance.StartCrowdMurmur(1);
             gameObject.SetActive(false);
         }
     }
