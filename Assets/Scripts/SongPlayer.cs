@@ -7,6 +7,7 @@ public class SongPlayer : MonoBehaviour {
 
     public AudioSourcePool audioSourcePool;
     public Action<double, float> onLoop;
+    public Action<int, double> onPlayNote;
     private bool loop = false;
 
     private Song currentSong;
@@ -67,6 +68,7 @@ public class SongPlayer : MonoBehaviour {
     private readonly List<AudioSource> activeSources = new List<AudioSource>();
     public const float FADE_TIME = 0.15f;
     private void PlayNote(QueuedNote note) {
+        onPlayNote?.Invoke(note.instrumentNote.partIndex, note.startTime);
         AudioSource audioSource = audioSourcePool.GetAudioSource(note.instrumentNote);
         activeSources.Add(audioSource);
         audioSource.PlayScheduled(note.dspStartTime);
@@ -98,10 +100,10 @@ public class SongPlayer : MonoBehaviour {
     public const double SECONDS_PER_BEAT = 0.625;
 
     private void QueueSongAtOffset(Song song, double dspStartOffset, float startOffset) {
-        BandMemberMasterList iml = BandMemberMasterList.Instance;
+        BandMemberMasterList bmml = BandMemberMasterList.Instance;
         for (int i = 0; i < song.parts.Length; i++) {
             InstrumentTrack mainTrack = song.parts[i];
-            BandMember bandMember = iml.GetBandMemberForId(mainTrack.instrument);
+            BandMember bandMember = bmml.GetBandMemberForId(mainTrack.instrument);
             for (int j = 0; j < mainTrack.notes.Count; j++) {
                 List<Note> noteList = mainTrack.notes[j];
                 for (int k = 0; k < noteList.Count; k++) {
@@ -112,6 +114,7 @@ public class SongPlayer : MonoBehaviour {
                     }
                     double endTime = note.end * SECONDS_PER_BEAT;
                     InstrumentNote instrumentNote = bandMember.GetInstrumentNote(j);
+                    instrumentNote.partIndex = i;
                     QueueNote(dspStartOffset, startOffset, startTime, endTime, instrumentNote);
                 }
             }

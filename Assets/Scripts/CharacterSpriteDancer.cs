@@ -5,7 +5,7 @@ public class CharacterSpriteDancer : MonoBehaviour
 {
     // get the sprite renderer
     private SpriteRenderer spriteRenderer;
-    private new ParticleSystem particleSystem;
+    public ParticleSystem mainParticles;
     // get the original position
     private Vector3 originalPosition;
     private Vector3 originalScale;
@@ -22,7 +22,6 @@ public class CharacterSpriteDancer : MonoBehaviour
         jamSpeed = Random.Range(.2f, .6f);
         spriteRenderer = GetComponent<SpriteRenderer>();
         // get particle system on child
-        particleSystem = GetComponentInChildren<ParticleSystem>();
         originalPosition = transform.position;
         originalScale = transform.localScale;
         originalRotation = transform.eulerAngles;
@@ -52,7 +51,7 @@ public class CharacterSpriteDancer : MonoBehaviour
     )
     {
         currentRoutines++;
-        particleSystem.Emit(1);
+        mainParticles.Emit(1);
         float intensity = .05f;
         // move the sprite up then down in a cos motion
         for (float t = 0; t < jamSpeed; t += Time.deltaTime)

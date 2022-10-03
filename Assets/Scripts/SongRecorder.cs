@@ -49,7 +49,7 @@ public class SongRecorder : MonoBehaviour {
                 } else if (InputUtility.GetKeyUp(key.key) && currentBandMember.HasNoteIndex(key.noteIndex)) {
                     if (key.currentNote != null) {
                         double end = Quantize((Time.time - startTime) % 10f);
-                        double extension = (key.currentNote.start == end) ? 0.25 : 0;
+                        double extension = (key.currentNote.start == end) ? SMALLEST_NOTE_LENGTH : 0;
                         end += extension;
                         if(key.currentSource != null) {
                             FadeNote(key.currentSource, extension);

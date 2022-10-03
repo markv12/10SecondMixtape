@@ -1,15 +1,28 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ConcertPlayer : MonoBehaviour {
     public ConcertMember[] concertMembers;
     public SongPlayer songPlayer;
 
+    private void Awake() {
+        songPlayer.onPlayNote = WaitThenBounce;
+    }
+
+    private void WaitThenBounce(int partIndex, double startTime) {
+        StartCoroutine(WaitRoutine());
+
+        IEnumerator WaitRoutine() {
+            while(Time.time < startTime) {
+                yield return null;
+            }
+            concertMembers[partIndex].dancer.Bounce();
+        }
+    }
+
     public void PlaySong(Song song) {
         SetupConcertMembers(song);
         songPlayer.PlaySong(song, 0.5, true);
-
     }
 
     private void SetupConcertMembers(Song song) {

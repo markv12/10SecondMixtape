@@ -493,6 +493,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   intensity: 1
   speed: 1
+  playSound: 1
 --- !u!1 &8918423011038149799
 GameObject:
   m_ObjectHideFlags: 0
@@ -675,6 +676,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   intensity: 1
   speed: 1
+  playSound: 1
 --- !u!1 &8918423011188831509
 GameObject:
   m_ObjectHideFlags: 0
@@ -1310,6 +1312,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   intensity: 1
   speed: 1
+  playSound: 1
 --- !u!1 &8918423012277625760
 GameObject:
   m_ObjectHideFlags: 0
@@ -2209,6 +2212,7 @@ MonoBehaviour:
   doneButton: {fileID: 8918423010922058394}
   clearButton: {fileID: 8918423011178237722}
   backButton: {fileID: 8918423012010612602}
+  menuManager: {fileID: 0}
   songVisualizer: {fileID: 4199489142580832465}
   songRecorder: {fileID: 3759802253287666717}
   otherPartPlayer: {fileID: 4706804703286527388}
@@ -2220,6 +2224,7 @@ MonoBehaviour:
   otherMemberImage: {fileID: 8918423011402094351}
   bandNameText: {fileID: 8918423012388880176}
   otherMemberNameText: {fileID: 8918423011503603533}
+  bandPickUI: {fileID: 0}
 --- !u!114 &4199489142580832465
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2253,7 +2258,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 1
+  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 2
   m_TargetDisplay: 0
