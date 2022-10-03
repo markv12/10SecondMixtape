@@ -11,6 +11,7 @@ public class CassetteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     private InstrumentTrack part;
     public GameObject selectedImage;
     public Action<InstrumentTrack> playPart;
+    public Action stopPart;
 
     public void ShowTrack(InstrumentTrack instrumentTrack) {
         part = instrumentTrack;
@@ -31,6 +32,6 @@ public class CassetteButton : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     }
 
     public void OnPointerExit(PointerEventData eventData) {
-
+        stopPart?.Invoke();
     }
 }

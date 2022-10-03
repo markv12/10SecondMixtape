@@ -16,14 +16,16 @@ public class BandPickUI : MonoBehaviour {
         StartCoroutine(SoundSchedule());
 
         for (int i = 0; i < cassetteButtons.Length; i++) {
-            cassetteButtons[i].playPart = (InstrumentTrack part) => {
+            CassetteButton cassetteButton = cassetteButtons[i];
+            cassetteButton.playPart = (InstrumentTrack part) => {
                 songPlayer.StopSong();
                 songPlayer.PlayPart(part, 0.5, true);
             };
+            cassetteButton.stopPart = () => { songPlayer.StopSong(); };
         }
     }
     private IEnumerator SoundSchedule() {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.333f);
         AudioManager.Instance.PlayTapeScatterSound(1.0f);
     }
 
