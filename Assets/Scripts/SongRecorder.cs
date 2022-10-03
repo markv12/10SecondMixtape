@@ -59,7 +59,7 @@ public class SongRecorder : MonoBehaviour {
                         if(key.currentNote.start > key.currentNote.end) {
                             key.currentNote.end = 16;
                         }
-                        onNoteAdded?.Invoke(key.currentNote, key.noteIndex, currentBandMember.color);
+                        onNoteAdded?.Invoke(key.currentNote, key.noteIndex, currentBandMember.noteColor);
                         key.currentNote = null;
                     }
                 }

@@ -15,7 +15,7 @@ MonoBehaviour:
   id: SynthDrums
   instrumentDisplayName: Synth Drums
   color: {r: 0.56334466, g: 0.4182093, b: 0.6981132, a: 1}
-  noteColor: {r: 0.80392164, g: 0.5254902, b: 0.98823535, a: 0}
+  noteColor: {r: 0.80392164, g: 0.5254902, b: 0.98823535, a: 1}
   mainSprite: {fileID: 21300000, guid: 46da1504418bc4af99ad4d80b55dadaa, type: 3}
   cassetteSprite: {fileID: 21300000, guid: a02d2b8d036514d4c83214383faa7b75, type: 3}
   cassetteTextWhite: 1
