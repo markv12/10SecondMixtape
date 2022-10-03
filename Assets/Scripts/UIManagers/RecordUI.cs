@@ -121,7 +121,7 @@ public class RecordUI : MonoBehaviour {
                 GetYourPartPlayer().PlayPartAtTime(songRecorder.currentTrack, dspStartOffset, startOffset, false);
             };
             otherPartPlayer.PlayPart(sessionData.otherPart, STANDARD_WAIT, true);
-            songRecorder.StartRecording(sessionData.yourMember, STANDARD_WAIT, songVisualizer.AddNote);
+            songRecorder.StartRecording(sessionData.yourMember, sessionData.yourName, STANDARD_WAIT, songVisualizer.AddNote);
         }
     }
 

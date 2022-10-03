@@ -14,11 +14,11 @@ public class SongRecorder : MonoBehaviour {
     private BandMember currentBandMember;
     private float startTime;
     private Action<Note, int, Color> onNoteAdded;
-    public void StartRecording(BandMember bandMember, double startOffset, Action<Note, int, Color> _onNoteAdded) {
+    public void StartRecording(BandMember bandMember, string yourName, double startOffset, Action<Note, int, Color> _onNoteAdded) {
         startTime = Time.time + (float)startOffset;
         currentBandMember = bandMember;
         currentTrack = new InstrumentTrack() {
-            name = "Test Person",
+            name = yourName,
             instrument = bandMember.id,
             notes = Note.NoteTwoDArray(18)
         };
