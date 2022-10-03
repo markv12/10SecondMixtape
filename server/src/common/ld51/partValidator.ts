@@ -32,9 +32,9 @@ export function validatePart(part: PartData) {
     )
 
   part.notes?.forEach((track, i) => {
-    if (track.length > 30)
+    if (track.length > 50)
       errors.push(
-        `Track ${i} has more than 30 notes being played (${track.length})`,
+        `Track ${i} has more than 50 notes being played (${track.length})`,
       )
 
     track.forEach((note, j) => {
