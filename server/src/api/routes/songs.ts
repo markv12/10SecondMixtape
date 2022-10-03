@@ -111,7 +111,7 @@ router.post('/new', async (req, res) => {
     }
   }
 
-  c.log('gray', 'Uploading new song', song)
+  c.log('gray', 'Uploading new song', song.name)
   await db.songs.add(song)
   res.status(200).send(song.id)
 })

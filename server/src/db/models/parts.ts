@@ -125,11 +125,17 @@ export async function incrementGiven(id: string) {
 }
 
 export async function incrementChosen(id: string) {
-  const res = await Part.updateOne(
-    { id },
-    { $inc: { chosen: 1 } },
+  const found = await Part.find({ id })
+  if (found.length === 0) return
+  const part = found[0]
+  if (!part) return
+  part.chosen = (part.chosen || 0) + 1
+  part.ratio = part.chosen / (part.given || 1)
+  part.recencyRatio = c.getRecencyRatio(part)
+  const res = await Part.updateOne({ id }, part)
+  c.log(
+    `Incremented chosen for part ${id} (recencyRatio: ${part.ratio})`,
   )
-  c.log(`Incremented chosen for part ${id}`)
   return res
 }
 

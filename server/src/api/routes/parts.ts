@@ -17,6 +17,22 @@ router.get(
       | ScaleType
       | undefined
 
+    if (count === 1) {
+      // looking for initial partner, but we don't want an AWFUL partner.
+      const randomParts = await db.parts.getRandom(
+        5,
+        scaleType,
+      )
+      const best = randomParts.sort(
+        (a, b) => (b.ratio ?? -10000) - (a.ratio ?? -10000),
+      )[0]
+      res.send(best)
+      c.log(
+        `Sent best of 5 random parts for scale type ${scaleType}`,
+      )
+      return
+    }
+
     let randomParts: PartData[] = [],
       bestParts: PartData[] = []
     randomParts = await db.parts.getRandom(
@@ -59,6 +75,8 @@ router.get('/chosen/:id', async (req, res) => {
   }
   await db.parts.incrementChosen(id)
   res.status(200).end()
+
+  c.log(`Incremented chosen for part with id ${id}`)
 })
 
 router.post('/new', async (req, res) => {
@@ -75,7 +93,7 @@ router.post('/new', async (req, res) => {
     return
   }
 
-  c.log('gray', 'Uploading new part', part)
+  c.log('gray', 'Uploading new part', part.name)
   part.created = Date.now()
   await db.parts.add(part)
   res.status(200).send(part.id)

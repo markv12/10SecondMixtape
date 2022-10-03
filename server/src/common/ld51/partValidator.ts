@@ -15,8 +15,16 @@ export function validatePart(part: PartData) {
   if (!part.notes?.length) errors.push('Part notes missing')
 
   // no notes
-  if (!part.notes?.reduce((a, b) => a + b.length, 0))
-    errors.push('Part notes must be non-empty')
+  const noteCount = part.notes?.reduce(
+    (a, b) => a + b.length,
+    0,
+  )
+  if (noteCount < 3)
+    errors.push(
+      'Part notes must be non-empty (or more than 2)',
+    )
+  if (noteCount > 100)
+    errors.push('Part notes must be less than 100')
 
   if (part.notes?.length > 25)
     errors.push(

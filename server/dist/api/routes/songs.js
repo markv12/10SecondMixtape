@@ -95,7 +95,7 @@ router.post('/new', async (req, res) => {
             return;
         }
     }
-    c.log('gray', 'Uploading new song', song);
+    c.log('gray', 'Uploading new song', song.name);
     await db_1.db.songs.add(song);
     res.status(200).send(song.id);
 });

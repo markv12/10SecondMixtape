@@ -130,8 +130,17 @@ async function incrementGiven(id) {
 }
 exports.incrementGiven = incrementGiven;
 async function incrementChosen(id) {
-    const res = await Part.updateOne({ id }, { $inc: { chosen: 1 } });
-    c.log(`Incremented chosen for part ${id}`);
+    const found = await Part.find({ id });
+    if (found.length === 0)
+        return;
+    const part = found[0];
+    if (!part)
+        return;
+    part.chosen = (part.chosen || 0) + 1;
+    part.ratio = part.chosen / (part.given || 1);
+    part.recencyRatio = c.getRecencyRatio(part);
+    const res = await Part.updateOne({ id }, part);
+    c.log(`Incremented chosen for part ${id} (recencyRatio: ${part.ratio})`);
     return res;
 }
 exports.incrementChosen = incrementChosen;
