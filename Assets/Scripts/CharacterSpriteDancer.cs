@@ -32,7 +32,9 @@ public class CharacterSpriteDancer : MonoBehaviour
         this.EnsureCoroutineStopped(ref rockRoutine);
         transform.localScale = originalScale;
 
-        rockRoutine = StartCoroutine(RockRoutine());
+        if (gameObject.activeSelf) {
+            rockRoutine = StartCoroutine(RockRoutine());
+        }
     }
 
     // coroutine to bounce the sprite up and down smoothly
