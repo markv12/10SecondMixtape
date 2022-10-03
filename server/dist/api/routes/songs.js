@@ -61,6 +61,25 @@ router.get('/some/:count', async (req, res) => {
     res.send(allSongs);
     c.log(`Sent ${allSongs.length} general song/s`);
 });
+router.get('/page/:page', async (req, res) => {
+    const perPage = 100;
+    const page = Math.max(0, parseInt(req.params.page || '1') - 1);
+    let randomSongs = [], bestSongs = [], recentSongs = [];
+    randomSongs = await db_1.db.songs.getRandom(Math.ceil(perPage / 3));
+    bestSongs = await db_1.db.songs.getBest(Math.ceil(perPage / 3), page * perPage);
+    recentSongs = await db_1.db.songs.getRecent(Math.ceil(perPage / 3), page * perPage);
+    let allSongs = [
+        ...randomSongs,
+        ...bestSongs,
+        ...recentSongs,
+    ];
+    // remove just one of duplicate ids
+    allSongs = allSongs.filter((song, i) => allSongs.findIndex((s) => s.id === song.id) === i);
+    allSongs = allSongs.slice(0, perPage);
+    allSongs = c.shuffleArray(allSongs);
+    res.send(allSongs);
+    c.log(`Sent ${allSongs.length} general song/s`);
+});
 router.post('/new', async (req, res) => {
     const song = req.body;
     if (!song?.name) {

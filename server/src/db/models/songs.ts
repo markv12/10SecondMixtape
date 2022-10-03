@@ -36,6 +36,8 @@ function songDataToFrontendData(song: SongData): SongData {
   }
 }
 
+const perPage = 30
+
 export async function get(
   id: string,
 ): Promise<SongData | null> {
@@ -72,6 +74,7 @@ export async function getRandom(limit: number = 1) {
 
 export async function getBest(
   limit: number = 1,
+  startFrom?: number,
 ): Promise<SongData[]> {
   // get highest recencyRatio
   const filters: any = {}
@@ -79,6 +82,7 @@ export async function getBest(
     sort: { recencyRatio: -1 },
     limit,
   }
+  if (startFrom) options.skip = startFrom
   const results: SongData[] | null = await Song.find(
     filters,
     {},
@@ -89,6 +93,7 @@ export async function getBest(
 
 export async function getRecent(
   limit: number = 1,
+  startFrom?: number,
 ): Promise<SongData[]> {
   // get highest created
   const filters: any = {}
@@ -96,6 +101,7 @@ export async function getRecent(
     sort: { created: -1 },
     limit,
   }
+  if (startFrom) options.skip = startFrom
   const results: SongData[] | null = await Song.find(
     filters,
     {},
