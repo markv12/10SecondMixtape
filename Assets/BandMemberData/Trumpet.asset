@@ -15,8 +15,10 @@ MonoBehaviour:
   id: Trumpet
   instrumentDisplayName: Trumpet
   color: {r: 1, g: 0.89019614, b: 0.49411768, a: 1}
+  noteColor: {r: 0.9607844, g: 0.68235296, b: 0.2627451, a: 0}
   mainSprite: {fileID: 21300000, guid: e7f0fc287e0284b7fbc8daa78b673d32, type: 3}
   cassetteSprite: {fileID: 21300000, guid: cfcf1e1aaece44c23b41f35164fae1ee, type: 3}
   cassetteTextWhite: 0
+  volume: 1
   instrumentType: 0
   note: {fileID: 8300000, guid: 165d8c0743e6641a187ff914d6ad6947, type: 3}

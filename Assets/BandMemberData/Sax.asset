@@ -15,6 +15,7 @@ MonoBehaviour:
   id: Sax
   instrumentDisplayName: Sax
   color: {r: 0.40049842, g: 0.6792453, b: 0.6439609, a: 1}
+  noteColor: {r: 0.14901961, g: 0.9568628, b: 0.5137255, a: 0}
   mainSprite: {fileID: 21300000, guid: 42b4e9850505b4e82977c6750381c986, type: 3}
   cassetteSprite: {fileID: 21300000, guid: 290376ad4ab3d4f199d9c1d9db5842f2, type: 3}
   cassetteTextWhite: 1

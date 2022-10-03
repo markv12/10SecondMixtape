@@ -15,8 +15,10 @@ MonoBehaviour:
   id: AcousticGuitar
   instrumentDisplayName: Acoustic Guitar
   color: {r: 0.9686275, g: 0.8196079, b: 0.3372549, a: 1}
+  noteColor: {r: 0.9960785, g: 0.50980395, b: 0.3372549, a: 0}
   mainSprite: {fileID: 21300000, guid: cf2b17bd492b344f7be78bc66c257636, type: 3}
   cassetteSprite: {fileID: 21300000, guid: 87e942d667e644feda5263669a0ba720, type: 3}
   cassetteTextWhite: 0
+  volume: 1
   instrumentType: 0
   note: {fileID: 8300000, guid: bd7637571d4a449ddb3a999a5eb50947, type: 3}

@@ -27,7 +27,7 @@ public class CrowdSpawner : MonoBehaviour
             newImage.transform.localPosition = new Vector3(
                 (maxWidth*2/spawnCount) * i - maxWidth,
                 // Random.Range(-1 * maxWidth * 1.1f, maxWidth * 1.1f),
-                -1 * maxHeight * 0.18f,
+                -1 * maxHeight * 0.25f,
                 0
             );
             newImage.GetComponent<Image>().sprite = crowdSprites[Random.Range(0, crowdSprites.Length)];

@@ -15,6 +15,7 @@ MonoBehaviour:
   id: MaleSinger
   instrumentDisplayName: Singer
   color: {r: 0.6431142, g: 0.41834283, b: 0.745283, a: 1}
+  noteColor: {r: 0.6392157, g: 0.20392159, b: 1, a: 0}
   mainSprite: {fileID: 21300000, guid: 28c3e236f32884fbc94309c7b41ea10b, type: 3}
   cassetteSprite: {fileID: 21300000, guid: 25f78f94a4b5e4c97a7c4678332fed1f, type: 3}
   cassetteTextWhite: 1

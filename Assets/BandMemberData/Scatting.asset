@@ -15,8 +15,10 @@ MonoBehaviour:
   id: Scatting
   instrumentDisplayName: Scatting
   color: {r: 0.6862745, g: 0.7725491, b: 0.8431373, a: 1}
+  noteColor: {r: 0.19215688, g: 0.5137255, b: 0.8078432, a: 0}
   mainSprite: {fileID: 21300000, guid: 871e79baeb02c44f6b43fc7db48bb083, type: 3}
   cassetteSprite: {fileID: 21300000, guid: cbe9ba00131994eb4a9cd5b0bb9c8f1e, type: 3}
   cassetteTextWhite: 1
+  volume: 1
   instrumentType: 2
   note: {fileID: 0}
