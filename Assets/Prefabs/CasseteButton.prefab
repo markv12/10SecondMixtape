@@ -195,8 +195,8 @@ GameObject:
   - component: {fileID: 3041621931740525078}
   - component: {fileID: 6269979638370136535}
   - component: {fileID: 3437029758081790018}
-  - component: {fileID: 3895073591686910415}
   - component: {fileID: 5531715482913205489}
+  - component: {fileID: 3895073591686910415}
   m_Layer: 5
   m_Name: CasseteButton
   m_TagString: Untagged
@@ -291,6 +291,20 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &5531715482913205489
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2347725916205427685}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba7514ad1709f4288946cae57615f582, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 0.15
+  intensity: 1
 --- !u!114 &3895073591686910415
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -306,20 +320,6 @@ MonoBehaviour:
   intensity: 1
   speed: 1
   playSound: 0
---- !u!114 &5531715482913205489
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2347725916205427685}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba7514ad1709f4288946cae57615f582, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 0.15
-  intensity: 1
 --- !u!1 &2944191615572351870
 GameObject:
   m_ObjectHideFlags: 0
