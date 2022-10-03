@@ -5,10 +5,9 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class SongRecorder : MonoBehaviour {
-
     public AudioSourcePool audioSourcePool;
 
-    private bool isRecording = false;
+    public bool IsRecording { get; private set; }
 
     public InstrumentTrack currentTrack;
     private BandMember currentBandMember;
@@ -23,18 +22,18 @@ public class SongRecorder : MonoBehaviour {
             notes = Note.NoteTwoDArray(18)
         };
         onNoteAdded = _onNoteAdded;
-        isRecording = true;
+        IsRecording = true;
     }
 
     public void StopRecording() {
-        isRecording = false;
+        IsRecording = false;
     }
 
     public const double SMALLEST_NOTE_LENGTH = 0.125;
     public const double NOTE_QUANTIZE_MULTIPLE = 1.0 / SMALLEST_NOTE_LENGTH;
     public const float TIME_ADJUST = -0.02f;
     private void Update() {
-        if (isRecording && Time.time > startTime) {
+        if (IsRecording && Time.time > startTime) {
             for (int i = 0; i < pitchedKeyboard.Length; i++) {
                 InstrumentKey key = pitchedKeyboard[i];
                 if (InputUtility.GetKeyDown(key.key) && currentBandMember.HasNoteIndex(key.noteIndex)) {

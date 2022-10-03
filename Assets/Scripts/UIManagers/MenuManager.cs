@@ -175,10 +175,12 @@ public class MenuManager : MonoBehaviour{
     }
 
     private void NextBand() {
-        AudioManager.Instance.PlayApplauseSound(0.4f);
-        StartCoroutine(WaitThenStop());
-        WaitThenLoadNewBand(4);
-        SetNextBandButtonVisible(false);
+        if (!AnimatingNextButton) {
+            AudioManager.Instance.PlayApplauseSound(0.4f);
+            StartCoroutine(WaitThenStop());
+            WaitThenLoadNewBand(4);
+            SetNextBandButtonVisible(false);
+        }
     }
 
     private IEnumerator WaitThenStop() {
@@ -251,7 +253,7 @@ public class MenuManager : MonoBehaviour{
 
     private static readonly Vector2 NEXT_BAND_OFFSCREEN_POS = new Vector2(0, -690);
     private static readonly Vector2 NEXT_BAND_ONSCREEN_POS = new Vector2(0, -410);
-    Coroutine nextButtonRoutine;
+    Coroutine nextButtonRoutine = null;
     private void SetNextBandButtonVisible(bool visible) {
         this.EnsureCoroutineStopped(ref nextButtonRoutine);
         if (visible) {
@@ -266,8 +268,10 @@ public class MenuManager : MonoBehaviour{
             if (!visible) {
                 nextBandButtonT.anchoredPosition = NEXT_BAND_OFFSCREEN_POS;
             }
+            nextButtonRoutine = null;
         });
     }
+    private bool AnimatingNextButton => nextButtonRoutine != null;
 
     private const string UPVOTE_TEXT = @"They'll play more
 often for everyone.";
