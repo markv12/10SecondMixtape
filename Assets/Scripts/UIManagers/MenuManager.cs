@@ -33,7 +33,8 @@ public class MenuManager : MonoBehaviour{
     public Button downvoteButton;
     public Button nextBandButton;
     public RectTransform nextBandButtonT;
-    public GameObject feedbackText;
+    public Transform feedbackTextT;
+    public TMP_Text feedbackSubtitleText;
     private bool canVote = false;
 
     private bool canStart = true;
@@ -156,6 +157,7 @@ public class MenuManager : MonoBehaviour{
         if (!canVote) return;
         AudioManager.Instance.PlayApplauseSound(0.4f);
         MusicNetworking.Instance.UpvoteSong(currentSong);
+        SetFeedbackSubtitle(true);
         SetCanVote(false);
         SetNextBandButtonVisible(true);
     }
@@ -164,6 +166,7 @@ public class MenuManager : MonoBehaviour{
         if (!canVote) return;
         AudioManager.Instance.PlayBooSound(0.9f);
         MusicNetworking.Instance.DownvoteSong(currentSong);
+        SetFeedbackSubtitle(false);
         SetCanVote(false);
         StartCoroutine(WaitThenStop());
         WaitThenLoadNewBand(5.5f);
@@ -209,9 +212,9 @@ public class MenuManager : MonoBehaviour{
         });
         feedbackUI.anchoredPosition = FEEDBACK_OFFSCREEN_POS;
 
-        feedbackText.SetActive(true);
+        feedbackTextT.gameObject.SetActive(true);
         yield return this.CreateAnimationRoutine(.6f, (float progress) => {
-            feedbackText.transform.localScale = Vector3.Lerp(
+            feedbackTextT.localScale = Vector3.Lerp(
                 Vector3.zero,
                 Vector3.one,
                 Easing.easeOutQuad(0, 1, progress)
@@ -219,13 +222,13 @@ public class MenuManager : MonoBehaviour{
         });
         yield return new WaitForSeconds(3.0f);
         yield return this.CreateAnimationRoutine(.6f, (float progress) => {
-            feedbackText.transform.localScale = Vector3.Lerp(
+            feedbackTextT.localScale = Vector3.Lerp(
                 Vector3.one,
                 Vector3.zero,
                 Easing.easeInQuad(0, 1, progress)
             );
         });
-        feedbackText.SetActive(false);
+        feedbackTextT.gameObject.SetActive(false);
     }
 
     private IEnumerator ShowVoteButtons() {
@@ -245,7 +248,7 @@ public class MenuManager : MonoBehaviour{
     }
 
     private static readonly Vector2 NEXT_BAND_OFFSCREEN_POS = new Vector2(0, -690);
-    private static readonly Vector2 NEXT_BAND_ONSCREEN_POS = new Vector2(0, -415);
+    private static readonly Vector2 NEXT_BAND_ONSCREEN_POS = new Vector2(0, -410);
     Coroutine nextButtonRoutine;
     private void SetNextBandButtonVisible(bool visible) {
         this.EnsureCoroutineStopped(ref nextButtonRoutine);
@@ -256,5 +259,13 @@ public class MenuManager : MonoBehaviour{
         nextButtonRoutine = this.CreateAnimationRoutine(0.6f, (float progress) => {
             nextBandButtonT.localScale = Vector3.Lerp(startScale, endScale, progress);
         });
+    }
+
+    private const string UPVOTE_TEXT = @"They'll play more
+often for everyone.";
+    private const string DOWNVOTE_TEXT = @"They'll play less
+often for everyone.";
+    private void SetFeedbackSubtitle(bool upvote) {
+        feedbackSubtitleText.text = upvote ? UPVOTE_TEXT : DOWNVOTE_TEXT;
     }
 }
