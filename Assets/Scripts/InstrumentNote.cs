@@ -5,4 +5,5 @@ public struct InstrumentNote {
     public float volume;
     public float pitch;
     public int partIndex;
+    public Note sourceNote;
 }

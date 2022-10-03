@@ -46,6 +46,16 @@ public class SongPlayer : MonoBehaviour {
         }
     }
 
+    public void RemoveNote(Note note) {
+        for (int i = 0; i < noteQueue.Count; i++) {
+            QueuedNote queuedNote = noteQueue[i];
+            if(queuedNote.instrumentNote.sourceNote == note) {
+                noteQueue.RemoveAt(i);
+                i--;
+            }
+        }
+    }
+
     private readonly List<QueuedNote> noteQueue = new List<QueuedNote>();
     private void Update() {
         if(loop && (Time.time - startOffset) > (currentSong.length - 0.25f)) {
@@ -115,6 +125,7 @@ public class SongPlayer : MonoBehaviour {
                     double endTime = note.end * SECONDS_PER_BEAT;
                     InstrumentNote instrumentNote = bandMember.GetInstrumentNote(j);
                     instrumentNote.partIndex = i;
+                    instrumentNote.sourceNote = note;
                     QueueNote(dspStartOffset, startOffset, startTime, endTime, instrumentNote);
                 }
             }

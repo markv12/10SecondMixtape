@@ -125,7 +125,12 @@ public class RecordUI : MonoBehaviour {
         }
 
         void AddNote(Note note, int noteIndex, Color color) {
-            songVisualizer.AddNoteSquare(note, noteIndex, color, () => { songRecorder.DeleteNote(note); });
+            songVisualizer.AddNoteSquare(note, noteIndex, color, () => {
+                songRecorder.DeleteNote(note);
+                for (int i = 0; i < yourPartPlayers.Length; i++) {
+                    yourPartPlayers[i].RemoveNote(note);
+                }
+            });
         }
     }
 
