@@ -19,30 +19,30 @@ public class SongVisualizer : MonoBehaviour {
         playheadEndPos = playheadRect.anchoredPosition.SetX(rectWidth);
     }
 
+    //public void ShowPart(InstrumentTrack track, double startWait, float songLength) {
+    //    int lineCount = GetLastLineIndex(track) + 1;
+    //    noteLines = new List<NoteLine>(new NoteLine[lineCount]);
+
+    //    float lineHeight = rectHeight / lineCount;
+    //    for (int i = 0; i < lineCount; i++) {
+    //        NoteLine newLine = Instantiate(noteLinePrefab, visualizerRect);
+    //        newLine.rectT.sizeDelta = new Vector2(rectWidth, lineHeight);
+    //        newLine.rectT.anchoredPosition = new Vector2(0, lineHeight * i);
+    //        newLine.keyText.text = SongRecorder.KeyStringForLine(i);
+    //        noteLines[i] = newLine;
+
+    //        List<Note> noteList = track.notes[i];
+    //        for (int j = 0; j < noteList.Count; j++) {
+    //            Note note = noteList[j];
+    //            AddNoteSquare(note, songLength, rectWidth, newLine);
+    //        }
+    //    }
+    //    MovePlayhead(songLength, startWait);
+    //}
+
     private List<NoteLine> noteLines;
     private readonly List<NoteSquare> noteSquares = new List<NoteSquare>();
-    public void ShowPart(InstrumentTrack track, double startWait, float songLength) {
-        int lineCount = GetLastLineIndex(track) + 1;
-        noteLines = new List<NoteLine>(new NoteLine[lineCount]);
-
-        float lineHeight = rectHeight / lineCount;
-        for (int i = 0; i < lineCount; i++) {
-            NoteLine newLine = Instantiate(noteLinePrefab, visualizerRect);
-            newLine.rectT.sizeDelta = new Vector2(rectWidth, lineHeight);
-            newLine.rectT.anchoredPosition = new Vector2(0, lineHeight * i);
-            newLine.keyText.text = SongRecorder.KeyStringForLine(i);
-            noteLines[i] = newLine;
-
-            List<Note> noteList = track.notes[i];
-            for (int j = 0; j < noteList.Count; j++) {
-                Note note = noteList[j];
-                AddNoteSquare(note, songLength, rectWidth, newLine);
-            }
-        }
-        MovePlayhead(songLength, startWait);
-    }
-
-    private void AddNoteSquare(Note note, float songLength, float rectWidth, NoteLine newLine) {
+    private void AddNoteSquare(Note note, float songLength, float rectWidth, Color color, NoteLine newLine) {
         NoteSquare newSquare = Instantiate(noteSquarePrefab, newLine.rectT);
 
         double end = note.end == 0 ? note.start + SongRecorder.SMALLEST_NOTE_LENGTH : note.end;
@@ -50,11 +50,12 @@ public class SongVisualizer : MonoBehaviour {
         float width = BeatToX((end - note.start), songLength, rectWidth);
         newSquare.rectT.anchoredPosition = new Vector2(startX, 0);
         newSquare.rectT.sizeDelta = new Vector2(width, newLine.rectT.sizeDelta.y);
+        newSquare.mainImage.color = color;
         noteSquares.Add(newSquare);
     }
 
-    private void AddNoteSquare(Note note, int lineIndex,  float songLength) {
-        AddNoteSquare(note, songLength, visualizerRect.sizeDelta.x, noteLines[lineIndex]);
+    private void AddNoteSquare(Note note, int lineIndex, Color color, float songLength) {
+        AddNoteSquare(note, songLength, visualizerRect.sizeDelta.x, color, noteLines[lineIndex]);
     }
 
     public void ShowInstrument(BandMember bandMember, double startWait, float songLength) {
@@ -124,7 +125,7 @@ public class SongVisualizer : MonoBehaviour {
         return result;
     }
 
-    public void AddNote(Note note, int noteIndex) {
-        AddNoteSquare(note, noteIndex, 10);
+    public void AddNote(Note note, int noteIndex, Color color) {
+        AddNoteSquare(note, noteIndex, color, 10);
     }
 }
