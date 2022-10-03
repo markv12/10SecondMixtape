@@ -33,6 +33,7 @@ public class ConcertPlayer : MonoBehaviour {
                 InstrumentTrack part = song.parts[i];
                 member.mainSprite.sprite = bmml.GetBandMemberForId(part.instrument).mainSprite;
                 member.gameObject.SetActive(true);
+                member.dancer.SetParticleColor( bmml.GetBandMemberForId(part.instrument).color);
             } else {
                 member.gameObject.SetActive(false);
             }
