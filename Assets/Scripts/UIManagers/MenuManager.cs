@@ -120,18 +120,20 @@ public class MenuManager : MonoBehaviour{
     }
 
     private void StartGame() {
-        if (!canStart) return;
-        canStart = false;
-        LoadingScreen.ShowTransition(LoadBandMate());
-        AudioManager.Instance.PlaySuccessSound(1.0f);
+        if (canStart) {
+            canStart = false;
+            LoadingScreen.ShowTransition(LoadBandMate());
+            AudioManager.Instance.PlaySuccessSound(1.0f);
 
-        IEnumerator Hider() {
-            yield return new WaitForSeconds(1.0f);
-            gameObject.SetActive(false);
+            //IEnumerator Hider() {
+            //    yield return new WaitForSeconds(1.0f);
+            //    gameObject.SetActive(false);
+            //}
         }
     }
 
     IEnumerator LoadBandMate() {
+        SetCanVote(false);
         yield return MusicNetworking.Instance.GetRandomPart("major", (InstrumentTrack part) => {
             concertPlayer.StopSong();
             bandmatePreviewUI.SetupNewBandmatePairing(part);
@@ -176,7 +178,7 @@ public class MenuManager : MonoBehaviour{
         AudioManager.Instance.PlayApplauseSound(0.4f);
         StartCoroutine(WaitThenStop());
         WaitThenLoadNewBand(4);
-        SetNextBandButtonVisible(true);
+        SetNextBandButtonVisible(false);
     }
 
     private IEnumerator WaitThenStop() {
@@ -252,12 +254,18 @@ public class MenuManager : MonoBehaviour{
     Coroutine nextButtonRoutine;
     private void SetNextBandButtonVisible(bool visible) {
         this.EnsureCoroutineStopped(ref nextButtonRoutine);
-        nextBandButtonT.anchoredPosition = visible ? NEXT_BAND_ONSCREEN_POS : NEXT_BAND_OFFSCREEN_POS;
+        if (visible) {
+            nextBandButtonT.anchoredPosition = NEXT_BAND_ONSCREEN_POS;
+        }
 
         Vector3 startScale = visible ? Vector3.zero : Vector3.one;
         Vector3 endScale = visible ? Vector3.one : Vector3.zero;
         nextButtonRoutine = this.CreateAnimationRoutine(0.6f, (float progress) => {
             nextBandButtonT.localScale = Vector3.Lerp(startScale, endScale, progress);
+        }, () => {
+            if (!visible) {
+                nextBandButtonT.anchoredPosition = NEXT_BAND_OFFSCREEN_POS;
+            }
         });
     }
 
