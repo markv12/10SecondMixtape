@@ -21,12 +21,13 @@ public class CrowdSpawner : MonoBehaviour
             newImage.transform.SetParent(this.transform);
             newImage.AddComponent<RectTransform>();
             newImage.AddComponent<Image>();
-            newImage.transform.localScale = new Vector3(Random.Range(4.0f, 7.0f), Random.Range(4.0f, 7.0f), 1);
+            newImage.transform.localScale = new Vector3(Random.Range(4.0f, 6.0f), Random.Range(4.0f, 6.0f), 1);
 
             newImage.transform.GetComponent<RectTransform>().pivot = new Vector2(0.5f, 0.0f);
             newImage.transform.localPosition = new Vector3(
-                Random.Range(-1 * maxWidth * 1.1f, maxWidth * 1.1f),
-                -1 * maxHeight * 0.15f,
+                (maxWidth*2/spawnCount) * i - maxWidth,
+                // Random.Range(-1 * maxWidth * 1.1f, maxWidth * 1.1f),
+                -1 * maxHeight * 0.2f,
                 0
             );
             newImage.GetComponent<Image>().sprite = crowdSprites[Random.Range(0, crowdSprites.Length)];

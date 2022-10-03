@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: Beatbox
   instrumentDisplayName: Beatbox
-  color: {r: 0.18823531, g: 0.098039225, b: 0.16078432, a: 1}
+  color: {r: 0.5849056, g: 0.38901743, b: 0.52528745, a: 1}
   mainSprite: {fileID: 21300000, guid: b55e2746576594178a1176d1a281a634, type: 3}
   cassetteSprite: {fileID: 21300000, guid: a9d3ce3a1b08143b088b1de37159c6d0, type: 3}
   cassetteTextWhite: 1
