@@ -80,9 +80,11 @@ public class MenuManager : MonoBehaviour{
             yield return null;
             yield return null;
             yield return null;
-            concertPlayer.PlaySong(song);
-            bandNameText.text = song.name;
-            SetCanVote(true);
+            if (canStart) {
+                concertPlayer.PlaySong(song);
+                bandNameText.text = song.name;
+                SetCanVote(true);
+            }
         }
     }
 
