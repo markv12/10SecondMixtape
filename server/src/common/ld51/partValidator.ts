@@ -68,6 +68,13 @@ export function validatePart(part: PartData) {
       else if (note.start % 0.5 === 0) eighthCount++
       else if (note.start % 0.25 === 0) sixteenthCount++
       else if (note.start % 0.125 === 0) thirtySecondCount++
+      c.log(
+        note.start,
+        note.start % 1,
+        note.start % 0.5,
+        note.start % 0.25,
+        note.start % 0.125,
+      )
     })
   })
 
