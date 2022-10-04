@@ -45,12 +45,16 @@ router.get('/some/:count?/:scaleType?', async (req, res) => {
         return;
     }
     let randomParts = [], bestParts = [];
-    randomParts = await db_1.db.parts.getRandom(Math.ceil(count / 2), scaleType);
+    // * likely to just send random parts — otherwise we end up with the same "best" parts every call
+    const countToGetAsRandom = Math.floor(count / 2 + Math.random() * count * 0.75);
+    randomParts = await db_1.db.parts.getRandom(countToGetAsRandom, scaleType);
     if (randomParts.length < count)
         bestParts = await db_1.db.parts.getBest(count - randomParts.length, scaleType);
     let allParts = [...randomParts, ...bestParts];
     // remove just one of duplicate ids
-    allParts = allParts.filter((song, i) => allParts.findIndex((s) => s.id === song.id) === i, scaleType);
+    allParts = allParts
+        .filter((song, i) => allParts.findIndex((s) => s.id === song.id) === i, scaleType)
+        .slice(0, count);
     res.send(c.shuffleArray(allParts));
     if (count > 1)
         allParts.forEach((p) => {

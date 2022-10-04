@@ -46,7 +46,6 @@ const defaultMongoOptions = {
     hostname: `localhost`,
     port: 27017,
     dbName: databaseName,
-    authDatabase: databaseName,
 };
 let toRun = [];
 const isReady = () => ready;
@@ -186,8 +185,6 @@ function resetDbToBackup(backupId) {
             defaultMongoOptions.hostname +
             `" --port ` +
             defaultMongoOptions.port +
-            ` --authenticationDatabase ` +
-            defaultMongoOptions.authDatabase +
             ` ` +
             path_1.default.resolve(backupsFolderPath, backupId);
         (0, child_process_1.exec)(cmd, undefined, (error, stdout, stderr) => {

@@ -66,13 +66,13 @@ router.get('/page/:page', async (req, res) => {
     const page = Math.max(0, parseInt(req.params.page || '1') - 1);
     let randomSongs = [], bestSongs = [], recentSongs = [];
     randomSongs = await db_1.db.songs.getRandom(Math.ceil(perPage / 3));
-    bestSongs = await db_1.db.songs.getBest(Math.ceil(perPage / 3), page * perPage);
     recentSongs = await db_1.db.songs.getRecent(Math.ceil(perPage / 3), page * perPage);
+    bestSongs = await db_1.db.songs.getBest(Math.ceil(perPage / 3), page * perPage);
     let allSongs = [
         ...randomSongs,
-        ...bestSongs,
         ...recentSongs,
-    ];
+        ...bestSongs,
+    ].slice(0, perPage);
     // remove just one of duplicate ids
     allSongs = allSongs.filter((song, i) => allSongs.findIndex((s) => s.id === song.id) === i);
     allSongs = allSongs.slice(0, perPage);
