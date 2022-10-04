@@ -31,6 +31,11 @@ export function validatePart(part: PartData) {
       `Has more than 25 different notes (${part.notes.length})`,
     )
 
+  let quarterCount = 0,
+    eighthCount = 0,
+    sixteenthCount = 0,
+    thirtySecondCount = 0
+
   part.notes?.forEach((track, i) => {
     if (track.length > 50)
       errors.push(
@@ -58,8 +63,16 @@ export function validatePart(part: PartData) {
         errors.push(
           `Voice ${i} note ${j} has invalid end timing`,
         )
+
+      if (note.start % 1 === 0) quarterCount++
+      else if (note.start % 0.5 === 0) eighthCount++
+      else if (note.start % 0.25 === 0) sixteenthCount++
+      else if (note.start % 0.125 === 0) thirtySecondCount++
     })
   })
+
+  if (thirtySecondCount > quarterCount)
+    errors.push('Too many thirty-second notes')
 
   return errors
 }

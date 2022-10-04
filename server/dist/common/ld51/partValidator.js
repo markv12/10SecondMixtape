@@ -21,6 +21,7 @@ function validatePart(part) {
         errors.push('Part notes must be less than 100');
     if (part.notes?.length > 25)
         errors.push(`Has more than 25 different notes (${part.notes.length})`);
+    let quarterCount = 0, eighthCount = 0, sixteenthCount = 0, thirtySecondCount = 0;
     part.notes?.forEach((track, i) => {
         if (track.length > 50)
             errors.push(`Track ${i} has more than 50 notes being played (${track.length})`);
@@ -35,8 +36,18 @@ function validatePart(part) {
                 errors.push(`Voice ${i} note ${j} has invalid start timing`);
             if (note.end && (note.end * 8) % 1 !== 0)
                 errors.push(`Voice ${i} note ${j} has invalid end timing`);
+            if (note.start % 1 === 0)
+                quarterCount++;
+            else if (note.start % 0.5 === 0)
+                eighthCount++;
+            else if (note.start % 0.25 === 0)
+                sixteenthCount++;
+            else if (note.start % 0.125 === 0)
+                thirtySecondCount++;
         });
     });
+    if (thirtySecondCount > quarterCount)
+        errors.push('Too many thirty-second notes');
     return errors;
 }
 exports.validatePart = validatePart;
