@@ -134,7 +134,7 @@ export async function incrementChosen(id: string) {
   part.recencyRatio = c.getRecencyRatio(part)
   const res = await Part.updateOne({ id }, part)
   c.log(
-    `Incremented chosen for part ${id} (recencyRatio: ${part.ratio})`,
+    `Incremented chosen for part ${id} (ratio: ${part.ratio})`,
   )
   return res
 }

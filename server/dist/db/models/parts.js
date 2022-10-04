@@ -140,7 +140,7 @@ async function incrementChosen(id) {
     part.ratio = part.chosen / (part.given || 1);
     part.recencyRatio = c.getRecencyRatio(part);
     const res = await Part.updateOne({ id }, part);
-    c.log(`Incremented chosen for part ${id} (recencyRatio: ${part.ratio})`);
+    c.log(`Incremented chosen for part ${id} (ratio: ${part.ratio})`);
     return res;
 }
 exports.incrementChosen = incrementChosen;

@@ -19,9 +19,9 @@ router.get(
     if (!scaleType) scaleType = undefined
 
     if (count === 1) {
-      // looking for initial partner, but we don't want an AWFUL partner.
+      // * looking for initial partner, but we don't want an AWFUL partner.
       const randomParts = await db.parts.getRandom(
-        5,
+        10,
         scaleType,
       )
       const best = randomParts.sort(
