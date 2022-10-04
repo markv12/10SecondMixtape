@@ -76,7 +76,7 @@ function validatePart(part) {
         sixteenthCount,
         thirtySecondCount,
     });
-    if (thirtySecondCount > 3 &&
+    if (thirtySecondCount > 5 &&
         thirtySecondCount > quarterCount + eighthCount)
         errors.push('Too many thirty-second notes');
     return errors;

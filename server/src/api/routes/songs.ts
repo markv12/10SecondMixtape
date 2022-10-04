@@ -164,6 +164,21 @@ router.get('/dislike/:id', async (req, res) => {
   song.dislikes = song.dislikes || 0
   song.dislikes++
   song.ratio = (song.likes || 0) / (song.dislikes || 1)
+
+  if (song.dislikes >= 10 && song.ratio < 0.1) {
+    await db.songs.removeById(id)
+    c.log(
+      'gray',
+      `Deleted poorly rated song ${
+        song.name
+      } with ratio ${c.r2(song.ratio, 4)} and ${
+        song.dislikes
+      } dislikes`,
+    )
+    res.status(200).end()
+    return
+  }
+
   if (!song.created) song.created = Date.now()
   song.recencyRatio = c.getRecencyRatio(song)
   await db.songs.update(song)

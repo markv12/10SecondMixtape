@@ -78,7 +78,7 @@ export function validatePart(part: PartData) {
     thirtySecondCount,
   })
   if (
-    thirtySecondCount > 3 &&
+    thirtySecondCount > 5 &&
     thirtySecondCount > quarterCount + eighthCount
   )
     errors.push('Too many thirty-second notes')
