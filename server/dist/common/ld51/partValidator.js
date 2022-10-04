@@ -76,8 +76,8 @@ function validatePart(part) {
         sixteenthCount,
         thirtySecondCount,
     });
-    // if (thirtySecondCount > quarterCount)
-    //   errors.push('Too many thirty-second notes')
+    if (thirtySecondCount > quarterCount + eighthCount)
+        errors.push('Too many thirty-second notes');
     return errors;
 }
 exports.validatePart = validatePart;
