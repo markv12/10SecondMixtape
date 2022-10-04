@@ -98,14 +98,14 @@ router.get('/page/:page', async (req, res) => {
 router.post('/new', async (req, res) => {
   const song = req.body as SongData
   if (!song?.name) {
-    c.error('Invalid song uploaded (no name)', song)
+    c.error('Invalid song uploaded (no name)')
     res.status(400).end()
     return
   }
   for (const part of song?.parts) {
     const errors = c.validatePart(part)
     if (errors.length) {
-      c.error('Invalid song part uploaded', part, errors)
+      c.error('Invalid song part uploaded', errors)
       res.status(400).end()
       return
     }

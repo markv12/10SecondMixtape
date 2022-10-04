@@ -37,10 +37,11 @@ router.get('/some/:count?/:scaleType?', async (req, res) => {
         scaleType = undefined;
     if (count === 1) {
         // * looking for initial partner, but we don't want an AWFUL partner.
-        const randomParts = await db_1.db.parts.getRandom(10, scaleType);
+        const howManyPartsToGet = 10;
+        const randomParts = await db_1.db.parts.getRandom(howManyPartsToGet, scaleType);
         const best = randomParts.sort((a, b) => (b.ratio ?? -10000) - (a.ratio ?? -10000))[0];
         res.send([best]);
-        c.log(`Sent ${[best].length} best part of 5 random parts for scale type ${scaleType}`);
+        c.log(`Sent ${[best].length} best part of ${howManyPartsToGet} random parts for scale type ${scaleType}`);
         return;
     }
     let randomParts = [], bestParts = [];
@@ -71,13 +72,13 @@ router.get('/chosen/:id', async (req, res) => {
 router.post('/new', async (req, res) => {
     const part = req.body;
     if (!part?.name) {
-        c.error('Invalid part uploaded', part);
+        c.error('Invalid part uploaded: missing name');
         res.status(400).end();
         return;
     }
     const errors = c.validatePart(part);
     if (errors.length) {
-        c.error('Invalid part uploaded', part, errors);
+        c.error('Invalid part uploaded', errors);
         res.status(400).end();
         return;
     }

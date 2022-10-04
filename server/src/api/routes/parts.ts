@@ -20,8 +20,9 @@ router.get(
 
     if (count === 1) {
       // * looking for initial partner, but we don't want an AWFUL partner.
+      const howManyPartsToGet = 10
       const randomParts = await db.parts.getRandom(
-        10,
+        howManyPartsToGet,
         scaleType,
       )
       const best = randomParts.sort(
@@ -31,7 +32,7 @@ router.get(
       c.log(
         `Sent ${
           [best].length
-        } best part of 5 random parts for scale type ${scaleType}`,
+        } best part of ${howManyPartsToGet} random parts for scale type ${scaleType}`,
       )
       return
     }
@@ -85,13 +86,13 @@ router.get('/chosen/:id', async (req, res) => {
 router.post('/new', async (req, res) => {
   const part = req.body as PartData
   if (!part?.name) {
-    c.error('Invalid part uploaded', part)
+    c.error('Invalid part uploaded: missing name')
     res.status(400).end()
     return
   }
   const errors = c.validatePart(part)
   if (errors.length) {
-    c.error('Invalid part uploaded', part, errors)
+    c.error('Invalid part uploaded', errors)
     res.status(400).end()
     return
   }
