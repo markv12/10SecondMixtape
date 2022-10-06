@@ -80,8 +80,9 @@ export function validatePart(part: PartData) {
   //   thirtySecondCount,
   // })
   if (
-    thirtySecondCount > 5 &&
-    thirtySecondCount > quarterCount + eighthCount
+    thirtySecondCount > 8 &&
+    thirtySecondCount >
+      quarterCount + eighthCount + sixteenthCount
   )
     errors.push(
       `Too many thirty-second notes (${thirtySecondCount})`,
