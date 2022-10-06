@@ -44,6 +44,10 @@ export async function get(
   return dbObject ? toFrontendData(dbObject) : null
 }
 
+export async function count() {
+  return await Part.countDocuments()
+}
+
 export async function getBest(
   limit: number = 1,
   scaleType?: ScaleType,
@@ -120,7 +124,7 @@ export async function incrementGiven(id: string) {
     { id },
     { $inc: { given: 1 } },
   )
-  c.log(`Incremented given for part ${id}`)
+  // c.log(`Incremented given for part ${id}`)
   return res
 }
 
@@ -148,3 +152,14 @@ export async function wipe() {
   const res = await Part.deleteMany({})
   c.log(`Wiped parts DB`, res)
 }
+
+async function validateAllParts() {
+  const parts = await Part.find({})
+  for (const part of parts) {
+    const errors = c.validatePart(part)
+    if (errors.length) {
+      c.log('would delete:', part.name, errors)
+    }
+  }
+}
+validateAllParts()

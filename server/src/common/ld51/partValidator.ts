@@ -21,10 +21,12 @@ export function validatePart(part: PartData) {
   )
   if (noteCount < 3)
     errors.push(
-      'Part notes must be non-empty (or more than 2)',
+      `Part notes must be non-empty (or more than 2) (got ${noteCount})`,
     )
   if (noteCount > 100)
-    errors.push('Part notes must be less than 100')
+    errors.push(
+      `Part notes must be less than 100 (${noteCount})`,
+    )
 
   if (part.notes?.length > 25)
     errors.push(
@@ -51,17 +53,17 @@ export function validatePart(part: PartData) {
 
       if (note.start < 0)
         errors.push(
-          `Voice ${i} note ${j} has invalid start`,
+          `Voice ${i} note ${j} has invalid start (${note.start})`,
         )
 
       if ((note.start * 8) % 1 !== 0)
         errors.push(
-          `Voice ${i} note ${j} has invalid start timing`,
+          `Voice ${i} note ${j} has invalid start timing (${note.start})`,
         )
 
       if (note.end && (note.end * 8) % 1 !== 0)
         errors.push(
-          `Voice ${i} note ${j} has invalid end timing`,
+          `Voice ${i} note ${j} has invalid end timing (${note.end})`,
         )
 
       if (note.start % 1 === 0) quarterCount++
@@ -71,17 +73,19 @@ export function validatePart(part: PartData) {
     })
   })
 
-  c.log(part.name, {
-    quarterCount,
-    eighthCount,
-    sixteenthCount,
-    thirtySecondCount,
-  })
+  // c.log(part.name, {
+  //   quarterCount,
+  //   eighthCount,
+  //   sixteenthCount,
+  //   thirtySecondCount,
+  // })
   if (
     thirtySecondCount > 5 &&
     thirtySecondCount > quarterCount + eighthCount
   )
-    errors.push('Too many thirty-second notes')
+    errors.push(
+      `Too many thirty-second notes (${thirtySecondCount})`,
+    )
 
   return errors
 }

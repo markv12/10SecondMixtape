@@ -19,6 +19,8 @@ app.use(
 )
 const subdirectory = c.baseSubdirectory + '/api'
 
+export const serverRunningSince = Date.now()
+
 app.get(`/${subdirectory}`, (req, res) => {
   res.send('Hello World!')
 })

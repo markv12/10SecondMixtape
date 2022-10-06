@@ -1,11 +1,13 @@
 import * as c from './common'
 
 import './api'
+import { init as gameStatsTrackerInit } from './gameStatsTracker'
 import { init, runOnReady, db } from './db'
 init({})
 
 runOnReady(async () => {
   c.log('green', 'DB Ready')
+  gameStatsTrackerInit()
 
   // await db.parts.wipe()
   // await db.songs.wipe()

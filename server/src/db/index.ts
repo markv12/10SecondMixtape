@@ -2,6 +2,7 @@ import mongoose from 'mongoose'
 import * as c from '../common'
 import * as songs from './models/songs'
 import * as parts from './models/parts'
+import * as stats from './models/stats'
 import * as fs from 'fs'
 import path from 'path'
 import { exec } from 'child_process'
@@ -12,6 +13,7 @@ const maxBackups = 20
 export const db = {
   songs,
   parts,
+  stats,
 }
 let ready = false
 

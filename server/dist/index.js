@@ -25,10 +25,12 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const c = __importStar(require("./common"));
 require("./api");
+const gameStatsTracker_1 = require("./gameStatsTracker");
 const db_1 = require("./db");
 (0, db_1.init)({});
 (0, db_1.runOnReady)(async () => {
     c.log('green', 'DB Ready');
+    (0, gameStatsTracker_1.init)();
     // await db.parts.wipe()
     // await db.songs.wipe()
     // if (process.env.NODE_ENV !== 'development') return

@@ -1,30 +1,6 @@
 "use strict";
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    var desc = Object.getOwnPropertyDescriptor(m, k);
-    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
-      desc = { enumerable: true, get: function() { return m[k]; } };
-    }
-    Object.defineProperty(o, k2, desc);
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.validatePart = void 0;
-const c = __importStar(require("../general/log"));
 function validatePart(part) {
     const errors = [];
     if (!part)
@@ -40,9 +16,9 @@ function validatePart(part) {
     // no notes
     const noteCount = part.notes?.reduce((a, b) => a + b.length, 0);
     if (noteCount < 3)
-        errors.push('Part notes must be non-empty (or more than 2)');
+        errors.push(`Part notes must be non-empty (or more than 2) (got ${noteCount})`);
     if (noteCount > 100)
-        errors.push('Part notes must be less than 100');
+        errors.push(`Part notes must be less than 100 (${noteCount})`);
     if (part.notes?.length > 25)
         errors.push(`Has more than 25 different notes (${part.notes.length})`);
     let quarterCount = 0, eighthCount = 0, sixteenthCount = 0, thirtySecondCount = 0;
@@ -55,11 +31,11 @@ function validatePart(part) {
             // if (note.end && note.end < note.start)
             //   errors.push(`Voice ${i} note ${j} has invalid end`)
             if (note.start < 0)
-                errors.push(`Voice ${i} note ${j} has invalid start`);
+                errors.push(`Voice ${i} note ${j} has invalid start (${note.start})`);
             if ((note.start * 8) % 1 !== 0)
-                errors.push(`Voice ${i} note ${j} has invalid start timing`);
+                errors.push(`Voice ${i} note ${j} has invalid start timing (${note.start})`);
             if (note.end && (note.end * 8) % 1 !== 0)
-                errors.push(`Voice ${i} note ${j} has invalid end timing`);
+                errors.push(`Voice ${i} note ${j} has invalid end timing (${note.end})`);
             if (note.start % 1 === 0)
                 quarterCount++;
             else if (note.start % 0.5 === 0)
@@ -70,15 +46,15 @@ function validatePart(part) {
                 thirtySecondCount++;
         });
     });
-    c.log(part.name, {
-        quarterCount,
-        eighthCount,
-        sixteenthCount,
-        thirtySecondCount,
-    });
+    // c.log(part.name, {
+    //   quarterCount,
+    //   eighthCount,
+    //   sixteenthCount,
+    //   thirtySecondCount,
+    // })
     if (thirtySecondCount > 5 &&
         thirtySecondCount > quarterCount + eighthCount)
-        errors.push('Too many thirty-second notes');
+        errors.push(`Too many thirty-second notes (${thirtySecondCount})`);
     return errors;
 }
 exports.validatePart = validatePart;

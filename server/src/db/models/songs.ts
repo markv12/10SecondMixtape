@@ -47,6 +47,10 @@ export async function get(
   return dbObject ? songDataToFrontendData(dbObject) : null
 }
 
+export async function count() {
+  return await Song.countDocuments()
+}
+
 export async function getByIdFragment(idFragment: string) {
   const dbObject: SongData | undefined = (
     await Song.find({ id: { $regex: idFragment } }).limit(1)
@@ -140,3 +144,16 @@ export async function wipe() {
   const res = await Song.deleteMany({})
   c.log(`Wiped songs DB`, res)
 }
+
+async function validateAllSongs() {
+  const songs = await Song.find({})
+  for (const song of songs) {
+    for (let part of song.parts) {
+      const errors = c.validatePart(part)
+      if (errors.length) {
+        c.log('would delete:', song.name, errors)
+      }
+    }
+  }
+}
+validateAllSongs()

@@ -44,3 +44,9 @@ interface NoteData {
   start: number
   end?: number
 }
+
+interface GameStat {
+  activePlayers: number
+  time: number
+  span: number
+}

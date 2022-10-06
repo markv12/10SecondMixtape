@@ -31,6 +31,7 @@ const mongoose_1 = __importDefault(require("mongoose"));
 const c = __importStar(require("../common"));
 const songs = __importStar(require("./models/songs"));
 const parts = __importStar(require("./models/parts"));
+const stats = __importStar(require("./models/stats"));
 const fs = __importStar(require("fs"));
 const path_1 = __importDefault(require("path"));
 const child_process_1 = require("child_process");
@@ -39,6 +40,7 @@ const maxBackups = 20;
 exports.db = {
     songs,
     parts,
+    stats,
 };
 let ready = false;
 let databaseName = `ld51`;

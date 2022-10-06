@@ -87,7 +87,7 @@ router.get('/chosen/:id', async (req, res) => {
   await db.parts.incrementChosen(id)
   res.status(200).end()
 
-  c.log(`Incremented chosen for part with id ${id}`)
+  // c.log(`Incremented chosen for part with id ${id}`)
 })
 
 router.post('/new', async (req, res) => {

@@ -26,6 +26,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.serverRunningSince = void 0;
 const c = __importStar(require("../common"));
 const dotenv = __importStar(require("dotenv"));
 dotenv.config();
@@ -43,6 +44,7 @@ app.use((0, helmet_1.default)({
     contentSecurityPolicy: false,
 }));
 const subdirectory = c.baseSubdirectory + '/api';
+exports.serverRunningSince = Date.now();
 app.get(`/${subdirectory}`, (req, res) => {
     res.send('Hello World!');
 });
