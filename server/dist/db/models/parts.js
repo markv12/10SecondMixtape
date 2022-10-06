@@ -159,13 +159,17 @@ async function wipe() {
 }
 exports.wipe = wipe;
 async function validateAllParts() {
+    const toDelete = new Set();
     const parts = await Part.find({});
-    for (const part of parts) {
+    for (const partIndex in parts) {
+        const part = parts[partIndex];
         const errors = c.validatePart(part);
         if (errors.length) {
-            c.log('would delete:', part.name, errors);
+            c.log('would delete:', part.name, errors, `(${partIndex}/${parts.length})`);
+            toDelete.add(part.id);
         }
     }
+    c.log('toDelete', toDelete.size + '/' + parts.length);
 }
 validateAllParts();
 //# sourceMappingURL=parts.js.map

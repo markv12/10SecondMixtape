@@ -1,4 +1,4 @@
-import { Schema, model } from 'mongoose'
+import { Schema, model, set } from 'mongoose'
 import { db } from '../'
 import * as c from '../../common'
 import getRandomDocs from 'mongoose-simple-random'
@@ -146,14 +146,19 @@ export async function wipe() {
 }
 
 async function validateAllSongs() {
+  const toDelete = new Set<string>()
   const songs = await Song.find({})
   for (const song of songs) {
     for (let part of song.parts) {
       const errors = c.validatePart(part)
       if (errors.length) {
         c.log('would delete:', song.name, errors)
+        toDelete.add(song.id)
       }
     }
   }
+  c.log(
+    `will delete ${toDelete.size}/${songs.length} songs`,
+  )
 }
 validateAllSongs()

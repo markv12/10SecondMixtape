@@ -144,15 +144,18 @@ async function wipe() {
 }
 exports.wipe = wipe;
 async function validateAllSongs() {
+    const toDelete = new Set();
     const songs = await Song.find({});
     for (const song of songs) {
         for (let part of song.parts) {
             const errors = c.validatePart(part);
             if (errors.length) {
                 c.log('would delete:', song.name, errors);
+                toDelete.add(song.id);
             }
         }
     }
+    c.log(`will delete ${toDelete.size}/${songs.length} songs`);
 }
 validateAllSongs();
 //# sourceMappingURL=songs.js.map
