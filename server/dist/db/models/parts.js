@@ -31,6 +31,7 @@ const mongoose_1 = require("mongoose");
 const c = __importStar(require("../../common"));
 const mongoose_simple_random_1 = __importDefault(require("mongoose-simple-random"));
 const uuid_1 = require("uuid");
+const __1 = require("..");
 const schemaFields = {
     id: { type: String },
     created: { type: Number },
@@ -166,6 +167,7 @@ async function validateAllParts() {
         const errors = c.validatePart(part);
         if (errors.length) {
             c.log('would delete:', part.name, errors, `(${partIndex}/${parts.length})`);
+            __1.db.parts.removeById(part.id);
             toDelete.add(part.id);
         }
     }

@@ -153,12 +153,13 @@ async function validateAllSongs() {
       const errors = c.validatePart(part)
       if (errors.length) {
         c.log('would delete:', song.name, errors)
+        db.songs.removeById(song.id)
         toDelete.add(song.id)
       }
     }
   }
-  c.log(
-    `will delete ${toDelete.size}/${songs.length} songs`,
-  )
+  // c.log(
+  //   `will delete ${toDelete.size}/${songs.length} songs`,
+  // )
 }
 validateAllSongs()

@@ -2,6 +2,7 @@ import { Schema, model } from 'mongoose'
 import * as c from '../../common'
 import getRandomDocs from 'mongoose-simple-random'
 import { v4 as uuidv4 } from 'uuid'
+import { db } from '..'
 
 const schemaFields: { [key in keyof PartData]: any } = {
   id: { type: String },
@@ -166,6 +167,7 @@ async function validateAllParts() {
         errors,
         `(${partIndex}/${parts.length})`,
       )
+      db.parts.removeById(part.id)
       toDelete.add(part.id)
     }
   }
