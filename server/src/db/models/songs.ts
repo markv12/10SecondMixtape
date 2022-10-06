@@ -145,21 +145,21 @@ export async function wipe() {
   c.log(`Wiped songs DB`, res)
 }
 
-async function validateAllSongs() {
-  const toDelete = new Set<string>()
-  const songs = await Song.find({})
-  for (const song of songs) {
-    for (let part of song.parts) {
-      const errors = c.validatePart(part)
-      if (errors.length) {
-        c.log('would delete:', song.name, errors)
-        db.songs.removeById(song.id)
-        toDelete.add(song.id)
-      }
-    }
-  }
-  // c.log(
-  //   `will delete ${toDelete.size}/${songs.length} songs`,
-  // )
-}
-validateAllSongs()
+// async function validateAllSongs() {
+//   const toDelete = new Set<string>()
+//   const songs = await Song.find({})
+//   for (const song of songs) {
+//     for (let part of song.parts) {
+//       const errors = c.validatePart(part)
+//       if (errors.length) {
+//         c.log('would delete:', song.name, errors)
+//         db.songs.removeById(song.id)
+//         toDelete.add(song.id)
+//       }
+//     }
+//   }
+//   // c.log(
+//   //   `will delete ${toDelete.size}/${songs.length} songs`,
+//   // )
+// }
+// validateAllSongs()

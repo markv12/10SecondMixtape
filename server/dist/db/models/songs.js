@@ -28,7 +28,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.wipe = exports.removeById = exports.update = exports.add = exports.getRecent = exports.getBest = exports.getRandom = exports.getByIdFragment = exports.count = exports.get = void 0;
 const mongoose_1 = require("mongoose");
-const __1 = require("../");
 const c = __importStar(require("../../common"));
 const mongoose_simple_random_1 = __importDefault(require("mongoose-simple-random"));
 const uuid_1 = require("uuid");
@@ -144,22 +143,22 @@ async function wipe() {
     c.log(`Wiped songs DB`, res);
 }
 exports.wipe = wipe;
-async function validateAllSongs() {
-    const toDelete = new Set();
-    const songs = await Song.find({});
-    for (const song of songs) {
-        for (let part of song.parts) {
-            const errors = c.validatePart(part);
-            if (errors.length) {
-                c.log('would delete:', song.name, errors);
-                __1.db.songs.removeById(song.id);
-                toDelete.add(song.id);
-            }
-        }
-    }
-    // c.log(
-    //   `will delete ${toDelete.size}/${songs.length} songs`,
-    // )
-}
-validateAllSongs();
+// async function validateAllSongs() {
+//   const toDelete = new Set<string>()
+//   const songs = await Song.find({})
+//   for (const song of songs) {
+//     for (let part of song.parts) {
+//       const errors = c.validatePart(part)
+//       if (errors.length) {
+//         c.log('would delete:', song.name, errors)
+//         db.songs.removeById(song.id)
+//         toDelete.add(song.id)
+//       }
+//     }
+//   }
+//   // c.log(
+//   //   `will delete ${toDelete.size}/${songs.length} songs`,
+//   // )
+// }
+// validateAllSongs()
 //# sourceMappingURL=songs.js.map

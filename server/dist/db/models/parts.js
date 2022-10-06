@@ -31,7 +31,6 @@ const mongoose_1 = require("mongoose");
 const c = __importStar(require("../../common"));
 const mongoose_simple_random_1 = __importDefault(require("mongoose-simple-random"));
 const uuid_1 = require("uuid");
-const __1 = require("..");
 const schemaFields = {
     id: { type: String },
     created: { type: Number },
@@ -159,19 +158,24 @@ async function wipe() {
     c.log(`Wiped parts DB`, res);
 }
 exports.wipe = wipe;
-async function validateAllParts() {
-    const toDelete = new Set();
-    const parts = await Part.find({});
-    for (const partIndex in parts) {
-        const part = parts[partIndex];
-        const errors = c.validatePart(part);
-        if (errors.length) {
-            c.log('would delete:', part.name, errors, `(${partIndex}/${parts.length})`);
-            __1.db.parts.removeById(part.id);
-            toDelete.add(part.id);
-        }
-    }
-    c.log('toDelete', toDelete.size + '/' + parts.length);
-}
-validateAllParts();
+// async function validateAllParts() {
+//   const toDelete = new Set<number>()
+//   const parts = await Part.find({})
+//   for (const partIndex in parts) {
+//     const part = parts[partIndex]
+//     const errors = c.validatePart(part)
+//     if (errors.length) {
+//       c.log(
+//         'would delete:',
+//         part.name,
+//         errors,
+//         `(${partIndex}/${parts.length})`,
+//       )
+//       db.parts.removeById(part.id)
+//       toDelete.add(part.id)
+//     }
+//   }
+//   // c.log('toDelete', toDelete.size + '/' + parts.length)
+// }
+// validateAllParts()
 //# sourceMappingURL=parts.js.map

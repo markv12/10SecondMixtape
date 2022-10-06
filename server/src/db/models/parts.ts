@@ -154,23 +154,23 @@ export async function wipe() {
   c.log(`Wiped parts DB`, res)
 }
 
-async function validateAllParts() {
-  const toDelete = new Set<number>()
-  const parts = await Part.find({})
-  for (const partIndex in parts) {
-    const part = parts[partIndex]
-    const errors = c.validatePart(part)
-    if (errors.length) {
-      c.log(
-        'would delete:',
-        part.name,
-        errors,
-        `(${partIndex}/${parts.length})`,
-      )
-      db.parts.removeById(part.id)
-      toDelete.add(part.id)
-    }
-  }
-  c.log('toDelete', toDelete.size + '/' + parts.length)
-}
-validateAllParts()
+// async function validateAllParts() {
+//   const toDelete = new Set<number>()
+//   const parts = await Part.find({})
+//   for (const partIndex in parts) {
+//     const part = parts[partIndex]
+//     const errors = c.validatePart(part)
+//     if (errors.length) {
+//       c.log(
+//         'would delete:',
+//         part.name,
+//         errors,
+//         `(${partIndex}/${parts.length})`,
+//       )
+//       db.parts.removeById(part.id)
+//       toDelete.add(part.id)
+//     }
+//   }
+//   // c.log('toDelete', toDelete.size + '/' + parts.length)
+// }
+// validateAllParts()
