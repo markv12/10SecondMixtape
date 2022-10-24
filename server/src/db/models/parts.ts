@@ -106,7 +106,7 @@ export async function add(part: PartData) {
   if (part.scaleType)
     part.scaleType =
       part.scaleType.toLowerCase() as ScaleType
-  part.ratio = 0.5
+  part.ratio = 0
   part.recencyRatio = c.getRecencyRatio(part)
   const res = await Part.create(part)
   c.log(`Added part ${part.id}`)

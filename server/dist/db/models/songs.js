@@ -119,7 +119,7 @@ async function add(song) {
     song.created = Date.now();
     song.likes = 0;
     song.dislikes = 0;
-    song.ratio = 0.5;
+    song.ratio = 0;
     song.key = song.key || 0;
     song.scaleType = (song.scaleType || 'major').toLowerCase();
     song.recencyRatio = c.getRecencyRatio(song);

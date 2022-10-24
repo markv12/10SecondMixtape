@@ -113,7 +113,7 @@ async function add(part) {
     if (part.scaleType)
         part.scaleType =
             part.scaleType.toLowerCase();
-    part.ratio = 0.5;
+    part.ratio = 0;
     part.recencyRatio = c.getRecencyRatio(part);
     const res = await Part.create(part);
     c.log(`Added part ${part.id}`);

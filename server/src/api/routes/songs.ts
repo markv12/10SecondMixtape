@@ -116,6 +116,12 @@ router.post('/new', async (req, res) => {
   res.status(200).send(song.id)
 })
 
+router.get('/top/:count', async (req, res) => {
+  const count = parseInt(req.params.count)
+  const songs = await db.songs.getBest(count)
+  res.send(songs)
+})
+
 router.get('/like/:id', async (req, res) => {
   const id = req.params.id
   if (!id) {
