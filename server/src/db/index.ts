@@ -7,8 +7,8 @@ import * as fs from 'fs'
 import path from 'path'
 import { exec } from 'child_process'
 
-const minBackupInterval = 1000 * 60 * 60 * 3 // hours
-const maxBackups = 20
+const minBackupInterval = 1000 * 60 * 60 * 48 // hours
+const maxBackups = 3
 
 export const db = {
   songs,
