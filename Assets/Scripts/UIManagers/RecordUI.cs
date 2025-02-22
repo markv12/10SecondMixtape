@@ -63,7 +63,7 @@ public class RecordUI : MonoBehaviour {
 
     private void TurnOffYourPart() {
         StopYourPart();
-        songVisualizer.ClearNoteSquares();
+        songVisualizer.ClearYourNoteSquares();
     }
 
     private void StopYourPart() {
@@ -118,6 +118,7 @@ public class RecordUI : MonoBehaviour {
             yield return MoveUI(onScreenPos);
             yield return new WaitForSeconds(0.8f);
             songVisualizer.ShowInstrument(sessionData.yourMember, STANDARD_WAIT, 10);
+            songVisualizer.ShowOtherPart(sessionData.otherPart, 10);
             metronomePlayer.PlaySong(Song.METRONOME_SONG, STANDARD_WAIT, true);
             metronomePlayer.onLoop = (double dspStartOffset, float startOffset) => {
                 GetYourPartPlayer().PlayPartAtTime(songRecorder.currentTrack, dspStartOffset, startOffset, false);

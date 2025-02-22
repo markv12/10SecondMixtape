@@ -4,98 +4,91 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class SongVisualizer : MonoBehaviour {
-    public RectTransform visualizerRect;
+    public RectTransform yourPartRect;
+    public RectTransform otherPartRect;
     public RectTransform playheadRect;
     public NoteLine noteLinePrefab;
     public NoteSquare noteSquarePrefab;
+
+    private List<NoteLine> yourPartNoteLines;
+    private readonly List<NoteSquare> yourPartNoteSquares = new List<NoteSquare>();
+
+    private List<NoteLine> otherPartNoteLines;
+    private readonly List<NoteSquare> otherPartNoteSquares = new List<NoteSquare>();
 
     private float rectWidth;
     private float rectHeight;
     private Vector2 playheadStartPos; 
     private Vector2 playheadEndPos;
     private void Awake() {
-        rectWidth = visualizerRect.sizeDelta.x;
-        rectHeight = visualizerRect.sizeDelta.y;
+        rectWidth = yourPartRect.rect.width;
+        rectHeight = yourPartRect.rect.height;
         playheadStartPos = playheadRect.anchoredPosition.SetX(0);
         playheadEndPos = playheadRect.anchoredPosition.SetX(rectWidth);
     }
 
-    //public void ShowPart(InstrumentTrack track, double startWait, float songLength) {
-    //    int lineCount = GetLastLineIndex(track) + 1;
-    //    noteLines = new List<NoteLine>(new NoteLine[lineCount]);
-
-    //    float lineHeight = rectHeight / lineCount;
-    //    for (int i = 0; i < lineCount; i++) {
-    //        NoteLine newLine = Instantiate(noteLinePrefab, visualizerRect);
-    //        newLine.rectT.sizeDelta = new Vector2(rectWidth, lineHeight);
-    //        newLine.rectT.anchoredPosition = new Vector2(0, lineHeight * i);
-    //        newLine.keyText.text = SongRecorder.KeyStringForLine(i);
-    //        noteLines[i] = newLine;
-
-    //        List<Note> noteList = track.notes[i];
-    //        for (int j = 0; j < noteList.Count; j++) {
-    //            Note note = noteList[j];
-    //            AddNoteSquare(note, songLength, rectWidth, newLine);
-    //        }
-    //    }
-    //    MovePlayhead(songLength, startWait);
-    //}
-
-    private List<NoteLine> noteLines;
-    private readonly List<NoteSquare> noteSquares = new List<NoteSquare>();
-    private void AddNoteSquare(Note note, float songLength, float rectWidth, Color color, NoteLine newLine, Action deleteAction) {
-        NoteSquare newSquare = Instantiate(noteSquarePrefab, newLine.rectT);
+    private void AddNoteSquare(Note note, float songLength, Color color, NoteLine noteLine, List<NoteSquare> squareList, Action deleteAction) {
+        NoteSquare newSquare = Instantiate(noteSquarePrefab, noteLine.rectT);
 
         double end = note.end == 0 ? note.start + SongRecorder.SMALLEST_NOTE_LENGTH : note.end;
         float startX = BeatToX(note.start, songLength, rectWidth);
         float width = BeatToX((end - note.start), songLength, rectWidth);
         newSquare.rectT.anchoredPosition = new Vector2(startX, 0);
-        newSquare.rectT.sizeDelta = new Vector2(width, newLine.rectT.sizeDelta.y);
+        newSquare.rectT.sizeDelta = new Vector2(width, noteLine.rectT.rect.height);
         newSquare.mainImage.color = color;
-        newSquare.deleteAction = () => {
-            noteSquares.Remove(newSquare);
-            deleteAction?.Invoke();
-        };
-        noteSquares.Add(newSquare);
+        if (deleteAction != null) {
+            newSquare.deleteAction = () => {
+                squareList.Remove(newSquare);
+                deleteAction?.Invoke();
+            };
+        } else {
+            newSquare.mainButton.enabled = false;
+        }
+        squareList.Add(newSquare);
     }
 
     public void AddNoteSquare(Note note, int lineIndex, Color color, Action deleteAction) {
-        AddNoteSquare(note, 10f, visualizerRect.sizeDelta.x, color, noteLines[lineIndex], deleteAction);
+        AddNoteSquare(note, 10f, color, yourPartNoteLines[lineIndex], yourPartNoteSquares, deleteAction);
     }
 
     public void ShowInstrument(BandMember bandMember, double startWait, float songLength) {
         int lineCount = bandMember.NoteCount;
-        noteLines = new List<NoteLine>(new NoteLine[lineCount]);
+        yourPartNoteLines = new List<NoteLine>(new NoteLine[lineCount]);
 
-        float rectWidth = visualizerRect.sizeDelta.x;
-        float rectHeight = visualizerRect.sizeDelta.y;
         float lineHeight = rectHeight / lineCount;
         for (int i = 0; i < lineCount; i++) {
-            NoteLine newLine = Instantiate(noteLinePrefab, visualizerRect);
+            NoteLine newLine = Instantiate(noteLinePrefab, yourPartRect);
             newLine.rectT.sizeDelta = new Vector2(rectWidth, lineHeight);
             newLine.rectT.anchoredPosition = new Vector2(0, lineHeight * i);
             newLine.keyText.text = SongRecorder.KeyStringForLine(i);
-            noteLines[i] = newLine;
+            yourPartNoteLines[i] = newLine;
         }
         MovePlayhead(songLength, startWait);
     }
 
-    public void ClearNoteSquares() {
-        for (int i = 0; i < noteSquares.Count; i++) {
-            Destroy(noteSquares[i].gameObject);
+    public void ClearYourNoteSquares() {
+        for (int i = 0; i < yourPartNoteSquares.Count; i++) {
+            Destroy(yourPartNoteSquares[i].gameObject);
         }
-        noteSquares.Clear();
+        yourPartNoteSquares.Clear();
     }
 
     public void ClearLinesAndStop() {
-        if(noteLines != null) {
+        ClearNoteLines(yourPartNoteLines);
+        ClearNoteLines(otherPartNoteLines);
+        yourPartNoteSquares.Clear();
+        otherPartNoteSquares.Clear();
+        this.EnsureCoroutineStopped(ref playheadRoutine);
+        playheadRect.anchoredPosition = playheadStartPos;
+    }
+
+    private static void ClearNoteLines(List<NoteLine> noteLines) {
+        if (noteLines != null) {
             for (int i = 0; i < noteLines.Count; i++) {
                 Destroy(noteLines[i].gameObject);
             }
             noteLines.Clear();
         }
-        this.EnsureCoroutineStopped(ref playheadRoutine);
-        playheadRect.anchoredPosition = playheadStartPos;
     }
 
     private Coroutine playheadRoutine;
@@ -120,13 +113,25 @@ public class SongVisualizer : MonoBehaviour {
         return (float)((beat * SongPlayer.SECONDS_PER_BEAT * rectWidth) / songLength);
     }
 
-    public int GetLastLineIndex(InstrumentTrack track) {
-        int result = 0;
-        for (int i = 0; i < track.notes.Count; i++) {
-            if(track.notes[i].Count > 0) {
-                result = i;
+    public void ShowOtherPart(InstrumentTrack track, float songLength) {
+        BandMember bandMember = BandMemberMasterList.Instance.GetBandMemberForId(track.instrument);
+        int lineCount = bandMember.NoteCount;
+        otherPartNoteLines = new List<NoteLine>(new NoteLine[lineCount]);
+
+        float lineHeight = rectHeight / Mathf.Max(lineCount, yourPartNoteLines.Count);
+        for (int i = 0; i < lineCount; i++) {
+            NoteLine newLine = Instantiate(noteLinePrefab, otherPartRect);
+            newLine.rectT.sizeDelta = new Vector2(rectWidth, lineHeight);
+            newLine.rectT.anchoredPosition = new Vector2(0, lineHeight * i);
+            newLine.keyText.text = null;
+            newLine.lineImage.enabled = false;
+            otherPartNoteLines[i] = newLine;
+
+            List<Note> noteList = track.notes[i];
+            for (int j = 0; j < noteList.Count; j++) {
+                Note note = noteList[j];
+                AddNoteSquare(note, songLength, bandMember.noteColor, newLine, otherPartNoteSquares, null);
             }
         }
-        return result;
     }
 }
