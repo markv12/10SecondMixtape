@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-
+ 
 public static class InputUtility {
     public static float GetHorizontal() {
         float result = 0;
